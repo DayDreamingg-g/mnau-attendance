@@ -1,7 +1,17 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
+
+import { logoutAction } from "@/app/logout/actions";
+import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
 export default async function Home() {
+  const user = await getCurrentUser();
+
+  if (!user) {
+    redirect("/login");
+  }
+
   const specialties = await prisma.specialty.findMany({
     include: {
       groups: {
@@ -89,7 +99,9 @@ export default async function Home() {
     }
 
     const percentage =
-      tracked === 0 ? 100 : Math.round((present / tracked) * 100);
+      tracked === 0
+        ? 100
+        : Math.round((present / tracked) * 100);
 
     return {
       id: specialty.id,
@@ -107,18 +119,33 @@ export default async function Home() {
   return (
     <main className="min-h-screen bg-slate-100">
       <div className="mx-auto max-w-7xl px-6 py-10">
-        <div className="mb-10">
-          <p className="text-sm font-medium text-slate-500">
-            Миколаївський національний аграрний університет
-          </p>
+        <div className="mb-10 flex items-start justify-between gap-6">
+          <div>
+            <p className="text-sm font-medium text-slate-500">
+              Миколаївський національний аграрний університет
+            </p>
 
-          <h1 className="mt-1 text-4xl font-bold tracking-tight text-slate-950">
-            Факультет менеджменту
-          </h1>
+            <h1 className="mt-1 text-4xl font-bold tracking-tight text-slate-950">
+              Факультет менеджменту
+            </h1>
 
-          <p className="mt-2 text-slate-600">
-            Аналітика відвідуваності студентів
-          </p>
+            <p className="mt-2 text-slate-600">
+              Аналітика відвідуваності студентів
+            </p>
+
+            <p className="mt-3 text-sm text-slate-500">
+              {user.firstName} {user.lastName} · {user.role.name}
+            </p>
+          </div>
+
+          <form action={logoutAction}>
+            <button
+              type="submit"
+              className="rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50"
+            >
+              Вийти
+            </button>
+          </form>
         </div>
 
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -190,7 +217,9 @@ export default async function Home() {
                   {specialty.studentsCount}
                 </div>
 
-                <AttendanceBadge percentage={specialty.percentage} />
+                <AttendanceBadge
+                  percentage={specialty.percentage}
+                />
               </Link>
             ))}
           </div>
@@ -214,16 +243,19 @@ export default async function Home() {
               )}
 
               {criticalStudents.slice(0, 8).map((student) => (
-                <div
+                <Link
                   key={student.id}
-                  className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-3"
+                  href={`/students/${student.id}`}
+                  className="flex items-center justify-between rounded-xl bg-slate-50 px-4 py-3 transition hover:bg-slate-100"
                 >
                   <span className="font-medium text-slate-800">
                     {student.lastName} {student.firstName}
                   </span>
 
-                  <AttendanceBadge percentage={student.percentage} />
-                </div>
+                  <AttendanceBadge
+                    percentage={student.percentage}
+                  />
+                </Link>
               ))}
             </div>
           </div>
@@ -272,14 +304,18 @@ function StatCard({
 }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-6">
-      <p className="text-sm font-medium text-slate-500">{title}</p>
+      <p className="text-sm font-medium text-slate-500">
+        {title}
+      </p>
 
       <p className="mt-3 text-4xl font-bold tracking-tight text-slate-950">
         {value}
       </p>
 
       {subtitle && (
-        <p className="mt-2 text-xs text-slate-400">{subtitle}</p>
+        <p className="mt-2 text-xs text-slate-400">
+          {subtitle}
+        </p>
       )}
     </div>
   );

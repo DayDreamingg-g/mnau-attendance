@@ -1,5 +1,8 @@
 import "dotenv/config";
+
 import { PrismaPg } from "@prisma/adapter-pg";
+import { hash } from "bcryptjs";
+
 import { PrismaClient } from "../app/generated/prisma/client";
 
 const connectionString = process.env.DATABASE_URL!;
@@ -14,6 +17,8 @@ const adapter = new PrismaPg(
 );
 
 const prisma = new PrismaClient({ adapter });
+
+const DEMO_PASSWORD = "Test1234!";
 
 // --------------------------------------------------
 // DEMO STUDENTS
@@ -56,164 +61,158 @@ const lastNames = [
 ];
 
 // --------------------------------------------------
-// REAL MNAU TEACHERS FROM THE SCHEDULE
-//
-// Emails below are DEMO identifiers only.
-// They are not real university emails.
+// REAL MNAU TEACHERS, DEMO EMAILS
 // --------------------------------------------------
 
 const teachers = [
   {
     firstName: "А.М.",
     lastName: "Коломієць",
-    email: "kolomiets.am@demo.mnau.local",
+    email: "kolomiets.am@test.com",
   },
   {
     firstName: "С.І.",
     lastName: "Ємельянов",
-    email: "yemelianov.si@demo.mnau.local",
+    email: "yemelianov.si@test.com",
   },
   {
     firstName: "О.Ю.",
     lastName: "Пархоменко",
-    email: "parkhomenko.oyu@demo.mnau.local",
+    email: "parkhomenko.oyu@test.com",
   },
   {
     firstName: "С.І.",
     lastName: "Павлюк",
-    email: "pavliuk.si@demo.mnau.local",
+    email: "pavliuk.si@test.com",
   },
   {
     firstName: "А.С.",
     lastName: "Полторак",
-    email: "poltorak.as@demo.mnau.local",
+    email: "poltorak.as@test.com",
   },
   {
     firstName: "А.І.",
     lastName: "Бурковська",
-    email: "burkovska.ai@demo.mnau.local",
+    email: "burkovska.ai@test.com",
   },
   {
     firstName: "Н.І.",
     lastName: "Галунець",
-    email: "halunets.ni@demo.mnau.local",
+    email: "halunets.ni@test.com",
   },
   {
     firstName: "В.М.",
     lastName: "Стамат",
-    email: "stamat.vm@demo.mnau.local",
+    email: "stamat.vm@test.com",
   },
   {
     firstName: "Ю.Ю.",
     lastName: "Чебан",
-    email: "cheban.yuyu@demo.mnau.local",
+    email: "cheban.yuyu@test.com",
   },
   {
     firstName: "К.А.",
     lastName: "Мікуляк",
-    email: "mikuliak.ka@demo.mnau.local",
+    email: "mikuliak.ka@test.com",
   },
   {
     firstName: "І.О.",
     lastName: "Піюренко",
-    email: "piurenko.io@demo.mnau.local",
+    email: "piurenko.io@test.com",
   },
   {
     firstName: "А.В.",
     lastName: "Ключник",
-    email: "kliuchnyk.av@demo.mnau.local",
+    email: "kliuchnyk.av@test.com",
   },
   {
     firstName: "Л.Ю.",
     lastName: "Прогонюк",
-    email: "prohoniuk.lyu@demo.mnau.local",
+    email: "prohoniuk.lyu@test.com",
   },
 ];
 
 // --------------------------------------------------
-// REAL SUBJECT -> TEACHER MAPPINGS
+// SUBJECT -> TEACHER
 // --------------------------------------------------
 
 const subjectCatalog = [
   {
     name: "Прикладне програмування",
-    teacherEmail: "kolomiets.am@demo.mnau.local",
+    teacherEmail: "kolomiets.am@test.com",
   },
   {
     name: "Об'єктно-орієнтоване програмування",
-    teacherEmail: "kolomiets.am@demo.mnau.local",
+    teacherEmail: "kolomiets.am@test.com",
   },
   {
     name: "Фреймворки JavaScript",
-    teacherEmail: "kolomiets.am@demo.mnau.local",
+    teacherEmail: "kolomiets.am@test.com",
   },
   {
     name: "Основи ІТ-підприємництва",
-    teacherEmail: "yemelianov.si@demo.mnau.local",
+    teacherEmail: "yemelianov.si@test.com",
   },
   {
     name: "ІС і технології в управлінні",
-    teacherEmail: "pavliuk.si@demo.mnau.local",
+    teacherEmail: "pavliuk.si@test.com",
   },
   {
     name: "Інтелектуальний аналіз даних",
-    teacherEmail: "parkhomenko.oyu@demo.mnau.local",
+    teacherEmail: "parkhomenko.oyu@test.com",
   },
   {
     name: "Основи наукових досліджень",
-    teacherEmail: "poltorak.as@demo.mnau.local",
+    teacherEmail: "poltorak.as@test.com",
   },
   {
     name: "Менеджмент",
-    teacherEmail: "burkovska.ai@demo.mnau.local",
+    teacherEmail: "burkovska.ai@test.com",
   },
   {
     name: "Теорія організацій",
-    teacherEmail: "burkovska.ai@demo.mnau.local",
+    teacherEmail: "burkovska.ai@test.com",
   },
   {
     name: "Публічне управління та адміністрування",
-    teacherEmail: "halunets.ni@demo.mnau.local",
+    teacherEmail: "halunets.ni@test.com",
   },
   {
     name: "Соціальні мережі у публічному управлінні",
-    teacherEmail: "prohoniuk.lyu@demo.mnau.local",
+    teacherEmail: "prohoniuk.lyu@test.com",
   },
   {
     name: "Маркетинг",
-    teacherEmail: "stamat.vm@demo.mnau.local",
+    teacherEmail: "stamat.vm@test.com",
   },
   {
     name: "Бухгалтерський облік та аудит",
-    teacherEmail: "cheban.yuyu@demo.mnau.local",
+    teacherEmail: "cheban.yuyu@test.com",
   },
   {
     name: "Облік і оподаткування ФОП",
-    teacherEmail: "cheban.yuyu@demo.mnau.local",
+    teacherEmail: "cheban.yuyu@test.com",
   },
   {
     name: "Корпоративні фінанси",
-    teacherEmail: "mikuliak.ka@demo.mnau.local",
+    teacherEmail: "mikuliak.ka@test.com",
   },
   {
     name: "Менеджмент в туризмі",
-    teacherEmail: "poltorak.as@demo.mnau.local",
+    teacherEmail: "poltorak.as@test.com",
   },
   {
     name: "Event-менеджмент",
-    teacherEmail: "piurenko.io@demo.mnau.local",
+    teacherEmail: "piurenko.io@test.com",
   },
   {
     name: "Економіка туризму",
-    teacherEmail: "kliuchnyk.av@demo.mnau.local",
+    teacherEmail: "kliuchnyk.av@test.com",
   },
 ];
 
 // --------------------------------------------------
 // SUBJECT POOLS BY SPECIALTY
-//
-// This determines which realistic subjects are shown
-// for each demo group.
 // --------------------------------------------------
 
 const specialtySubjects: Record<string, string[]> = {
@@ -300,7 +299,7 @@ const specialtySubjects: Record<string, string[]> = {
 };
 
 // --------------------------------------------------
-// REAL MNAU ROOM NUMBERS USED FOR DEMO
+// ROOMS
 // --------------------------------------------------
 
 const buildingRooms: Record<string, string[]> = {
@@ -392,7 +391,10 @@ function makePhone(groupIndex: number, studentIndex: number) {
     operatorCodes[(groupIndex + studentIndex) % operatorCodes.length];
 
   const uniqueNumber =
-    1000000 + groupIndex * 1000 + studentIndex * 17 + 100;
+    1000000 +
+    groupIndex * 1000 +
+    studentIndex * 17 +
+    100;
 
   const numberString = String(uniqueNumber)
     .padStart(7, "0")
@@ -410,7 +412,10 @@ function getDemoAttendanceStatus(
   lessonIndex: number
 ) {
   const score =
-    (groupIndex * 17 + studentIndex * 13 + lessonIndex * 7) % 100;
+    (groupIndex * 17 +
+      studentIndex * 13 +
+      lessonIndex * 7) %
+    100;
 
   const isHighRiskStudent =
     studentIndex === 3 || studentIndex === 8;
@@ -460,11 +465,13 @@ function getDemoAttendanceStatus(
 async function main() {
   console.log("Starting seed...");
 
+  const passwordHash = await hash(DEMO_PASSWORD, 10);
+
   // --------------------------------------------------
   // ROLES
   // --------------------------------------------------
 
-  const roles = [
+  const roleNames = [
     "TEACHER",
     "STAROSTA",
     "CURATOR",
@@ -472,12 +479,20 @@ async function main() {
     "ADMIN",
   ];
 
-  for (const name of roles) {
-    await prisma.role.upsert({
-      where: { name },
+  const roles = new Map<string, number>();
+
+  for (const name of roleNames) {
+    const role = await prisma.role.upsert({
+      where: {
+        name,
+      },
       update: {},
-      create: { name },
+      create: {
+        name,
+      },
     });
+
+    roles.set(name, role.id);
   }
 
   console.log("Roles created");
@@ -721,25 +736,63 @@ async function main() {
     }
   }
 
-  console.log("Students created and phone numbers updated");
+  console.log("Students created and phones updated");
 
   // --------------------------------------------------
-  // TEACHERS
+  // CLEAR OLD LESSON DATA
   // --------------------------------------------------
 
-  const teacherRole = await prisma.role.findUniqueOrThrow({
+  await prisma.attendance.deleteMany();
+  await prisma.lesson.deleteMany();
+
+  // --------------------------------------------------
+  // REMOVE LEGACY DEMO USERS
+  // --------------------------------------------------
+
+  const legacyUsers = await prisma.user.findMany({
     where: {
-      name: "TEACHER",
+      email: {
+        endsWith: "@demo.mnau.local",
+      },
+    },
+    select: {
+      id: true,
     },
   });
 
-  const teachersByEmail = new Map<
-    string,
-    {
-      id: number;
-      email: string;
-    }
-  >();
+  const legacyUserIds = legacyUsers.map((user) => user.id);
+
+  if (legacyUserIds.length > 0) {
+    await prisma.teacher.deleteMany({
+      where: {
+        userId: {
+          in: legacyUserIds,
+        },
+      },
+    });
+
+    await prisma.user.deleteMany({
+      where: {
+        id: {
+          in: legacyUserIds,
+        },
+      },
+    });
+  }
+
+  console.log("Old demo lesson data cleared");
+
+  // --------------------------------------------------
+  // TEACHERS + LOGIN ACCOUNTS
+  // --------------------------------------------------
+
+  const teacherRoleId = roles.get("TEACHER");
+
+  if (!teacherRoleId) {
+    throw new Error("TEACHER role not found");
+  }
+
+  const teachersByEmail = new Map<string, number>();
 
   for (const teacherData of teachers) {
     const user = await prisma.user.upsert({
@@ -747,20 +800,17 @@ async function main() {
         email: teacherData.email,
       },
       update: {
+        passwordHash,
         firstName: teacherData.firstName,
         lastName: teacherData.lastName,
-        roleId: teacherRole.id,
+        roleId: teacherRoleId,
       },
       create: {
         email: teacherData.email,
-
-        // DEMO account only.
-        // Real authentication comes later.
-        passwordHash: "DEMO_ACCOUNT_NO_LOGIN",
-
+        passwordHash,
         firstName: teacherData.firstName,
         lastName: teacherData.lastName,
-        roleId: teacherRole.id,
+        roleId: teacherRoleId,
       },
     });
 
@@ -790,13 +840,133 @@ async function main() {
       });
     }
 
-    teachersByEmail.set(teacherData.email, {
-      id: teacher.id,
-      email: teacherData.email,
+    teachersByEmail.set(teacherData.email, teacher.id);
+  }
+
+  console.log("Teacher accounts created");
+
+  // --------------------------------------------------
+  // ADMIN / DEAN / CURATOR
+  // --------------------------------------------------
+
+  const demoAccounts = [
+    {
+      email: "curator@test.com",
+      firstName: "Тестовий",
+      lastName: "Куратор",
+      role: "CURATOR",
+    },
+    {
+      email: "dean@test.com",
+      firstName: "Тестовий",
+      lastName: "Деканат",
+      role: "DEAN_OFFICE",
+    },
+    {
+      email: "admin@test.com",
+      firstName: "System",
+      lastName: "Admin",
+      role: "ADMIN",
+    },
+  ];
+
+  for (const account of demoAccounts) {
+    const roleId = roles.get(account.role);
+
+    if (!roleId) {
+      throw new Error(`${account.role} role not found`);
+    }
+
+    await prisma.user.upsert({
+      where: {
+        email: account.email,
+      },
+      update: {
+        passwordHash,
+        firstName: account.firstName,
+        lastName: account.lastName,
+        roleId,
+      },
+      create: {
+        email: account.email,
+        passwordHash,
+        firstName: account.firstName,
+        lastName: account.lastName,
+        roleId,
+      },
     });
   }
 
-  console.log("Real MNAU teachers created");
+  console.log("Administrative accounts created");
+
+  // --------------------------------------------------
+  // STAROSTA
+  // --------------------------------------------------
+
+  const starostaRoleId = roles.get("STAROSTA");
+
+  if (!starostaRoleId) {
+    throw new Error("STAROSTA role not found");
+  }
+
+  const starostaGroup = await prisma.group.findFirst({
+    where: {
+      name: "Мен 3/1",
+    },
+    include: {
+      students: {
+        orderBy: {
+          id: "asc",
+        },
+        take: 1,
+      },
+    },
+  });
+
+  if (!starostaGroup || starostaGroup.students.length === 0) {
+    throw new Error("Unable to select demo starosta");
+  }
+
+  const starostaStudent = starostaGroup.students[0];
+
+  const starostaUser = await prisma.user.upsert({
+    where: {
+      email: "starosta@test.com",
+    },
+    update: {
+      passwordHash,
+      firstName: starostaStudent.firstName,
+      lastName: starostaStudent.lastName,
+      roleId: starostaRoleId,
+    },
+    create: {
+      email: "starosta@test.com",
+      passwordHash,
+      firstName: starostaStudent.firstName,
+      lastName: starostaStudent.lastName,
+      roleId: starostaRoleId,
+    },
+  });
+
+  await prisma.student.updateMany({
+    where: {
+      userId: starostaUser.id,
+    },
+    data: {
+      userId: null,
+    },
+  });
+
+  await prisma.student.update({
+    where: {
+      id: starostaStudent.id,
+    },
+    data: {
+      userId: starostaUser.id,
+    },
+  });
+
+  console.log("Starosta account created");
 
   // --------------------------------------------------
   // SUBJECTS
@@ -818,19 +988,7 @@ async function main() {
     subjectsByName.set(subject.name, subject.id);
   }
 
-  console.log("Real subjects created");
-
-  // --------------------------------------------------
-  // CLEAN OLD DEMO LESSONS
-  //
-  // Attendance depends on lessons, so remove attendance
-  // first and regenerate the demo period consistently.
-  // --------------------------------------------------
-
-  await prisma.attendance.deleteMany();
-  await prisma.lesson.deleteMany();
-
-  console.log("Old demo lessons cleared");
+  console.log("Subjects created");
 
   // --------------------------------------------------
   // LESSONS
@@ -849,14 +1007,11 @@ async function main() {
     ])
   );
 
-  // Demo dates only.
   const lessonDates = [
     new Date("2026-09-01T08:30:00"),
     new Date("2026-09-01T10:05:00"),
-
     new Date("2026-09-02T08:30:00"),
     new Date("2026-09-02T10:05:00"),
-
     new Date("2026-09-03T08:30:00"),
     new Date("2026-09-03T10:05:00"),
   ];
@@ -864,7 +1019,7 @@ async function main() {
   for (let groupIndex = 0; groupIndex < groups.length; groupIndex++) {
     const group = groups[groupIndex];
 
-    const pool =
+    const subjectPool =
       specialtySubjects[group.specialty.name] ??
       subjectCatalog.slice(0, 6).map((subject) => subject.name);
 
@@ -874,79 +1029,68 @@ async function main() {
       lessonIndex++
     ) {
       const subjectName =
-        pool[lessonIndex % pool.length];
+        subjectPool[lessonIndex % subjectPool.length];
 
-      const subjectDefinition =
-        subjectCatalog.find(
-          (subject) => subject.name === subjectName
-        );
+      const subjectDefinition = subjectCatalog.find(
+        (subject) => subject.name === subjectName
+      );
 
       if (!subjectDefinition) {
         throw new Error(
-          `Subject mapping not found for ${subjectName}`
+          `Subject mapping not found: ${subjectName}`
         );
       }
 
-      const subjectId =
-        subjectsByName.get(subjectName);
+      const subjectId = subjectsByName.get(subjectName);
 
       if (!subjectId) {
         throw new Error(
-          `Subject DB record not found for ${subjectName}`
+          `Subject not found in DB: ${subjectName}`
         );
       }
 
-      const teacher =
-        teachersByEmail.get(
-          subjectDefinition.teacherEmail
-        );
+      const teacherId = teachersByEmail.get(
+        subjectDefinition.teacherEmail
+      );
 
-      if (!teacher) {
+      if (!teacherId) {
         throw new Error(
-          `Teacher not found for ${subjectDefinition.teacherEmail}`
+          `Teacher not found: ${subjectDefinition.teacherEmail}`
         );
       }
 
-      // Rotate real building abbreviations.
       const buildingCodes = ["м", "гк", "карп"];
 
       const buildingCode =
         buildingCodes[
-          (groupIndex + lessonIndex) %
-            buildingCodes.length
+          (groupIndex + lessonIndex) % buildingCodes.length
         ];
 
-      const building =
-        buildingByCode.get(buildingCode);
+      const building = buildingByCode.get(buildingCode);
 
       if (!building) {
         throw new Error(
-          `Building ${buildingCode} not found`
+          `Building not found: ${buildingCode}`
         );
       }
 
-      const rooms =
-        buildingRooms[buildingCode];
+      const rooms = buildingRooms[buildingCode];
 
       const room =
         rooms[
-          (groupIndex * 3 + lessonIndex) %
-            rooms.length
+          (groupIndex * 3 + lessonIndex) % rooms.length
         ];
 
       const lessonNumber =
-        lessonIndex % 2 === 0
-          ? 1
-          : 2;
+        lessonIndex % 2 === 0 ? 1 : 2;
 
       await prisma.lesson.create({
         data: {
           date: lessonDates[lessonIndex],
           lessonNumber,
           room,
-
           groupId: group.id,
-          teacherId: teacher.id,
+          teacherId,
           subjectId,
           buildingId: building.id,
         },
@@ -954,7 +1098,7 @@ async function main() {
     }
   }
 
-  console.log("Lessons created with real teacher mappings");
+  console.log("Lessons created");
 
   // --------------------------------------------------
   // ATTENDANCE
@@ -1054,47 +1198,24 @@ async function main() {
   // RESULT
   // --------------------------------------------------
 
-  const facultiesCount =
-    await prisma.faculty.count();
+  const facultiesCount = await prisma.faculty.count();
+  const specialtiesCount = await prisma.specialty.count();
+  const groupsCount = await prisma.group.count();
+  const studentsCount = await prisma.student.count();
 
-  const specialtiesCount =
-    await prisma.specialty.count();
-
-  const groupsCount =
-    await prisma.group.count();
-
-  const studentsCount =
-    await prisma.student.count();
-
-  const studentsWithPhoneCount =
-    await prisma.student.count({
-      where: {
-        phone: {
-          not: null,
-        },
+  const studentsWithPhoneCount = await prisma.student.count({
+    where: {
+      phone: {
+        not: null,
       },
-    });
+    },
+  });
 
-  const teachersCount =
-    await prisma.teacher.count();
-
-  const subjectsCount =
-    await prisma.subject.count();
-
-  const lessonsCount =
-    await prisma.lesson.count();
-
-  const attendanceCount =
-    await prisma.attendance.count();
-
-  const buildingsCount =
-    await prisma.building.count();
-
-  const rolesCount =
-    await prisma.role.count();
-
-  const statusesCount =
-    await prisma.attendanceStatus.count();
+  const teachersCount = await prisma.teacher.count();
+  const subjectsCount = await prisma.subject.count();
+  const lessonsCount = await prisma.lesson.count();
+  const attendanceCount = await prisma.attendance.count();
+  const usersCount = await prisma.user.count();
 
   console.log("");
   console.log("Seed completed");
@@ -1109,14 +1230,18 @@ async function main() {
   console.log(`Teachers: ${teachersCount}`);
   console.log(`Subjects: ${subjectsCount}`);
   console.log(`Lessons: ${lessonsCount}`);
-  console.log(
-    `Attendance records: ${attendanceCount}`
-  );
-  console.log(`Buildings: ${buildingsCount}`);
-  console.log(`Roles: ${rolesCount}`);
-  console.log(
-    `Attendance statuses: ${statusesCount}`
-  );
+  console.log(`Attendance records: ${attendanceCount}`);
+  console.log(`Users: ${usersCount}`);
+
+  console.log("");
+  console.log("Demo login accounts");
+  console.log("--------------------------------");
+  console.log("starosta@test.com");
+  console.log("curator@test.com");
+  console.log("dean@test.com");
+  console.log("admin@test.com");
+  console.log("");
+  console.log(`Password: ${DEMO_PASSWORD}`);
 }
 
 main()

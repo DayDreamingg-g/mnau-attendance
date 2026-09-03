@@ -10,6 +10,7 @@
  */
 export type * from './models/Role'
 export type * from './models/User'
+export type * from './models/Session'
 export type * from './models/Faculty'
 export type * from './models/Specialty'
 export type * from './models/Group'
