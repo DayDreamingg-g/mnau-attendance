@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
 import { prisma } from "@/lib/prisma";
 
 type PageProps = {
@@ -74,25 +75,25 @@ export default async function StudentPage({ params }: PageProps) {
       : Math.round((presentCount / trackedCount) * 100);
 
   return (
-    <main className="min-h-screen bg-slate-100">
+    <main className="min-h-screen bg-slate-100 transition-colors dark:bg-slate-950">
       <div className="mx-auto max-w-7xl px-6 py-10">
         <Link
           href={`/groups/${student.group.id}`}
-          className="text-sm font-medium text-slate-500 transition hover:text-slate-900"
+          className="text-sm font-medium text-slate-500 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
         >
           ← {student.group.name}
         </Link>
 
         <div className="mt-6">
-          <p className="text-sm font-medium text-slate-500">
+          <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
             {student.group.specialty.faculty.name}
           </p>
 
-          <h1 className="mt-1 text-4xl font-bold tracking-tight text-slate-950">
+          <h1 className="mt-1 text-4xl font-bold tracking-tight text-slate-950 dark:text-white">
             {student.lastName} {student.firstName}
           </h1>
 
-          <div className="mt-3 space-y-1 text-sm text-slate-500">
+          <div className="mt-3 space-y-1 text-sm text-slate-500 dark:text-slate-400">
             <p>
               {student.group.specialty.name}, {student.group.name},{" "}
               {student.group.course} курс
@@ -130,17 +131,17 @@ export default async function StudentPage({ params }: PageProps) {
 
         <section className="mt-10">
           <div className="mb-4">
-            <h2 className="text-2xl font-semibold text-slate-950">
+            <h2 className="text-2xl font-semibold text-slate-950 dark:text-white">
               Історія відвідування
             </h2>
 
-            <p className="mt-1 text-sm text-slate-500">
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
               Усі заняття студента за поточний демо-період
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white">
-            <div className="grid grid-cols-[140px_90px_1fr_180px_120px_120px] border-b border-slate-200 bg-slate-50 px-6 py-3 text-sm font-medium text-slate-500">
+          <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition-colors dark:border-slate-800 dark:bg-slate-900">
+            <div className="grid grid-cols-[140px_90px_1fr_180px_120px_120px] border-b border-slate-200 bg-slate-50 px-6 py-3 text-sm font-medium text-slate-500 dark:border-slate-800 dark:bg-slate-900/70 dark:text-slate-400">
               <div>Дата</div>
               <div>Пара</div>
               <div>Предмет</div>
@@ -152,26 +153,26 @@ export default async function StudentPage({ params }: PageProps) {
             {student.attendances.map((attendance) => (
               <div
                 key={attendance.id}
-                className="grid grid-cols-[140px_90px_1fr_180px_120px_120px] items-center border-b border-slate-100 px-6 py-5 last:border-b-0"
+                className="grid grid-cols-[140px_90px_1fr_180px_120px_120px] items-center border-b border-slate-100 px-6 py-5 last:border-b-0 dark:border-slate-800"
               >
-                <div className="text-slate-700">
+                <div className="text-slate-700 dark:text-slate-300">
                   {attendance.lesson.date.toLocaleDateString("uk-UA")}
                 </div>
 
-                <div className="text-slate-700">
+                <div className="text-slate-700 dark:text-slate-300">
                   {attendance.lesson.lessonNumber}
                 </div>
 
-                <div className="font-medium text-slate-900">
+                <div className="font-medium text-slate-900 dark:text-slate-100">
                   {attendance.lesson.subject.name}
                 </div>
 
-                <div className="text-slate-700">
+                <div className="text-slate-700 dark:text-slate-300">
                   {attendance.lesson.teacher.lastName}{" "}
                   {attendance.lesson.teacher.firstName}
                 </div>
 
-                <div className="text-slate-700">
+                <div className="text-slate-700 dark:text-slate-300">
                   {attendance.lesson.building.code}{" "}
                   {attendance.lesson.room}
                 </div>
@@ -196,17 +197,17 @@ function StatCard({
   subtitle?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-6">
-      <p className="text-sm font-medium text-slate-500">
+    <div className="rounded-2xl border border-slate-200 bg-white p-6 transition-colors dark:border-slate-800 dark:bg-slate-900">
+      <p className="text-sm font-medium text-slate-500 dark:text-slate-400">
         {title}
       </p>
 
-      <p className="mt-3 text-4xl font-bold tracking-tight text-slate-950">
+      <p className="mt-3 text-4xl font-bold tracking-tight text-slate-950 dark:text-white">
         {value}
       </p>
 
       {subtitle && (
-        <p className="mt-2 text-xs text-slate-400">
+        <p className="mt-2 text-xs text-slate-400 dark:text-slate-500">
           {subtitle}
         </p>
       )}
@@ -219,16 +220,20 @@ function StatusBadge({
 }: {
   code: string;
 }) {
-  let styles = "bg-emerald-50 text-emerald-700";
+  let styles =
+    "bg-emerald-50 text-emerald-700 dark:bg-emerald-950/50 dark:text-emerald-300";
+
   let label = "•";
 
   if (code === "N") {
-    styles = "bg-red-50 text-red-700";
+    styles =
+      "bg-red-50 text-red-700 dark:bg-red-950/50 dark:text-red-300";
     label = "N";
   }
 
   if (code === "HV") {
-    styles = "bg-blue-50 text-blue-700";
+    styles =
+      "bg-blue-50 text-blue-700 dark:bg-blue-950/50 dark:text-blue-300";
     label = "HV";
   }
 
