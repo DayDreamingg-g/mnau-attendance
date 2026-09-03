@@ -6,16 +6,41 @@ import { logoutAction } from "@/app/logout/actions";
 import { getCurrentUser } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 
-export default async function Home() {
+type HomePageProps = {
+  searchParams: Promise<{
+    course?: string;
+  }>;
+};
+
+export default async function Home({
+  searchParams,
+}: HomePageProps) {
   const user = await getCurrentUser();
 
   if (!user) {
     redirect("/login");
   }
 
+  const { course } = await searchParams;
+
+  const parsedCourse = Number(course);
+
+  const selectedCourse =
+    course &&
+    !Number.isNaN(parsedCourse) &&
+    parsedCourse >= 1 &&
+    parsedCourse <= 4
+      ? parsedCourse
+      : null;
+
   const specialties = await prisma.specialty.findMany({
     include: {
       groups: {
+        where: selectedCourse
+          ? {
+              course: selectedCourse,
+            }
+          : undefined,
         include: {
           students: {
             include: {
@@ -27,6 +52,14 @@ export default async function Home() {
             },
           },
         },
+        orderBy: [
+          {
+            course: "asc",
+          },
+          {
+            name: "asc",
+          },
+        ],
       },
     },
     orderBy: {
@@ -34,7 +67,11 @@ export default async function Home() {
     },
   });
 
-  const allStudents = specialties.flatMap((specialty) =>
+  const visibleSpecialties = specialties.filter(
+    (specialty) => specialty.groups.length > 0
+  );
+
+  const allStudents = visibleSpecialties.flatMap((specialty) =>
     specialty.groups.flatMap((group) => group.students)
   );
 
@@ -79,7 +116,7 @@ export default async function Home() {
     (student) => student.percentage < 50
   );
 
-  const specialtyStats = specialties.map((specialty) => {
+  const specialtyStats = visibleSpecialties.map((specialty) => {
     let present = 0;
     let tracked = 0;
 
@@ -117,6 +154,10 @@ export default async function Home() {
     };
   });
 
+  const courseLabel = selectedCourse
+    ? `${selectedCourse} курс`
+    : "Усі курси";
+
   return (
     <main className="min-h-screen bg-slate-100 transition-colors dark:bg-slate-950">
       <div className="mx-auto max-w-7xl px-6 py-10">
@@ -153,15 +194,46 @@ export default async function Home() {
           </div>
         </div>
 
+        <section className="mb-10">
+          <div className="mb-4">
+            <h2 className="text-lg font-semibold text-slate-950 dark:text-white">
+              Курс
+            </h2>
+
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              Оберіть курс для фільтрації аналітики
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            <CourseButton
+              href="/"
+              label="Усі"
+              active={selectedCourse === null}
+            />
+
+            {[1, 2, 3, 4].map((courseNumber) => (
+              <CourseButton
+                key={courseNumber}
+                href={`/?course=${courseNumber}`}
+                label={`${courseNumber} курс`}
+                active={selectedCourse === courseNumber}
+              />
+            ))}
+          </div>
+        </section>
+
         <section className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <StatCard
             title="Середня відвідуваність"
             value={`${averageAttendance}%`}
+            subtitle={courseLabel}
           />
 
           <StatCard
             title="Студенти"
             value={String(allStudents.length)}
+            subtitle={courseLabel}
           />
 
           <StatCard
@@ -184,7 +256,7 @@ export default async function Home() {
             </h2>
 
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              Поточна статистика по третьому курсу
+              Поточна статистика · {courseLabel}
             </p>
           </div>
 
@@ -199,7 +271,11 @@ export default async function Home() {
             {specialtyStats.map((specialty) => (
               <Link
                 key={specialty.id}
-                href={`/specialties/${specialty.id}`}
+                href={`/specialties/${specialty.id}${
+                  selectedCourse
+                    ? `?course=${selectedCourse}`
+                    : ""
+                }`}
                 className="grid grid-cols-[1fr_110px_110px_150px] items-center border-b border-slate-100 px-6 py-5 transition hover:bg-slate-50 last:border-b-0 dark:border-slate-800 dark:hover:bg-slate-800/60"
               >
                 <div>
@@ -237,7 +313,7 @@ export default async function Home() {
             </h2>
 
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              Відвідуваність нижче 50%
+              Відвідуваність нижче 50% · {courseLabel}
             </p>
 
             <div className="mt-5 space-y-3">
@@ -262,39 +338,71 @@ export default async function Home() {
                   />
                 </Link>
               ))}
+
+              {criticalStudents.length > 8 && (
+                <p className="pt-1 text-xs text-slate-400 dark:text-slate-500">
+                  Показано 8 із {criticalStudents.length}
+                </p>
+              )}
             </div>
           </div>
 
           <div className="rounded-2xl border border-slate-200 bg-white p-6 transition-colors dark:border-slate-800 dark:bg-slate-900">
             <h2 className="text-xl font-semibold text-slate-950 dark:text-white">
-              Що показує система
+              Огляд факультету
             </h2>
 
             <div className="mt-5 space-y-4 text-sm leading-6 text-slate-600 dark:text-slate-300">
               <p>
-                Дані відвідуваності зберігаються централізовано та не
-                залежать від фізичного журналу.
+                Поточний фільтр:{" "}
+                <strong className="font-semibold text-slate-900 dark:text-slate-100">
+                  {courseLabel}
+                </strong>
+                .
               </p>
 
               <p>
-                Статистика груп і спеціальностей розраховується
-                автоматично.
+                У вибірці {specialtyStats.length} спеціальностей та{" "}
+                {allStudents.length} студентів.
               </p>
 
               <p>
-                Студенти з низькою відвідуваністю визначаються без
-                ручного підрахунку пропусків.
+                Статистика автоматично перераховується за даними
+                відвідуваності.
               </p>
 
               <p>
-                Наступним етапом система може автоматично формувати
-                атестаційні звіти через n8n.
+                HV не враховується як звичайний прогул при розрахунку
+                відсотка відвідуваності.
               </p>
             </div>
           </div>
         </section>
       </div>
     </main>
+  );
+}
+
+function CourseButton({
+  href,
+  label,
+  active,
+}: {
+  href: string;
+  label: string;
+  active: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={
+        active
+          ? "rounded-xl bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition dark:bg-white dark:text-slate-950"
+          : "rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800"
+      }
+    >
+      {label}
+    </Link>
   );
 }
 

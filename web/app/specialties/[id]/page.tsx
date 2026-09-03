@@ -7,15 +7,33 @@ type PageProps = {
   params: Promise<{
     id: string;
   }>;
+  searchParams: Promise<{
+    course?: string;
+  }>;
 };
 
-export default async function SpecialtyPage({ params }: PageProps) {
+export default async function SpecialtyPage({
+  params,
+  searchParams,
+}: PageProps) {
   const { id } = await params;
+  const { course } = await searchParams;
+
   const specialtyId = Number(id);
 
   if (Number.isNaN(specialtyId)) {
     notFound();
   }
+
+  const parsedCourse = Number(course);
+
+  const selectedCourse =
+    course &&
+    !Number.isNaN(parsedCourse) &&
+    parsedCourse >= 1 &&
+    parsedCourse <= 4
+      ? parsedCourse
+      : null;
 
   const specialty = await prisma.specialty.findUnique({
     where: {
@@ -24,6 +42,11 @@ export default async function SpecialtyPage({ params }: PageProps) {
     include: {
       faculty: true,
       groups: {
+        where: selectedCourse
+          ? {
+              course: selectedCourse,
+            }
+          : undefined,
         include: {
           students: {
             include: {
@@ -35,9 +58,14 @@ export default async function SpecialtyPage({ params }: PageProps) {
             },
           },
         },
-        orderBy: {
-          name: "asc",
-        },
+        orderBy: [
+          {
+            course: "asc",
+          },
+          {
+            name: "asc",
+          },
+        ],
       },
     },
   });
@@ -75,7 +103,9 @@ export default async function SpecialtyPage({ params }: PageProps) {
     });
 
     const percentage =
-      tracked === 0 ? 100 : Math.round((present / tracked) * 100);
+      tracked === 0
+        ? 100
+        : Math.round((present / tracked) * 100);
 
     const warningCount = students.filter(
       (student) => student.percentage < 70
@@ -88,6 +118,7 @@ export default async function SpecialtyPage({ params }: PageProps) {
     return {
       id: group.id,
       name: group.name,
+      course: group.course,
       studentsCount: group.students.length,
       percentage,
       warningCount,
@@ -100,15 +131,29 @@ export default async function SpecialtyPage({ params }: PageProps) {
     0
   );
 
+  let totalPresent = 0;
+  let totalTracked = 0;
+
+  for (const group of specialty.groups) {
+    for (const student of group.students) {
+      for (const attendance of student.attendances) {
+        if (attendance.status.code === "HV") {
+          continue;
+        }
+
+        totalTracked++;
+
+        if (attendance.status.code === "PRESENT") {
+          totalPresent++;
+        }
+      }
+    }
+  }
+
   const averageAttendance =
-    groupStats.length === 0
+    totalTracked === 0
       ? 100
-      : Math.round(
-          groupStats.reduce(
-            (sum, group) => sum + group.percentage,
-            0
-          ) / groupStats.length
-        );
+      : Math.round((totalPresent / totalTracked) * 100);
 
   const totalWarning = groupStats.reduce(
     (sum, group) => sum + group.warningCount,
@@ -120,14 +165,23 @@ export default async function SpecialtyPage({ params }: PageProps) {
     0
   );
 
+  const courseLabel = selectedCourse
+    ? `${selectedCourse} курс`
+    : "Усі курси";
+
+  const backHref = selectedCourse
+    ? `/?course=${selectedCourse}`
+    : "/";
+
   return (
     <main className="min-h-screen bg-slate-100 transition-colors dark:bg-slate-950">
       <div className="mx-auto max-w-7xl px-6 py-10">
         <Link
-          href="/"
+          href={backHref}
           className="text-sm font-medium text-slate-500 transition hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
         >
           ← Факультет менеджменту
+          {selectedCourse ? ` · ${selectedCourse} курс` : ""}
         </Link>
 
         <div className="mt-6">
@@ -139,22 +193,59 @@ export default async function SpecialtyPage({ params }: PageProps) {
             {specialty.name}
           </h1>
 
-          {specialty.code && (
-            <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
-              Код спеціальності: {specialty.code}
-            </p>
-          )}
+          <div className="mt-2 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-slate-500 dark:text-slate-400">
+            {specialty.code && (
+              <span>
+                Код спеціальності: {specialty.code}
+              </span>
+            )}
+
+            <span>
+              {courseLabel}
+            </span>
+          </div>
         </div>
+
+        <section className="mt-8">
+          <div className="mb-4">
+            <h2 className="text-lg font-semibold text-slate-950 dark:text-white">
+              Курс
+            </h2>
+
+            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+              Оберіть курс для цієї спеціальності
+            </p>
+          </div>
+
+          <div className="flex flex-wrap gap-2">
+            <CourseButton
+              href={`/specialties/${specialty.id}`}
+              label="Усі"
+              active={selectedCourse === null}
+            />
+
+            {[1, 2, 3, 4].map((courseNumber) => (
+              <CourseButton
+                key={courseNumber}
+                href={`/specialties/${specialty.id}?course=${courseNumber}`}
+                label={`${courseNumber} курс`}
+                active={selectedCourse === courseNumber}
+              />
+            ))}
+          </div>
+        </section>
 
         <section className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           <StatCard
             title="Середня відвідуваність"
             value={`${averageAttendance}%`}
+            subtitle={courseLabel}
           />
 
           <StatCard
             title="Студенти"
             value={String(totalStudents)}
+            subtitle={courseLabel}
           />
 
           <StatCard
@@ -177,34 +268,47 @@ export default async function SpecialtyPage({ params }: PageProps) {
             </h2>
 
             <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
-              Статистика відвідуваності по навчальних групах
+              Статистика відвідуваності · {courseLabel}
             </p>
           </div>
 
           <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white transition-colors dark:border-slate-800 dark:bg-slate-900">
-            <div className="grid grid-cols-[1fr_120px_150px_150px_150px] border-b border-slate-200 bg-slate-50 px-6 py-3 text-sm font-medium text-slate-500 dark:border-slate-800 dark:bg-slate-900/70 dark:text-slate-400">
+            <div className="grid grid-cols-[1fr_110px_120px_150px_150px_150px] border-b border-slate-200 bg-slate-50 px-6 py-3 text-sm font-medium text-slate-500 dark:border-slate-800 dark:bg-slate-900/70 dark:text-slate-400">
               <div>Група</div>
+              <div>Курс</div>
               <div>Студенти</div>
               <div>Відвідуваність</div>
               <div>Нижче 70%</div>
               <div>Нижче 50%</div>
             </div>
 
+            {groupStats.length === 0 && (
+              <div className="px-6 py-8 text-sm text-slate-500 dark:text-slate-400">
+                На цьому курсі немає груп цієї спеціальності.
+              </div>
+            )}
+
             {groupStats.map((group) => (
               <Link
                 key={group.id}
                 href={`/groups/${group.id}`}
-                className="grid grid-cols-[1fr_120px_150px_150px_150px] items-center border-b border-slate-100 px-6 py-5 transition hover:bg-slate-50 last:border-b-0 dark:border-slate-800 dark:hover:bg-slate-800/60"
+                className="grid grid-cols-[1fr_110px_120px_150px_150px_150px] items-center border-b border-slate-100 px-6 py-5 transition hover:bg-slate-50 last:border-b-0 dark:border-slate-800 dark:hover:bg-slate-800/60"
               >
                 <div className="font-medium text-slate-900 dark:text-slate-100">
                   {group.name}
                 </div>
 
                 <div className="text-slate-700 dark:text-slate-300">
+                  {group.course}
+                </div>
+
+                <div className="text-slate-700 dark:text-slate-300">
                   {group.studentsCount}
                 </div>
 
-                <AttendanceBadge percentage={group.percentage} />
+                <AttendanceBadge
+                  percentage={group.percentage}
+                />
 
                 <div className="text-slate-700 dark:text-slate-300">
                   {group.warningCount}
@@ -219,6 +323,29 @@ export default async function SpecialtyPage({ params }: PageProps) {
         </section>
       </div>
     </main>
+  );
+}
+
+function CourseButton({
+  href,
+  label,
+  active,
+}: {
+  href: string;
+  label: string;
+  active: boolean;
+}) {
+  return (
+    <Link
+      href={href}
+      className={
+        active
+          ? "rounded-xl bg-slate-950 px-4 py-2 text-sm font-semibold text-white transition dark:bg-white dark:text-slate-950"
+          : "rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800"
+      }
+    >
+      {label}
+    </Link>
   );
 }
 
