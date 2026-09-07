@@ -1,0 +1,5153 @@
+{
+  "auditReportVersion": 2,
+  "vulnerabilities": {
+    "@1password/connect": {
+      "name": "@1password/connect",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "n8n"
+      ],
+      "range": ">=1.2.0",
+      "nodes": [
+        "node_modules/@1password/connect"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@aws-sdk/client-bedrock-runtime": {
+      "name": "@aws-sdk/client-bedrock-runtime",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/credential-provider-node",
+        "@aws-sdk/middleware-user-agent",
+        "@aws-sdk/token-providers",
+        "@aws-sdk/util-user-agent-node"
+      ],
+      "effects": [],
+      "range": "3.894.0 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/client-cognito-identity": {
+      "name": "@aws-sdk/client-cognito-identity",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/credential-provider-node",
+        "@aws-sdk/middleware-user-agent",
+        "@aws-sdk/util-user-agent-node"
+      ],
+      "effects": [
+        "@aws-sdk/credential-provider-cognito-identity",
+        "@aws-sdk/credential-providers"
+      ],
+      "range": "3.529.1 - 3.893.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-cognito-identity"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@aws-sdk/client-s3": {
+      "name": "@aws-sdk/client-s3",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/credential-provider-node",
+        "@aws-sdk/middleware-flexible-checksums",
+        "@aws-sdk/middleware-sdk-s3",
+        "@aws-sdk/middleware-user-agent",
+        "@aws-sdk/signature-v4-multi-region",
+        "@aws-sdk/util-user-agent-node"
+      ],
+      "effects": [],
+      "range": "3.529.1 - 3.893.0",
+      "nodes": [
+        "node_modules/@n8n/blob-storage/node_modules/@aws-sdk/client-s3"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/client-secrets-manager": {
+      "name": "@aws-sdk/client-secrets-manager",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/credential-provider-node",
+        "@aws-sdk/middleware-user-agent",
+        "@aws-sdk/util-user-agent-node",
+        "uuid"
+      ],
+      "effects": [
+        "n8n"
+      ],
+      "range": "<=3.895.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-secrets-manager"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@aws-sdk/client-sso": {
+      "name": "@aws-sdk/client-sso",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/core",
+        "@aws-sdk/middleware-user-agent",
+        "@aws-sdk/middleware-user-agent",
+        "@aws-sdk/util-user-agent-node",
+        "@aws-sdk/util-user-agent-node"
+      ],
+      "effects": [
+        "@aws-sdk/credential-provider-sso"
+      ],
+      "range": "3.529.1 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/client-sso",
+        "node_modules/@aws-sdk/client-sso"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/client-sso-oidc": {
+      "name": "@aws-sdk/client-sso-oidc",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/credential-provider-node",
+        "@aws-sdk/middleware-user-agent",
+        "@aws-sdk/util-user-agent-node"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "3.529.1 - 3.893.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-sso-oidc"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@aws-sdk/core": {
+      "name": "@aws-sdk/core",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/xml-builder",
+        "fast-xml-parser"
+      ],
+      "effects": [
+        "@aws-sdk/client-bedrock-runtime",
+        "@aws-sdk/client-cognito-identity",
+        "@aws-sdk/client-s3",
+        "@aws-sdk/client-secrets-manager",
+        "@aws-sdk/client-sso",
+        "@aws-sdk/client-sso-oidc",
+        "@aws-sdk/credential-provider-env",
+        "@aws-sdk/credential-provider-http",
+        "@aws-sdk/credential-provider-ini",
+        "@aws-sdk/credential-provider-login",
+        "@aws-sdk/credential-provider-process",
+        "@aws-sdk/credential-provider-sso",
+        "@aws-sdk/credential-provider-web-identity",
+        "@aws-sdk/credential-providers",
+        "@aws-sdk/middleware-flexible-checksums",
+        "@aws-sdk/middleware-sdk-s3",
+        "@aws-sdk/middleware-user-agent",
+        "@aws-sdk/nested-clients",
+        "@aws-sdk/token-providers"
+      ],
+      "range": "3.529.1 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/core",
+        "node_modules/@aws-sdk/core"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@aws-sdk/credential-provider-cognito-identity": {
+      "name": "@aws-sdk/credential-provider-cognito-identity",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/client-cognito-identity"
+      ],
+      "effects": [],
+      "range": "3.529.1 - 3.893.0",
+      "nodes": [
+        "node_modules/@aws-sdk/credential-provider-cognito-identity"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/credential-provider-env": {
+      "name": "@aws-sdk/credential-provider-env",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/core"
+      ],
+      "effects": [],
+      "range": "3.667.0 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/credential-provider-env",
+        "node_modules/@aws-sdk/credential-provider-env"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/credential-provider-http": {
+      "name": "@aws-sdk/credential-provider-http",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/core"
+      ],
+      "effects": [
+        "@aws-sdk/credential-provider-node"
+      ],
+      "range": "3.667.0 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/credential-provider-http",
+        "node_modules/@aws-sdk/credential-provider-http"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@aws-sdk/credential-provider-ini": {
+      "name": "@aws-sdk/credential-provider-ini",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/core",
+        "@aws-sdk/credential-provider-env",
+        "@aws-sdk/credential-provider-env",
+        "@aws-sdk/credential-provider-http",
+        "@aws-sdk/credential-provider-http",
+        "@aws-sdk/credential-provider-login",
+        "@aws-sdk/credential-provider-process",
+        "@aws-sdk/credential-provider-process",
+        "@aws-sdk/credential-provider-sso",
+        "@aws-sdk/credential-provider-sso",
+        "@aws-sdk/credential-provider-web-identity",
+        "@aws-sdk/credential-provider-web-identity",
+        "@aws-sdk/nested-clients",
+        "@aws-sdk/nested-clients"
+      ],
+      "effects": [],
+      "range": "3.667.0 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/credential-provider-ini",
+        "node_modules/@aws-sdk/credential-provider-ini"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/credential-provider-login": {
+      "name": "@aws-sdk/credential-provider-login",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/nested-clients"
+      ],
+      "effects": [
+        "@aws-sdk/credential-provider-ini"
+      ],
+      "range": "<=3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/credential-provider-login"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/credential-provider-node": {
+      "name": "@aws-sdk/credential-provider-node",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/credential-provider-env",
+        "@aws-sdk/credential-provider-env",
+        "@aws-sdk/credential-provider-http",
+        "@aws-sdk/credential-provider-http",
+        "@aws-sdk/credential-provider-ini",
+        "@aws-sdk/credential-provider-ini",
+        "@aws-sdk/credential-provider-process",
+        "@aws-sdk/credential-provider-process",
+        "@aws-sdk/credential-provider-sso",
+        "@aws-sdk/credential-provider-sso",
+        "@aws-sdk/credential-provider-web-identity",
+        "@aws-sdk/credential-provider-web-identity"
+      ],
+      "effects": [
+        "@aws-sdk/client-cognito-identity",
+        "@aws-sdk/client-s3",
+        "@aws-sdk/client-secrets-manager",
+        "@aws-sdk/client-sso-oidc"
+      ],
+      "range": "3.667.0 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/credential-provider-node",
+        "node_modules/@aws-sdk/credential-provider-node"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@aws-sdk/credential-provider-process": {
+      "name": "@aws-sdk/credential-provider-process",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/core"
+      ],
+      "effects": [],
+      "range": "3.667.0 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/credential-provider-process",
+        "node_modules/@aws-sdk/credential-provider-process"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/credential-provider-sso": {
+      "name": "@aws-sdk/credential-provider-sso",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/client-sso",
+        "@aws-sdk/client-sso",
+        "@aws-sdk/core",
+        "@aws-sdk/core",
+        "@aws-sdk/token-providers",
+        "@aws-sdk/token-providers"
+      ],
+      "effects": [],
+      "range": "3.529.1 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/credential-provider-sso",
+        "node_modules/@aws-sdk/credential-provider-sso"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/credential-provider-web-identity": {
+      "name": "@aws-sdk/credential-provider-web-identity",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/core",
+        "@aws-sdk/nested-clients",
+        "@aws-sdk/nested-clients"
+      ],
+      "effects": [],
+      "range": "3.667.0 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/credential-provider-web-identity",
+        "node_modules/@aws-sdk/credential-provider-web-identity"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/credential-providers": {
+      "name": "@aws-sdk/credential-providers",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/client-cognito-identity",
+        "@aws-sdk/core",
+        "@aws-sdk/credential-provider-cognito-identity",
+        "@aws-sdk/credential-provider-env",
+        "@aws-sdk/credential-provider-http",
+        "@aws-sdk/credential-provider-ini",
+        "@aws-sdk/credential-provider-node",
+        "@aws-sdk/credential-provider-process",
+        "@aws-sdk/credential-provider-sso",
+        "@aws-sdk/credential-provider-web-identity",
+        "@aws-sdk/nested-clients"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "3.529.1 - 3.893.0",
+      "nodes": [
+        "node_modules/@aws-sdk/credential-providers"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@aws-sdk/middleware-flexible-checksums": {
+      "name": "@aws-sdk/middleware-flexible-checksums",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core"
+      ],
+      "effects": [
+        "@aws-sdk/client-s3"
+      ],
+      "range": "3.666.0 - 3.893.0",
+      "nodes": [
+        "node_modules/@aws-sdk/middleware-flexible-checksums"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/middleware-sdk-s3": {
+      "name": "@aws-sdk/middleware-sdk-s3",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core"
+      ],
+      "effects": [
+        "@aws-sdk/client-s3",
+        "@aws-sdk/signature-v4-multi-region"
+      ],
+      "range": "3.624.0 - 3.893.0",
+      "nodes": [
+        "node_modules/@n8n/blob-storage/node_modules/@aws-sdk/middleware-sdk-s3"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/middleware-user-agent": {
+      "name": "@aws-sdk/middleware-user-agent",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/core"
+      ],
+      "effects": [
+        "@aws-sdk/client-cognito-identity",
+        "@aws-sdk/client-secrets-manager",
+        "@aws-sdk/client-sso",
+        "@aws-sdk/client-sso-oidc",
+        "@aws-sdk/util-user-agent-node"
+      ],
+      "range": "3.666.0 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/middleware-user-agent",
+        "node_modules/@aws-sdk/middleware-user-agent"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@aws-sdk/nested-clients": {
+      "name": "@aws-sdk/nested-clients",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/core",
+        "@aws-sdk/middleware-user-agent",
+        "@aws-sdk/middleware-user-agent",
+        "@aws-sdk/util-user-agent-node",
+        "@aws-sdk/util-user-agent-node"
+      ],
+      "effects": [
+        "@aws-sdk/credential-provider-ini",
+        "@aws-sdk/credential-provider-web-identity",
+        "@aws-sdk/credential-providers",
+        "@aws-sdk/token-providers"
+      ],
+      "range": "<=3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/nested-clients",
+        "node_modules/@aws-sdk/nested-clients"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@aws-sdk/signature-v4-multi-region": {
+      "name": "@aws-sdk/signature-v4-multi-region",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/middleware-sdk-s3"
+      ],
+      "effects": [],
+      "range": "3.624.0 - 3.893.0",
+      "nodes": [
+        "node_modules/@n8n/blob-storage/node_modules/@aws-sdk/signature-v4-multi-region"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/token-providers": {
+      "name": "@aws-sdk/token-providers",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/core",
+        "@aws-sdk/nested-clients",
+        "@aws-sdk/nested-clients"
+      ],
+      "effects": [
+        "@aws-sdk/credential-provider-sso"
+      ],
+      "range": "3.730.0 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/token-providers",
+        "node_modules/@aws-sdk/token-providers"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/util-user-agent-node": {
+      "name": "@aws-sdk/util-user-agent-node",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/middleware-user-agent",
+        "@aws-sdk/middleware-user-agent"
+      ],
+      "effects": [],
+      "range": "3.666.0 - 3.972.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/util-user-agent-node",
+        "node_modules/@aws-sdk/util-user-agent-node"
+      ],
+      "fixAvailable": true
+    },
+    "@aws-sdk/xml-builder": {
+      "name": "@aws-sdk/xml-builder",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "fast-xml-parser"
+      ],
+      "effects": [
+        "@aws-sdk/core"
+      ],
+      "range": "3.894.0 - 3.972.18",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/@aws-sdk/xml-builder"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@azure/identity": {
+      "name": "@azure/identity",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@azure/msal-node",
+        {
+          "source": 1106621,
+          "name": "@azure/identity",
+          "dependency": "@azure/identity",
+          "title": "Azure Identity Libraries and Microsoft Authentication Library Elevation of Privilege Vulnerability",
+          "url": "https://github.com/advisories/GHSA-m5vv-6r4h-3vj9",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-362"
+          ],
+          "cvss": {
+            "score": 5.5,
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:H/I:N/A:N"
+          },
+          "range": "<4.2.1"
+        }
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain",
+        "tedious"
+      ],
+      "range": "<=4.13.0 || 4.14.0-alpha.20251106.5 - 4.14.0-beta.2",
+      "nodes": [
+        "node_modules/@azure/identity",
+        "node_modules/tedious/node_modules/@azure/identity"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@azure/msal-node": {
+      "name": "@azure/msal-node",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@azure/identity"
+      ],
+      "range": "<=5.1.4",
+      "nodes": [
+        "node_modules/@azure/msal-node",
+        "node_modules/tedious/node_modules/@azure/msal-node"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@daytona/sdk": {
+      "name": "@daytona/sdk",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/exporter-trace-otlp-http",
+        "@opentelemetry/instrumentation-http",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-node"
+      ],
+      "effects": [
+        "@n8n/agents",
+        "@n8n/instance-ai",
+        "n8n"
+      ],
+      "range": "<=0.194.0",
+      "nodes": [
+        "node_modules/@daytona/sdk"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@getzep/zep-cloud": {
+      "name": "@getzep/zep-cloud",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        "form-data",
+        "langchain",
+        "qs"
+      ],
+      "effects": [
+        "@langchain/community",
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "<=2.2.0",
+      "nodes": [
+        "node_modules/@getzep/zep-cloud"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@getzep/zep-js": {
+      "name": "@getzep/zep-js",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        "form-data",
+        "qs"
+      ],
+      "effects": [
+        "@langchain/community"
+      ],
+      "range": ">=2.0.0-b.0",
+      "nodes": [
+        "node_modules/@n8n/ai-utilities/node_modules/@getzep/zep-js"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@google-cloud/storage": {
+      "name": "@google-cloud/storage",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "retry-request",
+        "teeny-request"
+      ],
+      "effects": [
+        "@langchain/community",
+        "langchain",
+        "snowflake-sdk"
+      ],
+      "range": "2.2.0 - 2.5.0 || 5.19.0 - 8.0.0",
+      "nodes": [
+        "node_modules/@google-cloud/storage"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@kafkajs/confluent-schema-registry": {
+      "name": "@kafkajs/confluent-schema-registry",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "ajv"
+      ],
+      "effects": [
+        "n8n-nodes-base"
+      ],
+      "range": "2.0.0 - 3.9.0",
+      "nodes": [
+        "node_modules/@kafkajs/confluent-schema-registry"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/classic": {
+      "name": "@langchain/classic",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@langchain/community",
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "<=1.0.31",
+      "nodes": [
+        "node_modules/@langchain/classic"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/cohere": {
+      "name": "@langchain/cohere",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "0.2.0 - 1.0.4",
+      "nodes": [
+        "node_modules/@langchain/cohere"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/community": {
+      "name": "@langchain/community",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        "@getzep/zep-cloud",
+        "@getzep/zep-js",
+        "@google-cloud/storage",
+        "@langchain/classic",
+        "@langchain/core",
+        "@langchain/openai",
+        {
+          "source": 1100326,
+          "name": "@langchain/community",
+          "dependency": "@langchain/community",
+          "title": "@langchain/community SQL Injection vulnerability",
+          "url": "https://github.com/advisories/GHSA-6m59-8fmv-m5f9",
+          "severity": "low",
+          "cwe": [
+            "CWE-89"
+          ],
+          "cvss": {
+            "score": 4.9,
+            "vectorString": "CVSS:3.0/AV:L/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L"
+          },
+          "range": "<0.3.3"
+        },
+        {
+          "source": 1113156,
+          "name": "@langchain/community",
+          "dependency": "@langchain/community",
+          "title": "@langchain/community affected by SSRF Bypass in RecursiveUrlLoader via insufficient URL origin validation",
+          "url": "https://github.com/advisories/GHSA-gf3v-fwqg-4vh7",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 4.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:N/A:N"
+          },
+          "range": "<=1.1.13"
+        },
+        {
+          "source": 1113503,
+          "name": "@langchain/community",
+          "dependency": "@langchain/community",
+          "title": "LangChain Community: redirect chaining can lead to SSRF bypass via RecursiveUrlLoader",
+          "url": "https://github.com/advisories/GHSA-mphv-75cg-56wg",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 4.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:N/A:N"
+          },
+          "range": "<=1.1.17"
+        },
+        "epub2",
+        "expr-eval",
+        "langsmith",
+        "uuid"
+      ],
+      "effects": [
+        "@n8n/ai-utilities",
+        "@n8n/n8n-nodes-langchain",
+        "langchain"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@n8n/ai-utilities/node_modules/@langchain/community",
+        "node_modules/@n8n/n8n-nodes-langchain/node_modules/@langchain/community",
+        "node_modules/langchain/node_modules/@langchain/community"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/core": {
+      "name": "@langchain/core",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1113339,
+          "name": "@langchain/core",
+          "dependency": "@langchain/core",
+          "title": "LangChain serialization injection vulnerability enables secret extraction",
+          "url": "https://github.com/advisories/GHSA-r399-636x-v7f6",
+          "severity": "high",
+          "cwe": [
+            "CWE-502"
+          ],
+          "cvss": {
+            "score": 8.6,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N"
+          },
+          "range": "<0.3.80"
+        },
+        "langsmith",
+        "uuid"
+      ],
+      "effects": [
+        "@langchain/community",
+        "@langchain/openai",
+        "@langchain/textsplitters",
+        "langchain"
+      ],
+      "range": "<=1.1.28 || 1.1.50-dev-1781580357424 - 1.2.0-dev-1775763803878",
+      "nodes": [
+        "node_modules/langchain/node_modules/@langchain/core",
+        "node_modules/langchain/node_modules/@langchain/textsplitters/node_modules/@langchain/core"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/google-common": {
+      "name": "@langchain/google-common",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@langchain/google-gauth",
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "0.0.5 - 2.1.28 || >=3.0.0-dev-1765937705265",
+      "nodes": [
+        "node_modules/@langchain/google-common"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/google-gauth": {
+      "name": "@langchain/google-gauth",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@langchain/google-common"
+      ],
+      "effects": [
+        "@langchain/google-vertexai"
+      ],
+      "range": "0.0.5 - 2.1.28 || >=3.0.0-dev-1765937705265",
+      "nodes": [
+        "node_modules/@langchain/google-gauth"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/google-vertexai": {
+      "name": "@langchain/google-vertexai",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@langchain/google-gauth"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "0.0.5 - 2.1.28 || >=3.0.0-dev-1765937705265",
+      "nodes": [
+        "node_modules/@langchain/google-vertexai"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/langgraph": {
+      "name": "@langchain/langgraph",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@langchain/langgraph-sdk",
+        "uuid"
+      ],
+      "effects": [
+        "@n8n/ai-workflow-builder"
+      ],
+      "range": "0.0.13 - 1.3.2",
+      "nodes": [
+        "node_modules/@n8n/ai-workflow-builder/node_modules/@langchain/langgraph",
+        "node_modules/@n8n/n8n-nodes-langchain/node_modules/@langchain/langgraph"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/langgraph-checkpoint": {
+      "name": "@langchain/langgraph-checkpoint",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@n8n/ai-workflow-builder",
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "<=1.0.3",
+      "nodes": [
+        "node_modules/@langchain/langgraph-checkpoint"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/langgraph-sdk": {
+      "name": "@langchain/langgraph-sdk",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@langchain/langgraph"
+      ],
+      "range": "<=1.3.1",
+      "nodes": [
+        "node_modules/@n8n/ai-workflow-builder/node_modules/@langchain/langgraph/node_modules/@langchain/langgraph-sdk",
+        "node_modules/@n8n/n8n-nodes-langchain/node_modules/@langchain/langgraph/node_modules/@langchain/langgraph-sdk"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/mistralai": {
+      "name": "@langchain/mistralai",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "0.0.18 - 1.0.2",
+      "nodes": [
+        "node_modules/@langchain/mistralai"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/ollama": {
+      "name": "@langchain/ollama",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "<=1.2.6",
+      "nodes": [
+        "node_modules/@langchain/ollama"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/openai": {
+      "name": "@langchain/openai",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@langchain/core"
+      ],
+      "effects": [
+        "@langchain/community",
+        "langchain"
+      ],
+      "range": "<=0.2.11",
+      "nodes": [
+        "node_modules/langchain/node_modules/@langchain/openai"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/pinecone": {
+      "name": "@langchain/pinecone",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [],
+      "range": "<=1.0.1",
+      "nodes": [
+        "node_modules/@langchain/pinecone"
+      ],
+      "fixAvailable": true
+    },
+    "@langchain/qdrant": {
+      "name": "@langchain/qdrant",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "<=1.0.1",
+      "nodes": [
+        "node_modules/@langchain/qdrant"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/textsplitters": {
+      "name": "@langchain/textsplitters",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@langchain/core"
+      ],
+      "effects": [
+        "langchain"
+      ],
+      "range": "<=0.0.3",
+      "nodes": [
+        "node_modules/langchain/node_modules/@langchain/textsplitters"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@langchain/weaviate": {
+      "name": "@langchain/weaviate",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "<=1.0.1",
+      "nodes": [
+        "node_modules/@langchain/weaviate"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@microsoft/agents-a365-observability": {
+      "name": "@microsoft/agents-a365-observability",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/exporter-trace-otlp-http",
+        "@opentelemetry/sdk-node"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@microsoft/agents-a365-observability"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@microsoft/agents-a365-tooling-extensions-langchain": {
+      "name": "@microsoft/agents-a365-tooling-extensions-langchain",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@microsoft/agents-a365-tooling-extensions-langchain"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/agents": {
+      "name": "@n8n/agents",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@daytona/sdk",
+        "@n8n/ai-utilities",
+        "@opentelemetry/sdk-trace-base"
+      ],
+      "effects": [
+        "@n8n/instance-ai"
+      ],
+      "range": ">=0.7.0",
+      "nodes": [
+        "node_modules/@n8n/agents"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/ai-node-sdk": {
+      "name": "@n8n/ai-node-sdk",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@n8n/ai-utilities"
+      ],
+      "effects": [
+        "n8n"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@n8n/ai-node-sdk"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/ai-utilities": {
+      "name": "@n8n/ai-utilities",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@langchain/classic",
+        "@langchain/community",
+        "@n8n/backend-network"
+      ],
+      "effects": [
+        "@n8n/agents",
+        "@n8n/ai-node-sdk",
+        "@n8n/ai-workflow-builder",
+        "@n8n/instance-ai",
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@n8n/ai-utilities"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/ai-workflow-builder": {
+      "name": "@n8n/ai-workflow-builder",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@langchain/langgraph",
+        "@langchain/langgraph-checkpoint",
+        "@n8n/ai-utilities",
+        "@n8n/backend-common",
+        "@n8n/backend-network",
+        "langsmith"
+      ],
+      "effects": [
+        "n8n"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@n8n/ai-workflow-builder"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/backend-common": {
+      "name": "@n8n/backend-common",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "stream-json"
+      ],
+      "effects": [
+        "@n8n/ai-workflow-builder",
+        "@n8n/backend-network",
+        "@n8n/db",
+        "n8n",
+        "n8n-core"
+      ],
+      "range": ">=1.10.0",
+      "nodes": [
+        "node_modules/@n8n/backend-common"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/backend-network": {
+      "name": "@n8n/backend-network",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@n8n/backend-common",
+        "qs"
+      ],
+      "effects": [
+        "@n8n/ai-utilities",
+        "@n8n/ai-workflow-builder",
+        "@n8n/blob-storage",
+        "@n8n/client-oauth2",
+        "n8n",
+        "n8n-core",
+        "n8n-nodes-base"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@n8n/backend-network"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/blob-storage": {
+      "name": "@n8n/blob-storage",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/client-s3",
+        "@azure/identity",
+        "@n8n/backend-common",
+        "@n8n/backend-network"
+      ],
+      "effects": [
+        "n8n",
+        "n8n-core"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@n8n/blob-storage"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/client-oauth2": {
+      "name": "@n8n/client-oauth2",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@n8n/backend-network"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain",
+        "n8n",
+        "n8n-core"
+      ],
+      "range": ">=1.14.0",
+      "nodes": [
+        "node_modules/@n8n/client-oauth2"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/db": {
+      "name": "@n8n/db",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@n8n/backend-common",
+        "@n8n/typeorm",
+        "n8n-core"
+      ],
+      "effects": [
+        "n8n"
+      ],
+      "range": ">=0.3.0",
+      "nodes": [
+        "node_modules/@n8n/db"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/design-system": {
+      "name": "@n8n/design-system",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/core",
+        "@tiptap/extension-link",
+        "@tiptap/extension-placeholder",
+        "@tiptap/extension-table",
+        "@tiptap/extension-table-cell",
+        "@tiptap/extension-table-header",
+        "@tiptap/extension-table-row",
+        "@tiptap/extension-task-item",
+        "@tiptap/extension-task-list",
+        "@tiptap/extension-underline",
+        "@tiptap/markdown",
+        "@tiptap/vue-3",
+        "element-plus",
+        "markdown-it",
+        "sanitize-html"
+      ],
+      "effects": [
+        "@n8n/mcp-apps"
+      ],
+      "range": ">=2.35.0",
+      "nodes": [
+        "node_modules/@n8n/design-system"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/engine": {
+      "name": "@n8n/engine",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@n8n/typeorm"
+      ],
+      "effects": [
+        "n8n"
+      ],
+      "range": ">=0.13.0",
+      "nodes": [
+        "node_modules/@n8n/engine"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/imap": {
+      "name": "@n8n/imap",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "imap"
+      ],
+      "effects": [
+        "n8n-nodes-base"
+      ],
+      "range": "<=0.8.0 || >=0.9.0",
+      "nodes": [
+        "node_modules/@n8n/imap"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/instance-ai": {
+      "name": "@n8n/instance-ai",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@daytona/sdk",
+        "@n8n/agents",
+        "@n8n/ai-utilities",
+        "@n8n/mcp-browser"
+      ],
+      "effects": [
+        "n8n"
+      ],
+      "range": ">=1.7.0",
+      "nodes": [
+        "node_modules/@n8n/instance-ai"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/mcp-apps": {
+      "name": "@n8n/mcp-apps",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@n8n/design-system"
+      ],
+      "effects": [
+        "n8n"
+      ],
+      "range": ">=0.13.0",
+      "nodes": [
+        "node_modules/@n8n/mcp-apps"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/mcp-browser": {
+      "name": "@n8n/mcp-browser",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "ws"
+      ],
+      "effects": [
+        "@n8n/instance-ai"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@n8n/mcp-browser"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/n8n-nodes-langchain": {
+      "name": "@n8n/n8n-nodes-langchain",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/client-bedrock-runtime",
+        "@aws-sdk/client-sso-oidc",
+        "@aws-sdk/credential-providers",
+        "@azure/identity",
+        "@getzep/zep-cloud",
+        "@langchain/classic",
+        "@langchain/cohere",
+        "@langchain/community",
+        "@langchain/google-common",
+        "@langchain/google-vertexai",
+        "@langchain/langgraph",
+        "@langchain/langgraph-checkpoint",
+        "@langchain/mistralai",
+        "@langchain/ollama",
+        "@langchain/pinecone",
+        "@langchain/qdrant",
+        "@langchain/weaviate",
+        "@microsoft/agents-a365-observability",
+        "@microsoft/agents-a365-tooling-extensions-langchain",
+        "@n8n/ai-utilities",
+        "@n8n/client-oauth2",
+        "@n8n/typeorm",
+        "@oracle/langchain-oracledb",
+        "cohere-ai",
+        "epub2",
+        "n8n-core",
+        "n8n-nodes-base",
+        "sanitize-html",
+        "sqlite3",
+        "weaviate-client"
+      ],
+      "effects": [
+        "n8n"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@n8n/n8n-nodes-langchain"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/node-engine-compatibility": {
+      "name": "@n8n/node-engine-compatibility",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@n8n/engine",
+        "n8n-core"
+      ],
+      "effects": [],
+      "range": "*",
+      "nodes": [
+        "node_modules/@n8n/node-engine-compatibility"
+      ],
+      "fixAvailable": true
+    },
+    "@n8n/task-runner": {
+      "name": "@n8n/task-runner",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "n8n-core"
+      ],
+      "effects": [
+        "n8n"
+      ],
+      "range": "0.1.0 || 1.59.15 - 1.59.47 || 2.9.0 - 2.26.4 || >=2.28.0",
+      "nodes": [
+        "node_modules/@n8n/task-runner"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@n8n/typeorm": {
+      "name": "@n8n/typeorm",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "sqlite3",
+        "uuid"
+      ],
+      "effects": [
+        "@n8n/db",
+        "@n8n/engine",
+        "@n8n/n8n-nodes-langchain",
+        "n8n"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@n8n/n8n-nodes-langchain/node_modules/@n8n/typeorm",
+        "node_modules/@n8n/typeorm"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/configuration": {
+      "name": "@opentelemetry/configuration",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core"
+      ],
+      "effects": [
+        "@opentelemetry/sdk-node"
+      ],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/configuration",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/configuration"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/core": {
+      "name": "@opentelemetry/core",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1153174,
+          "name": "@opentelemetry/core",
+          "dependency": "@opentelemetry/core",
+          "title": "OpenTelemetry Core: Unbounded memory allocation in W3C Baggage propagation",
+          "url": "https://github.com/advisories/GHSA-8988-4f7v-96qf",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<2.8.0"
+        }
+      ],
+      "effects": [
+        "@opentelemetry/configuration",
+        "@opentelemetry/exporter-logs-otlp-grpc",
+        "@opentelemetry/exporter-logs-otlp-http",
+        "@opentelemetry/exporter-logs-otlp-proto",
+        "@opentelemetry/exporter-metrics-otlp-grpc",
+        "@opentelemetry/exporter-metrics-otlp-http",
+        "@opentelemetry/exporter-metrics-otlp-proto",
+        "@opentelemetry/exporter-prometheus",
+        "@opentelemetry/exporter-trace-otlp-grpc",
+        "@opentelemetry/exporter-trace-otlp-http",
+        "@opentelemetry/exporter-trace-otlp-proto",
+        "@opentelemetry/exporter-zipkin",
+        "@opentelemetry/instrumentation-http",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/otlp-grpc-exporter-base",
+        "@opentelemetry/otlp-transformer",
+        "@opentelemetry/propagator-b3",
+        "@opentelemetry/propagator-jaeger",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-logs",
+        "@opentelemetry/sdk-metrics",
+        "@opentelemetry/sdk-node",
+        "@opentelemetry/sdk-trace-base",
+        "@opentelemetry/sdk-trace-node"
+      ],
+      "range": "<2.8.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/core",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/core",
+        "node_modules/@n8n/agents/node_modules/@opentelemetry/core",
+        "node_modules/@opentelemetry/exporter-trace-otlp-http/node_modules/@opentelemetry/core",
+        "node_modules/@opentelemetry/instrumentation-http/node_modules/@opentelemetry/core",
+        "node_modules/@opentelemetry/otlp-exporter-base/node_modules/@opentelemetry/core",
+        "node_modules/@opentelemetry/otlp-transformer/node_modules/@opentelemetry/core",
+        "node_modules/@opentelemetry/sdk-logs/node_modules/@opentelemetry/core",
+        "node_modules/@opentelemetry/sdk-metrics/node_modules/@opentelemetry/core"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/exporter-logs-otlp-grpc": {
+      "name": "@opentelemetry/exporter-logs-otlp-grpc",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/otlp-grpc-exporter-base",
+        "@opentelemetry/otlp-transformer",
+        "@opentelemetry/sdk-logs"
+      ],
+      "effects": [
+        "@opentelemetry/sdk-node"
+      ],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/exporter-logs-otlp-grpc",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/exporter-logs-otlp-grpc"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/exporter-logs-otlp-http": {
+      "name": "@opentelemetry/exporter-logs-otlp-http",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/otlp-transformer",
+        "@opentelemetry/sdk-logs"
+      ],
+      "effects": [],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/exporter-logs-otlp-http",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/exporter-logs-otlp-http"
+      ],
+      "fixAvailable": true
+    },
+    "@opentelemetry/exporter-logs-otlp-proto": {
+      "name": "@opentelemetry/exporter-logs-otlp-proto",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/otlp-transformer",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-logs",
+        "@opentelemetry/sdk-trace-base"
+      ],
+      "effects": [],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/exporter-logs-otlp-proto",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/exporter-logs-otlp-proto"
+      ],
+      "fixAvailable": true
+    },
+    "@opentelemetry/exporter-metrics-otlp-grpc": {
+      "name": "@opentelemetry/exporter-metrics-otlp-grpc",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/exporter-metrics-otlp-http",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/otlp-grpc-exporter-base",
+        "@opentelemetry/otlp-transformer",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-metrics"
+      ],
+      "effects": [],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/exporter-metrics-otlp-grpc",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/exporter-metrics-otlp-grpc"
+      ],
+      "fixAvailable": true
+    },
+    "@opentelemetry/exporter-metrics-otlp-http": {
+      "name": "@opentelemetry/exporter-metrics-otlp-http",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/otlp-transformer",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-metrics"
+      ],
+      "effects": [],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/exporter-metrics-otlp-http",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/exporter-metrics-otlp-http"
+      ],
+      "fixAvailable": true
+    },
+    "@opentelemetry/exporter-metrics-otlp-proto": {
+      "name": "@opentelemetry/exporter-metrics-otlp-proto",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/exporter-metrics-otlp-http",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/otlp-transformer",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-metrics"
+      ],
+      "effects": [],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/exporter-metrics-otlp-proto",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/exporter-metrics-otlp-proto"
+      ],
+      "fixAvailable": true
+    },
+    "@opentelemetry/exporter-prometheus": {
+      "name": "@opentelemetry/exporter-prometheus",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-metrics",
+        {
+          "source": 1120253,
+          "name": "@opentelemetry/exporter-prometheus",
+          "dependency": "@opentelemetry/exporter-prometheus",
+          "title": "Prometheus exporter process crash via malformed HTTP request",
+          "url": "https://github.com/advisories/GHSA-q7rr-3cgh-j5r3",
+          "severity": "high",
+          "cwe": [
+            "CWE-755"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<0.217.0"
+        }
+      ],
+      "effects": [
+        "@opentelemetry/sdk-node"
+      ],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/exporter-prometheus",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/exporter-prometheus"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/exporter-trace-otlp-grpc": {
+      "name": "@opentelemetry/exporter-trace-otlp-grpc",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/otlp-grpc-exporter-base",
+        "@opentelemetry/otlp-transformer",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-trace-base"
+      ],
+      "effects": [
+        "@opentelemetry/sdk-node"
+      ],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/exporter-trace-otlp-grpc",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/exporter-trace-otlp-grpc"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/exporter-trace-otlp-http": {
+      "name": "@opentelemetry/exporter-trace-otlp-http",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/otlp-transformer",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-trace-base"
+      ],
+      "effects": [],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/exporter-trace-otlp-http",
+        "node_modules/@opentelemetry/exporter-trace-otlp-http"
+      ],
+      "fixAvailable": true
+    },
+    "@opentelemetry/exporter-trace-otlp-proto": {
+      "name": "@opentelemetry/exporter-trace-otlp-proto",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/otlp-transformer",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-trace-base"
+      ],
+      "effects": [],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/exporter-trace-otlp-proto",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/exporter-trace-otlp-proto"
+      ],
+      "fixAvailable": true
+    },
+    "@opentelemetry/exporter-zipkin": {
+      "name": "@opentelemetry/exporter-zipkin",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-trace-base"
+      ],
+      "effects": [],
+      "range": "<=2.7.1",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/exporter-zipkin",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/exporter-zipkin"
+      ],
+      "fixAvailable": true
+    },
+    "@opentelemetry/instrumentation-http": {
+      "name": "@opentelemetry/instrumentation-http",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core"
+      ],
+      "effects": [],
+      "range": "<=0.16.0 || 0.19.1-alpha.7 - 0.218.0",
+      "nodes": [
+        "node_modules/@opentelemetry/instrumentation-http"
+      ],
+      "fixAvailable": true
+    },
+    "@opentelemetry/otlp-exporter-base": {
+      "name": "@opentelemetry/otlp-exporter-base",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/otlp-transformer"
+      ],
+      "effects": [
+        "@opentelemetry/exporter-logs-otlp-grpc",
+        "@opentelemetry/exporter-metrics-otlp-grpc",
+        "@opentelemetry/exporter-metrics-otlp-http",
+        "@opentelemetry/exporter-metrics-otlp-proto",
+        "@opentelemetry/exporter-trace-otlp-grpc",
+        "@opentelemetry/exporter-trace-otlp-http",
+        "@opentelemetry/exporter-trace-otlp-proto",
+        "@opentelemetry/sdk-node"
+      ],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/otlp-exporter-base",
+        "node_modules/@opentelemetry/otlp-exporter-base"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/otlp-grpc-exporter-base": {
+      "name": "@opentelemetry/otlp-grpc-exporter-base",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/otlp-transformer"
+      ],
+      "effects": [
+        "@opentelemetry/exporter-metrics-otlp-grpc",
+        "@opentelemetry/exporter-trace-otlp-grpc"
+      ],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/otlp-grpc-exporter-base",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/otlp-grpc-exporter-base"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/otlp-transformer": {
+      "name": "@opentelemetry/otlp-transformer",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-logs",
+        "@opentelemetry/sdk-metrics",
+        "@opentelemetry/sdk-trace-base",
+        "protobufjs"
+      ],
+      "effects": [
+        "@opentelemetry/exporter-metrics-otlp-grpc",
+        "@opentelemetry/exporter-metrics-otlp-http",
+        "@opentelemetry/exporter-metrics-otlp-proto",
+        "@opentelemetry/exporter-trace-otlp-grpc",
+        "@opentelemetry/exporter-trace-otlp-http",
+        "@opentelemetry/exporter-trace-otlp-proto",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/otlp-grpc-exporter-base"
+      ],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/otlp-transformer",
+        "node_modules/@opentelemetry/otlp-transformer"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/propagator-b3": {
+      "name": "@opentelemetry/propagator-b3",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core"
+      ],
+      "effects": [
+        "@opentelemetry/sdk-node"
+      ],
+      "range": "0.19.1-alpha.11 - 2.7.1",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/propagator-b3",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/propagator-b3"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/propagator-jaeger": {
+      "name": "@opentelemetry/propagator-jaeger",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        {
+          "source": 1124011,
+          "name": "@opentelemetry/propagator-jaeger",
+          "dependency": "@opentelemetry/propagator-jaeger",
+          "title": "OpenTelemetry JavaScript: Denial of service in `JaegerPropagator` via unhandled exception on a malformed header",
+          "url": "https://github.com/advisories/GHSA-45rx-2jwx-cxfr",
+          "severity": "high",
+          "cwe": [
+            "CWE-248"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<2.9.0"
+        }
+      ],
+      "effects": [
+        "@opentelemetry/sdk-node"
+      ],
+      "range": "<=2.8.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/propagator-jaeger",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/propagator-jaeger"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/resources": {
+      "name": "@opentelemetry/resources",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core"
+      ],
+      "effects": [
+        "@opentelemetry/exporter-prometheus",
+        "@opentelemetry/exporter-zipkin"
+      ],
+      "range": "0.8.0 - 2.7.1",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/resources",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/resources",
+        "node_modules/@n8n/agents/node_modules/@opentelemetry/resources",
+        "node_modules/@opentelemetry/exporter-trace-otlp-http/node_modules/@opentelemetry/resources",
+        "node_modules/@opentelemetry/otlp-transformer/node_modules/@opentelemetry/resources",
+        "node_modules/@opentelemetry/sdk-logs/node_modules/@opentelemetry/resources",
+        "node_modules/@opentelemetry/sdk-metrics/node_modules/@opentelemetry/resources"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/sdk-logs": {
+      "name": "@opentelemetry/sdk-logs",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/resources"
+      ],
+      "effects": [
+        "@opentelemetry/otlp-transformer",
+        "@opentelemetry/sdk-node"
+      ],
+      "range": "<=0.218.0",
+      "nodes": [
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/sdk-logs",
+        "node_modules/@opentelemetry/sdk-logs"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/sdk-metrics": {
+      "name": "@opentelemetry/sdk-metrics",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/resources"
+      ],
+      "effects": [
+        "@opentelemetry/exporter-metrics-otlp-grpc",
+        "@opentelemetry/exporter-metrics-otlp-http",
+        "@opentelemetry/exporter-metrics-otlp-proto",
+        "@opentelemetry/exporter-prometheus",
+        "@opentelemetry/otlp-transformer",
+        "@opentelemetry/sdk-node"
+      ],
+      "range": "<=2.7.1",
+      "nodes": [
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/sdk-metrics",
+        "node_modules/@opentelemetry/sdk-metrics"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/sdk-node": {
+      "name": "@opentelemetry/sdk-node",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/configuration",
+        "@opentelemetry/core",
+        "@opentelemetry/exporter-logs-otlp-grpc",
+        "@opentelemetry/exporter-logs-otlp-http",
+        "@opentelemetry/exporter-logs-otlp-proto",
+        "@opentelemetry/exporter-metrics-otlp-grpc",
+        "@opentelemetry/exporter-metrics-otlp-http",
+        "@opentelemetry/exporter-metrics-otlp-proto",
+        "@opentelemetry/exporter-prometheus",
+        "@opentelemetry/exporter-prometheus",
+        "@opentelemetry/exporter-trace-otlp-grpc",
+        "@opentelemetry/exporter-trace-otlp-http",
+        "@opentelemetry/exporter-trace-otlp-proto",
+        "@opentelemetry/exporter-zipkin",
+        "@opentelemetry/otlp-exporter-base",
+        "@opentelemetry/propagator-b3",
+        "@opentelemetry/propagator-jaeger",
+        "@opentelemetry/resources",
+        "@opentelemetry/sdk-logs",
+        "@opentelemetry/sdk-metrics",
+        "@opentelemetry/sdk-trace-base",
+        "@opentelemetry/sdk-trace-node",
+        {
+          "source": 1120252,
+          "name": "@opentelemetry/sdk-node",
+          "dependency": "@opentelemetry/sdk-node",
+          "title": "Prometheus exporter process crash via malformed HTTP request",
+          "url": "https://github.com/advisories/GHSA-q7rr-3cgh-j5r3",
+          "severity": "high",
+          "cwe": [
+            "CWE-755"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<0.217.0"
+        }
+      ],
+      "effects": [
+        "@daytona/sdk",
+        "@microsoft/agents-a365-observability"
+      ],
+      "range": "<=0.219.0",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/sdk-node",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/sdk-node"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/sdk-trace-base": {
+      "name": "@opentelemetry/sdk-trace-base",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/resources"
+      ],
+      "effects": [
+        "@n8n/agents",
+        "@opentelemetry/exporter-zipkin",
+        "@opentelemetry/sdk-node"
+      ],
+      "range": "<=2.7.1",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/sdk-trace-base",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/sdk-trace-base",
+        "node_modules/@n8n/agents/node_modules/@opentelemetry/sdk-trace-base",
+        "node_modules/@opentelemetry/exporter-trace-otlp-http/node_modules/@opentelemetry/sdk-trace-base",
+        "node_modules/@opentelemetry/otlp-transformer/node_modules/@opentelemetry/sdk-trace-base"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@opentelemetry/sdk-trace-node": {
+      "name": "@opentelemetry/sdk-trace-node",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@opentelemetry/core",
+        "@opentelemetry/sdk-trace-base"
+      ],
+      "effects": [],
+      "range": "<=2.7.1",
+      "nodes": [
+        "node_modules/@daytona/sdk/node_modules/@opentelemetry/sdk-trace-node",
+        "node_modules/@microsoft/agents-a365-observability/node_modules/@opentelemetry/sdk-trace-node"
+      ],
+      "fixAvailable": true
+    },
+    "@oracle/langchain-oracledb": {
+      "name": "@oracle/langchain-oracledb",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@oracle/langchain-oracledb"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@rudderstack/rudder-sdk-node": {
+      "name": "@rudderstack/rudder-sdk-node",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "axios",
+        "bull",
+        "uuid"
+      ],
+      "effects": [
+        "n8n"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/@rudderstack/rudder-sdk-node"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@tiptap/core": {
+      "name": "@tiptap/core",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1158508,
+          "name": "@tiptap/core",
+          "dependency": "@tiptap/core",
+          "title": "Tiptap: mergeAttributes() turns an own __proto__ key into inherited executable DOM attributes",
+          "url": "https://github.com/advisories/GHSA-cp6q-959q-f8rh",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-79",
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=2.0.0-alpha.0 <3.30.4"
+        }
+      ],
+      "effects": [
+        "@n8n/design-system",
+        "@tiptap/extension-link",
+        "@tiptap/extension-list",
+        "@tiptap/extension-table",
+        "@tiptap/extension-underline",
+        "@tiptap/extensions",
+        "@tiptap/markdown",
+        "@tiptap/vue-3"
+      ],
+      "range": "<=3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/core"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "@tiptap/extension-link": {
+      "name": "@tiptap/extension-link",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/core"
+      ],
+      "effects": [],
+      "range": "<=3.0.0-next.8 || 3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/extension-link"
+      ],
+      "fixAvailable": true
+    },
+    "@tiptap/extension-list": {
+      "name": "@tiptap/extension-list",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/core"
+      ],
+      "effects": [
+        "@tiptap/extension-task-item",
+        "@tiptap/extension-task-list"
+      ],
+      "range": "<=3.0.0-next.8 || 3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/extension-list"
+      ],
+      "fixAvailable": true
+    },
+    "@tiptap/extension-placeholder": {
+      "name": "@tiptap/extension-placeholder",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/extensions"
+      ],
+      "effects": [],
+      "range": "3.0.0-beta.0 - 3.0.0-next.8 || 3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/extension-placeholder"
+      ],
+      "fixAvailable": true
+    },
+    "@tiptap/extension-table": {
+      "name": "@tiptap/extension-table",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/core"
+      ],
+      "effects": [
+        "@tiptap/extension-table-cell",
+        "@tiptap/extension-table-header",
+        "@tiptap/extension-table-row"
+      ],
+      "range": "<=3.0.0-next.8 || 3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/extension-table"
+      ],
+      "fixAvailable": true
+    },
+    "@tiptap/extension-table-cell": {
+      "name": "@tiptap/extension-table-cell",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/extension-table"
+      ],
+      "effects": [],
+      "range": "3.0.0-beta.0 - 3.0.0-next.8 || 3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/extension-table-cell"
+      ],
+      "fixAvailable": true
+    },
+    "@tiptap/extension-table-header": {
+      "name": "@tiptap/extension-table-header",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/extension-table"
+      ],
+      "effects": [],
+      "range": "3.0.0-beta.0 - 3.0.0-next.8 || 3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/extension-table-header"
+      ],
+      "fixAvailable": true
+    },
+    "@tiptap/extension-table-row": {
+      "name": "@tiptap/extension-table-row",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/extension-table"
+      ],
+      "effects": [],
+      "range": "3.0.0-beta.0 - 3.0.0-next.8 || 3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/extension-table-row"
+      ],
+      "fixAvailable": true
+    },
+    "@tiptap/extension-task-item": {
+      "name": "@tiptap/extension-task-item",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/extension-list"
+      ],
+      "effects": [],
+      "range": "3.0.0-beta.0 - 3.0.0-next.8 || 3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/extension-task-item"
+      ],
+      "fixAvailable": true
+    },
+    "@tiptap/extension-task-list": {
+      "name": "@tiptap/extension-task-list",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/extension-list"
+      ],
+      "effects": [],
+      "range": "3.0.0-beta.0 - 3.0.0-next.8 || 3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/extension-task-list"
+      ],
+      "fixAvailable": true
+    },
+    "@tiptap/extension-underline": {
+      "name": "@tiptap/extension-underline",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/core"
+      ],
+      "effects": [],
+      "range": "<=3.0.0-next.8 || 3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/extension-underline"
+      ],
+      "fixAvailable": true
+    },
+    "@tiptap/extensions": {
+      "name": "@tiptap/extensions",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/core"
+      ],
+      "effects": [
+        "@tiptap/extension-placeholder"
+      ],
+      "range": "<=3.0.0-next.8 || 3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/extensions"
+      ],
+      "fixAvailable": true
+    },
+    "@tiptap/markdown": {
+      "name": "@tiptap/markdown",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/core"
+      ],
+      "effects": [],
+      "range": "3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/markdown"
+      ],
+      "fixAvailable": true
+    },
+    "@tiptap/vue-3": {
+      "name": "@tiptap/vue-3",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@tiptap/core"
+      ],
+      "effects": [],
+      "range": "<=3.0.0-next.8 || 3.22.4 - 3.30.3",
+      "nodes": [
+        "node_modules/@tiptap/vue-3"
+      ],
+      "fixAvailable": true
+    },
+    "@tootallnate/once": {
+      "name": "@tootallnate/once",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1119438,
+          "name": "@tootallnate/once",
+          "dependency": "@tootallnate/once",
+          "title": "@tootallnate/once vulnerable to Incorrect Control Flow Scoping",
+          "url": "https://github.com/advisories/GHSA-vpq2-c234-7xj6",
+          "severity": "low",
+          "cwe": [
+            "CWE-705"
+          ],
+          "cvss": {
+            "score": 3.3,
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<2.0.1"
+        }
+      ],
+      "effects": [
+        "http-proxy-agent"
+      ],
+      "range": "<2.0.1",
+      "nodes": [
+        "node_modules/@tootallnate/once"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "adm-zip": {
+      "name": "adm-zip",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1123686,
+          "name": "adm-zip",
+          "dependency": "adm-zip",
+          "title": "adm-zip: Crafted ZIP file triggers 4GB memory allocation",
+          "url": "https://github.com/advisories/GHSA-xcpc-8h2w-3j85",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-789"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<0.6.0"
+        }
+      ],
+      "effects": [
+        "epub2"
+      ],
+      "range": "<0.6.0",
+      "nodes": [
+        "node_modules/adm-zip"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "ajv": {
+      "name": "ajv",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1113715,
+          "name": "ajv",
+          "dependency": "ajv",
+          "title": "ajv has ReDoS when using `$data` option",
+          "url": "https://github.com/advisories/GHSA-2g4f-4pwh-qvx6",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-400",
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=7.0.0-alpha.0 <8.18.0"
+        }
+      ],
+      "effects": [
+        "@kafkajs/confluent-schema-registry"
+      ],
+      "range": "7.0.0-alpha.0 - 8.17.1",
+      "nodes": [
+        "node_modules/@kafkajs/confluent-schema-registry/node_modules/ajv"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "axios": {
+      "name": "axios",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1117577,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Invisible JSON Response Tampering via Prototype Pollution Gadget in `parseReviver`",
+          "url": "https://github.com/advisories/GHSA-3w6x-2g7m-8v23",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-915",
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 6.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:H/A:N"
+          },
+          "range": ">=1.0.0 <1.15.2"
+        },
+        {
+          "source": 1118607,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios has prototype pollution read-side gadgets in HTTP adapter that allow credential injection and request hijacking",
+          "url": "https://github.com/advisories/GHSA-q8qp-cvcw-x6jj",
+          "severity": "high",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7.4,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:N"
+          },
+          "range": ">=1.0.0 <1.15.2"
+        },
+        {
+          "source": 1120547,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Regular Expression Denial of Service (ReDoS) via Cookie Name Injection",
+          "url": "https://github.com/advisories/GHSA-hfxv-24rg-xrqf",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=1.0.0 <1.16.0"
+        },
+        {
+          "source": 1120643,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Allocation of Resources Without Limits or Throttling in Axios",
+          "url": "https://github.com/advisories/GHSA-777c-7fjr-54vf",
+          "severity": "high",
+          "cwe": [
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=1.7.0 <1.16.0"
+        },
+        {
+          "source": 1120645,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Proxy-Authorization Credential Leak to Origin Server Across HTTP-to-HTTPS Redirect in Axios Node.js HTTP Adapter",
+          "url": "https://github.com/advisories/GHSA-p92q-9vqr-4j8v",
+          "severity": "high",
+          "cwe": [
+            "CWE-201"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=1.0.0 <1.16.0"
+        },
+        {
+          "source": 1120647,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Proxy-Authorization header leaks to redirect target when proxy is re-evaluated to direct connection",
+          "url": "https://github.com/advisories/GHSA-j5f8-grm9-p9fc",
+          "severity": "high",
+          "cwe": [
+            "CWE-200"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N"
+          },
+          "range": ">=1.0.0 <1.16.0"
+        },
+        {
+          "source": 1120649,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "axios Vulnerable to Credential Theft and Response Hijacking via Prototype Pollution Gadget in Config Merge",
+          "url": "https://github.com/advisories/GHSA-3g43-6gmg-66jw",
+          "severity": "high",
+          "cwe": [
+            "CWE-94",
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:L/A:L"
+          },
+          "range": ">=1.0.0 <1.15.2"
+        },
+        {
+          "source": 1120650,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "axios Vulnerable to Full Man-in-the-Middle via Prototype Pollution Gadget in `config.proxy`",
+          "url": "https://github.com/advisories/GHSA-35jp-ww65-95wh",
+          "severity": "high",
+          "cwe": [
+            "CWE-441",
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 8.7,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:N"
+          },
+          "range": ">=1.0.0 <1.16.0"
+        },
+        {
+          "source": 1120652,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "axios has DoS & Header Injection via Prototype Pollution Read-Side Gadgets in axios merge functions",
+          "url": "https://github.com/advisories/GHSA-898c-q2cr-xwhg",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 4.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:L/A:L"
+          },
+          "range": ">=1.0.0 <1.16.0"
+        },
+        {
+          "source": 1123824,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "axios's shouldBypassProxy does not recognize IPv4-mapped IPv6 addresses, allowing NO_PROXY bypass (incomplete fix for CVE-2025-62718)",
+          "url": "https://github.com/advisories/GHSA-pjwm-pj3p-43mv",
+          "severity": "high",
+          "cwe": [
+            "CWE-289",
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 8.6,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N"
+          },
+          "range": ">=1.15.0 <1.16.0"
+        },
+        {
+          "source": 1123969,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios form serializer maxDepth bypass via {} metatoken",
+          "url": "https://github.com/advisories/GHSA-hcpx-6fm6-wx23",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-674"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=1.15.1 <1.18.0"
+        },
+        {
+          "source": 1147949,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Prototype pollution gadgets can alter axios request construction",
+          "url": "https://github.com/advisories/GHSA-mmx7-hfxf-jppx",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=1.0.0 <1.18.0"
+        },
+        {
+          "source": 1147950,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Deep formToJSON Key Recursion Can Cause Denial of Service",
+          "url": "https://github.com/advisories/GHSA-pmv8-rq9r-6j72",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-400",
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=1.0.0 <1.18.0"
+        },
+        {
+          "source": 1153175,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: HTTP/2 streamed uploads bypass `maxBodyLength`",
+          "url": "https://github.com/advisories/GHSA-mwf2-3pr3-8698",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-400"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=1.13.0 <1.18.0"
+        },
+        {
+          "source": 1153180,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Nested axios option objects can consume polluted prototype values",
+          "url": "https://github.com/advisories/GHSA-7q8q-rj6j-mhjq",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=1.0.0 <1.18.0"
+        },
+        {
+          "source": 1153182,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Fetch adapter `ReadableStream` uploads bypass `maxBodyLength`",
+          "url": "https://github.com/advisories/GHSA-jqh4-m9w3-8hp9",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=1.7.0 <1.18.0"
+        },
+        {
+          "source": 1153184,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: NO_PROXY bypass for 0.0.0.0 local addresses in axios",
+          "url": "https://github.com/advisories/GHSA-f4gw-2p7v-4548",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-183",
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=1.15.0 <1.18.0"
+        },
+        {
+          "source": 1153185,
+          "name": "axios",
+          "dependency": "axios",
+          "title": "Axios: Excessive recursion in formDataToJSON can cause denial of service",
+          "url": "https://github.com/advisories/GHSA-42h9-826w-cgv3",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-400",
+            "CWE-674"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=1.0.0 <1.18.0"
+        }
+      ],
+      "effects": [
+        "@rudderstack/rudder-sdk-node"
+      ],
+      "range": "1.0.0 - 1.17.0",
+      "nodes": [
+        "node_modules/@rudderstack/rudder-sdk-node/node_modules/axios"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "bull": {
+      "name": "bull",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@rudderstack/rudder-sdk-node",
+        "n8n"
+      ],
+      "range": ">=2.0.0",
+      "nodes": [
+        "node_modules/@rudderstack/rudder-sdk-node/node_modules/bull",
+        "node_modules/bull"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "cacache": {
+      "name": "cacache",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "tar"
+      ],
+      "effects": [
+        "make-fetch-happen"
+      ],
+      "range": "14.0.0 - 18.0.4",
+      "nodes": [
+        "node_modules/cacache"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "cohere-ai": {
+      "name": "cohere-ai",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "qs"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain"
+      ],
+      "range": "7.2.0 - 7.17.1",
+      "nodes": [
+        "node_modules/cohere-ai"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "element-plus": {
+      "name": "element-plus",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1107528,
+          "name": "element-plus",
+          "dependency": "element-plus",
+          "title": "Element Plus Link component (el-link) implements insufficient input validation for the href attribute",
+          "url": "https://github.com/advisories/GHSA-5m5x-9j46-h678",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-20",
+            "CWE-116"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=2.11.0"
+        }
+      ],
+      "effects": [],
+      "range": "<=2.11.0",
+      "nodes": [
+        "node_modules/element-plus"
+      ],
+      "fixAvailable": true
+    },
+    "epub2": {
+      "name": "epub2",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "adm-zip"
+      ],
+      "effects": [
+        "@langchain/community",
+        "@n8n/n8n-nodes-langchain",
+        "langchain"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/epub2"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "expr-eval": {
+      "name": "expr-eval",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1109807,
+          "name": "expr-eval",
+          "dependency": "expr-eval",
+          "title": "expr-eval vulnerable to Prototype Pollution",
+          "url": "https://github.com/advisories/GHSA-8gw3-rxh4-v6jx",
+          "severity": "high",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:L"
+          },
+          "range": "<=2.0.2"
+        },
+        {
+          "source": 1111287,
+          "name": "expr-eval",
+          "dependency": "expr-eval",
+          "title": "expr-eval does not restrict functions passed to the evaluate function",
+          "url": "https://github.com/advisories/GHSA-jc85-fpwf-qm7x",
+          "severity": "high",
+          "cwe": [
+            "CWE-94"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=2.0.2"
+        }
+      ],
+      "effects": [
+        "@langchain/community"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/expr-eval"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "fast-xml-parser": {
+      "name": "fast-xml-parser",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1113153,
+          "name": "fast-xml-parser",
+          "dependency": "fast-xml-parser",
+          "title": "fast-xml-parser has RangeError DoS Numeric Entities Bug",
+          "url": "https://github.com/advisories/GHSA-37qj-frw5-hhjh",
+          "severity": "high",
+          "cwe": [
+            "CWE-20",
+            "CWE-248"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=5.0.9 <=5.3.3"
+        },
+        {
+          "source": 1113567,
+          "name": "fast-xml-parser",
+          "dependency": "fast-xml-parser",
+          "title": "fast-xml-parser has an entity encoding bypass via regex injection in DOCTYPE entity names",
+          "url": "https://github.com/advisories/GHSA-m7jm-9gc2-mpf2",
+          "severity": "critical",
+          "cwe": [
+            "CWE-185"
+          ],
+          "cvss": {
+            "score": 9.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:H/A:N"
+          },
+          "range": ">=4.1.3 <4.5.4"
+        },
+        {
+          "source": 1113568,
+          "name": "fast-xml-parser",
+          "dependency": "fast-xml-parser",
+          "title": "fast-xml-parser has an entity encoding bypass via regex injection in DOCTYPE entity names",
+          "url": "https://github.com/advisories/GHSA-m7jm-9gc2-mpf2",
+          "severity": "critical",
+          "cwe": [
+            "CWE-185"
+          ],
+          "cvss": {
+            "score": 9.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:H/A:N"
+          },
+          "range": ">=5.0.0 <5.3.5"
+        },
+        {
+          "source": 1113569,
+          "name": "fast-xml-parser",
+          "dependency": "fast-xml-parser",
+          "title": "fast-xml-parser affected by DoS through entity expansion in DOCTYPE (no expansion limit)",
+          "url": "https://github.com/advisories/GHSA-jmr7-xgp7-cmfj",
+          "severity": "high",
+          "cwe": [
+            "CWE-776"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=5.0.0 <5.3.6"
+        },
+        {
+          "source": 1113570,
+          "name": "fast-xml-parser",
+          "dependency": "fast-xml-parser",
+          "title": "fast-xml-parser affected by DoS through entity expansion in DOCTYPE (no expansion limit)",
+          "url": "https://github.com/advisories/GHSA-jmr7-xgp7-cmfj",
+          "severity": "high",
+          "cwe": [
+            "CWE-776"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.1.3 <4.5.4"
+        },
+        {
+          "source": 1114149,
+          "name": "fast-xml-parser",
+          "dependency": "fast-xml-parser",
+          "title": "fast-xml-parser has stack overflow in XMLBuilder with preserveOrder",
+          "url": "https://github.com/advisories/GHSA-fj3w-jwp8-x2g3",
+          "severity": "low",
+          "cwe": [
+            "CWE-120"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=4.0.0-beta.0 <4.5.4"
+        },
+        {
+          "source": 1114153,
+          "name": "fast-xml-parser",
+          "dependency": "fast-xml-parser",
+          "title": "fast-xml-parser has stack overflow in XMLBuilder with preserveOrder",
+          "url": "https://github.com/advisories/GHSA-fj3w-jwp8-x2g3",
+          "severity": "low",
+          "cwe": [
+            "CWE-120"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=5.0.0 <5.3.8"
+        },
+        {
+          "source": 1115338,
+          "name": "fast-xml-parser",
+          "dependency": "fast-xml-parser",
+          "title": "fast-xml-parser affected by numeric entity expansion bypassing all entity expansion limits (incomplete fix for CVE-2026-26278)",
+          "url": "https://github.com/advisories/GHSA-8gc5-j5rx-235r",
+          "severity": "high",
+          "cwe": [
+            "CWE-776"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0-beta.3 <4.5.5"
+        },
+        {
+          "source": 1115339,
+          "name": "fast-xml-parser",
+          "dependency": "fast-xml-parser",
+          "title": "fast-xml-parser affected by numeric entity expansion bypassing all entity expansion limits (incomplete fix for CVE-2026-26278)",
+          "url": "https://github.com/advisories/GHSA-8gc5-j5rx-235r",
+          "severity": "high",
+          "cwe": [
+            "CWE-776"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=5.0.0 <5.5.6"
+        },
+        {
+          "source": 1116307,
+          "name": "fast-xml-parser",
+          "dependency": "fast-xml-parser",
+          "title": "Entity Expansion Limits Bypassed When Set to Zero Due to JavaScript Falsy Evaluation in fast-xml-parser",
+          "url": "https://github.com/advisories/GHSA-jp2q-39xq-3w4g",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1284"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=5.0.0 <5.5.7"
+        },
+        {
+          "source": 1116308,
+          "name": "fast-xml-parser",
+          "dependency": "fast-xml-parser",
+          "title": "Entity Expansion Limits Bypassed When Set to Zero Due to JavaScript Falsy Evaluation in fast-xml-parser",
+          "url": "https://github.com/advisories/GHSA-jp2q-39xq-3w4g",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1284"
+          ],
+          "cvss": {
+            "score": 5.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=4.0.0-beta.3 <4.5.5"
+        },
+        {
+          "source": 1117911,
+          "name": "fast-xml-parser",
+          "dependency": "fast-xml-parser",
+          "title": "fast-xml-parser XMLBuilder: XML Comment and CDATA Injection via Unescaped Delimiters",
+          "url": "https://github.com/advisories/GHSA-gh4j-gqv2-49f6",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-91"
+          ],
+          "cvss": {
+            "score": 6.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+          },
+          "range": "<5.7.0"
+        }
+      ],
+      "effects": [
+        "@aws-sdk/core",
+        "@aws-sdk/xml-builder",
+        "snowflake-sdk"
+      ],
+      "range": "<=5.6.0",
+      "nodes": [
+        "node_modules/@aws-sdk/client-bedrock-runtime/node_modules/fast-xml-parser",
+        "node_modules/fast-xml-parser"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "form-data": {
+      "name": "form-data",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1109538,
+          "name": "form-data",
+          "dependency": "form-data",
+          "title": "form-data uses unsafe random function in form-data for choosing boundary",
+          "url": "https://github.com/advisories/GHSA-fjxv-7rqg-78g4",
+          "severity": "critical",
+          "cwe": [
+            "CWE-330"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=4.0.0 <4.0.4"
+        },
+        {
+          "source": 1120743,
+          "name": "form-data",
+          "dependency": "form-data",
+          "title": "form-data: CRLF injection in form-data via unescaped multipart field names and filenames",
+          "url": "https://github.com/advisories/GHSA-hmw2-7cc7-3qxx",
+          "severity": "high",
+          "cwe": [
+            "CWE-93"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": ">=4.0.0 <4.0.6"
+        }
+      ],
+      "effects": [
+        "@getzep/zep-cloud",
+        "@getzep/zep-js"
+      ],
+      "range": "4.0.0 - 4.0.5",
+      "nodes": [
+        "node_modules/@getzep/zep-cloud/node_modules/form-data",
+        "node_modules/@n8n/ai-utilities/node_modules/form-data"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "gaxios": {
+      "name": "gaxios",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [],
+      "range": "6.4.0 - 6.7.1",
+      "nodes": [
+        "node_modules/@google-cloud/storage/node_modules/gaxios",
+        "node_modules/@google/genai/node_modules/gaxios",
+        "node_modules/google-gax/node_modules/gaxios"
+      ],
+      "fixAvailable": true
+    },
+    "google-gax": {
+      "name": "google-gax",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "retry-request",
+        "uuid"
+      ],
+      "effects": [],
+      "range": "4.0.5-experimental - 4.6.1",
+      "nodes": [
+        "node_modules/google-gax"
+      ],
+      "fixAvailable": true
+    },
+    "http-proxy-agent": {
+      "name": "http-proxy-agent",
+      "severity": "low",
+      "isDirect": false,
+      "via": [
+        "@tootallnate/once"
+      ],
+      "effects": [
+        "make-fetch-happen"
+      ],
+      "range": "4.0.1",
+      "nodes": [
+        "node_modules/make-fetch-happen/node_modules/http-proxy-agent"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "imap": {
+      "name": "imap",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "utf7"
+      ],
+      "effects": [
+        "@n8n/imap"
+      ],
+      "range": ">=0.8.18",
+      "nodes": [
+        "node_modules/imap"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "langchain": {
+      "name": "langchain",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@google-cloud/storage",
+        "@langchain/community",
+        "@langchain/core",
+        "@langchain/openai",
+        "@langchain/textsplitters",
+        {
+          "source": 1100325,
+          "name": "langchain",
+          "dependency": "langchain",
+          "title": "Langchain Path Traversal vulnerability",
+          "url": "https://github.com/advisories/GHSA-hc5w-c9f8-9cc4",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-22",
+            "CWE-29"
+          ],
+          "cvss": {
+            "score": 6.5,
+            "vectorString": "CVSS:3.0/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:L/A:N"
+          },
+          "range": "<0.2.19"
+        },
+        {
+          "source": 1113337,
+          "name": "langchain",
+          "dependency": "langchain",
+          "title": "LangChain serialization injection vulnerability enables secret extraction",
+          "url": "https://github.com/advisories/GHSA-r399-636x-v7f6",
+          "severity": "high",
+          "cwe": [
+            "CWE-502"
+          ],
+          "cvss": {
+            "score": 8.6,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N"
+          },
+          "range": "<0.3.37"
+        },
+        "epub2",
+        "langsmith",
+        "uuid"
+      ],
+      "effects": [
+        "@getzep/zep-cloud"
+      ],
+      "range": "<=1.2.27 || >=1.5.11-rc.0",
+      "nodes": [
+        "node_modules/langchain"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "langsmith": {
+      "name": "langsmith",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1116472,
+          "name": "langsmith",
+          "dependency": "langsmith",
+          "title": "LangSmith Client SDKs has Prototype Pollution in langsmith-sdk via Incomplete `__proto__` Guard in Internal lodash `set()`",
+          "url": "https://github.com/advisories/GHSA-fw9q-39r9-c252",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 5.6,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:L"
+          },
+          "range": "<=0.5.17"
+        },
+        {
+          "source": 1117058,
+          "name": "langsmith",
+          "dependency": "langsmith",
+          "title": "LangSmith SDK: Streaming token events bypass output redaction",
+          "url": "https://github.com/advisories/GHSA-rr7j-v2q5-chgv",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-200",
+            "CWE-359",
+            "CWE-532"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N"
+          },
+          "range": "<=0.5.18"
+        },
+        {
+          "source": 1120161,
+          "name": "langsmith",
+          "dependency": "langsmith",
+          "title": "LangSmith SDK: Public prompt pull deserializes untrusted manifests without trust boundary warning",
+          "url": "https://github.com/advisories/GHSA-3644-q5cj-c5c7",
+          "severity": "high",
+          "cwe": [
+            "CWE-502"
+          ],
+          "cvss": {
+            "score": 7.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:H/I:L/A:N"
+          },
+          "range": "<0.6.0"
+        },
+        "uuid"
+      ],
+      "effects": [
+        "@langchain/community",
+        "@langchain/core",
+        "@n8n/ai-workflow-builder",
+        "langchain"
+      ],
+      "range": "<=0.5.26",
+      "nodes": [
+        "node_modules/@n8n/ai-workflow-builder/node_modules/langsmith",
+        "node_modules/langchain/node_modules/langsmith"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "linkify-it": {
+      "name": "linkify-it",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1121797,
+          "name": "linkify-it",
+          "dependency": "linkify-it",
+          "title": "LinkifyIt#match scan loop has quadratic algorithmic complexity",
+          "url": "https://github.com/advisories/GHSA-22p9-wv53-3rq4",
+          "severity": "high",
+          "cwe": [
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=5.0.0"
+        },
+        {
+          "source": 1124012,
+          "name": "linkify-it",
+          "dependency": "linkify-it",
+          "title": "linkify-it: Quadratic-complexity DoS via the `mailto:` validator scan-loop on attacker text",
+          "url": "https://github.com/advisories/GHSA-v245-v573-v5vm",
+          "severity": "high",
+          "cwe": [
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=5.0.1"
+        }
+      ],
+      "effects": [
+        "mailparser",
+        "markdown-it"
+      ],
+      "range": "<=5.0.1",
+      "nodes": [
+        "node_modules/linkify-it",
+        "node_modules/mailparser/node_modules/linkify-it"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "mailparser": {
+      "name": "mailparser",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "linkify-it",
+        "nodemailer"
+      ],
+      "effects": [
+        "n8n-nodes-base"
+      ],
+      "range": "2.1.0 - 3.9.10",
+      "nodes": [
+        "node_modules/mailparser"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "make-fetch-happen": {
+      "name": "make-fetch-happen",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "cacache",
+        "http-proxy-agent"
+      ],
+      "effects": [
+        "node-gyp"
+      ],
+      "range": "7.1.1 - 14.0.0",
+      "nodes": [
+        "node_modules/make-fetch-happen"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "markdown-it": {
+      "name": "markdown-it",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1113190,
+          "name": "markdown-it",
+          "dependency": "markdown-it",
+          "title": "markdown-it is has a Regular Expression Denial of Service (ReDoS)",
+          "url": "https://github.com/advisories/GHSA-38c4-r59v-3vqw",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=13.0.0 <14.1.1"
+        },
+        {
+          "source": 1120820,
+          "name": "markdown-it",
+          "dependency": "markdown-it",
+          "title": "markdown-it: Quadratic complexity DoS in smartquotes rule via replaceAt string operations",
+          "url": "https://github.com/advisories/GHSA-6v5v-wf23-fmfq",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-400",
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<=14.1.1"
+        },
+        "linkify-it"
+      ],
+      "effects": [],
+      "range": "<=14.1.1",
+      "nodes": [
+        "node_modules/markdown-it"
+      ],
+      "fixAvailable": true
+    },
+    "minifaker": {
+      "name": "minifaker",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "n8n-nodes-base"
+      ],
+      "range": ">=1.26.0",
+      "nodes": [
+        "node_modules/minifaker"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "mssql": {
+      "name": "mssql",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "tedious"
+      ],
+      "effects": [
+        "n8n-nodes-base"
+      ],
+      "range": "7.2.1 - 10.0.4",
+      "nodes": [
+        "node_modules/mssql"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "n8n": {
+      "name": "n8n",
+      "severity": "high",
+      "isDirect": true,
+      "via": [
+        "@1password/connect",
+        "@aws-sdk/client-secrets-manager",
+        "@azure/identity",
+        "@daytona/sdk",
+        "@n8n/agents",
+        "@n8n/ai-node-sdk",
+        "@n8n/ai-utilities",
+        "@n8n/ai-workflow-builder",
+        "@n8n/backend-common",
+        "@n8n/backend-network",
+        "@n8n/blob-storage",
+        "@n8n/client-oauth2",
+        "@n8n/db",
+        "@n8n/engine",
+        "@n8n/instance-ai",
+        "@n8n/mcp-apps",
+        "@n8n/mcp-browser",
+        "@n8n/n8n-nodes-langchain",
+        "@n8n/node-engine-compatibility",
+        "@n8n/task-runner",
+        "@n8n/typeorm",
+        "@rudderstack/rudder-sdk-node",
+        "bull",
+        "n8n-core",
+        "n8n-nodes-base",
+        "nodemailer",
+        "sqlite3",
+        "ws"
+      ],
+      "effects": [],
+      "range": ">=0.108.0",
+      "nodes": [
+        "node_modules/n8n"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "n8n-core": {
+      "name": "n8n-core",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@n8n/backend-common",
+        "@n8n/backend-network",
+        "@n8n/blob-storage",
+        "@n8n/client-oauth2",
+        "qs"
+      ],
+      "effects": [
+        "@n8n/db",
+        "@n8n/n8n-nodes-langchain",
+        "@n8n/node-engine-compatibility",
+        "@n8n/task-runner",
+        "n8n"
+      ],
+      "range": "1.122.15 - 1.122.46 || >=2.9.0",
+      "nodes": [
+        "node_modules/n8n-core"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "n8n-nodes-base": {
+      "name": "n8n-nodes-base",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@aws-sdk/credential-providers",
+        "@kafkajs/confluent-schema-registry",
+        "@n8n/backend-network",
+        "@n8n/imap",
+        "mailparser",
+        "minifaker",
+        "mssql",
+        "nodemailer",
+        "qs",
+        "sanitize-html",
+        "showdown",
+        "snowflake-sdk"
+      ],
+      "effects": [
+        "n8n"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/n8n-nodes-base"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "node-gyp": {
+      "name": "node-gyp",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "make-fetch-happen",
+        "tar"
+      ],
+      "effects": [
+        "sqlite3"
+      ],
+      "range": "<=10.3.1",
+      "nodes": [
+        "node_modules/node-gyp"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "nodemailer": {
+      "name": "nodemailer",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1115470,
+          "name": "nodemailer",
+          "dependency": "nodemailer",
+          "title": "Nodemailer has SMTP command injection due to unsanitized `envelope.size` parameter",
+          "url": "https://github.com/advisories/GHSA-c7w3-x93f-qmm8",
+          "severity": "low",
+          "cwe": [
+            "CWE-93"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<8.0.4"
+        },
+        {
+          "source": 1116270,
+          "name": "nodemailer",
+          "dependency": "nodemailer",
+          "title": "Nodemailer Vulnerable to SMTP Command Injection via CRLF in Transport name Option (EHLO/HELO) ",
+          "url": "https://github.com/advisories/GHSA-vvjj-xcjg-gr5g",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-93"
+          ],
+          "cvss": {
+            "score": 4.9,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": "<=8.0.4"
+        },
+        {
+          "source": 1120795,
+          "name": "nodemailer",
+          "dependency": "nodemailer",
+          "title": "Nodemailer: CRLF injection in Nodemailer List-* header comments allows arbitrary message header injection",
+          "url": "https://github.com/advisories/GHSA-268h-hp4c-crq3",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-93"
+          ],
+          "cvss": {
+            "score": 5.4,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N"
+          },
+          "range": "<=8.0.8"
+        },
+        {
+          "source": 1120796,
+          "name": "nodemailer",
+          "dependency": "nodemailer",
+          "title": "Nodemailer jsonTransport bypasses disableFileAccess and disableUrlAccess during message normalization",
+          "url": "https://github.com/advisories/GHSA-wqvq-jvpq-h66f",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-862"
+          ],
+          "cvss": {
+            "score": 5.4,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:L/I:L/A:N"
+          },
+          "range": "<=8.0.8"
+        },
+        {
+          "source": 1120797,
+          "name": "nodemailer",
+          "dependency": "nodemailer",
+          "title": "Nodemailer: Improper TLS Certificate Validation in OAuth2 Token Fetch Enables Credential Interception",
+          "url": "https://github.com/advisories/GHSA-r7g4-qg5f-qqm2",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-295"
+          ],
+          "cvss": {
+            "score": 6.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:L/A:N"
+          },
+          "range": "<=8.0.7"
+        },
+        {
+          "source": 1158513,
+          "name": "nodemailer",
+          "dependency": "nodemailer",
+          "title": "Nodemailer: Message-level raw option bypasses disableFileAccess/disableUrlAccess, enabling arbitrary file read and full-response SSRF in the delivered message",
+          "url": "https://github.com/advisories/GHSA-p6gq-j5cr-w38f",
+          "severity": "high",
+          "cwe": [
+            "CWE-73",
+            "CWE-918"
+          ],
+          "cvss": {
+            "score": 7.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:H/I:L/A:N"
+          },
+          "range": "<=9.0.0"
+        }
+      ],
+      "effects": [
+        "mailparser",
+        "n8n",
+        "n8n-nodes-base"
+      ],
+      "range": "<=9.0.0",
+      "nodes": [
+        "node_modules/mailparser/node_modules/nodemailer",
+        "node_modules/nodemailer"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "protobufjs": {
+      "name": "protobufjs",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1118640,
+          "name": "protobufjs",
+          "dependency": "protobufjs",
+          "title": "protobuf.js: Code injection through bytes field defaults in generated toObject code",
+          "url": "https://github.com/advisories/GHSA-66ff-xgx4-vchm",
+          "severity": "high",
+          "cwe": [
+            "CWE-94"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": ">=8.0.0 <=8.0.1"
+        },
+        {
+          "source": 1118923,
+          "name": "protobufjs",
+          "dependency": "protobufjs",
+          "title": "protobuf.js: Denial of service from crafted field names in generated code",
+          "url": "https://github.com/advisories/GHSA-2pr8-phx7-x9h3",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-20"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=8.0.0 <=8.0.1"
+        },
+        {
+          "source": 1118925,
+          "name": "protobufjs",
+          "dependency": "protobufjs",
+          "title": "protobuf.js: Prototype injection in generated message constructors",
+          "url": "https://github.com/advisories/GHSA-fx83-v9x8-x52w",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": ">=8.0.0 <=8.0.1"
+        },
+        {
+          "source": 1118927,
+          "name": "protobufjs",
+          "dependency": "protobufjs",
+          "title": "protobuf.js: Code generation gadget after prototype pollution",
+          "url": "https://github.com/advisories/GHSA-75px-5xx7-5xc7",
+          "severity": "high",
+          "cwe": [
+            "CWE-94",
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 8.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H"
+          },
+          "range": ">=8.0.0 <=8.0.1"
+        },
+        {
+          "source": 1118929,
+          "name": "protobufjs",
+          "dependency": "protobufjs",
+          "title": "protobuf.js: Process-wide denial of service through unsafe option paths",
+          "url": "https://github.com/advisories/GHSA-jvwf-75h9-cwgg",
+          "severity": "high",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=8.0.0 <=8.0.1"
+        },
+        {
+          "source": 1118931,
+          "name": "protobufjs",
+          "dependency": "protobufjs",
+          "title": "protobuf.js: Denial of service through unbounded protobuf recursion",
+          "url": "https://github.com/advisories/GHSA-685m-2w69-288q",
+          "severity": "high",
+          "cwe": [
+            "CWE-674"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=8.0.0 <=8.0.1"
+        },
+        {
+          "source": 1118934,
+          "name": "protobufjs",
+          "dependency": "protobufjs",
+          "title": "protobufjs has overlong UTF-8 decoding",
+          "url": "https://github.com/advisories/GHSA-q6x5-8v7m-xcrf",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-176"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N"
+          },
+          "range": ">=8.0.0 <=8.0.1"
+        },
+        {
+          "source": 1119377,
+          "name": "protobufjs",
+          "dependency": "protobufjs",
+          "title": "protobufjs: Denial of Service via unbounded recursive JSON descriptor expansion",
+          "url": "https://github.com/advisories/GHSA-jggg-4jg4-v7c6",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-674"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=8.0.0 <8.2.0"
+        },
+        {
+          "source": 1123487,
+          "name": "protobufjs",
+          "dependency": "protobufjs",
+          "title": "protobufjs: Denial of service through unbounded Any expansion during JSON conversion",
+          "url": "https://github.com/advisories/GHSA-wcpc-wj8m-hjx6",
+          "severity": "high",
+          "cwe": [
+            "CWE-674"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=8.0.0 <=8.4.0"
+        },
+        {
+          "source": 1123489,
+          "name": "protobufjs",
+          "dependency": "protobufjs",
+          "title": "protobufjs : Schema-derived names can shadow runtime-significant properties",
+          "url": "https://github.com/advisories/GHSA-f38q-mgvj-vph7",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-674",
+            "CWE-754"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=8.0.0 <=8.5.0"
+        },
+        {
+          "source": 1123963,
+          "name": "protobufjs",
+          "dependency": "protobufjs",
+          "title": "protobufjs: Denial of Service via infinite loop in .proto option parsing",
+          "url": "https://github.com/advisories/GHSA-j3f2-48v5-ccww",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-835"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=8.0.0 <=8.6.5"
+        }
+      ],
+      "effects": [
+        "@opentelemetry/otlp-transformer"
+      ],
+      "range": "8.0.0 - 8.6.5",
+      "nodes": [
+        "node_modules/protobufjs"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "qs": {
+      "name": "qs",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1113161,
+          "name": "qs",
+          "dependency": "qs",
+          "title": "qs's arrayLimit bypass in comma parsing allows denial of service",
+          "url": "https://github.com/advisories/GHSA-w7fw-mjwx-w883",
+          "severity": "low",
+          "cwe": [
+            "CWE-20"
+          ],
+          "cvss": {
+            "score": 3.7,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=6.7.0 <=6.14.1"
+        },
+        {
+          "source": 1113719,
+          "name": "qs",
+          "dependency": "qs",
+          "title": "qs's arrayLimit bypass in its bracket notation allows DoS via memory exhaustion",
+          "url": "https://github.com/advisories/GHSA-6rw7-vpxm-498p",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-20"
+          ],
+          "cvss": {
+            "score": 3.7,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<6.14.1"
+        },
+        {
+          "source": 1119502,
+          "name": "qs",
+          "dependency": "qs",
+          "title": "qs has a remotely triggerable DoS: qs.stringify crashes with TypeError on null/undefined entries in comma-format arrays when encodeValuesOnly is set",
+          "url": "https://github.com/advisories/GHSA-q8mj-m7cp-5q26",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-476"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=6.11.1 <=6.15.1"
+        },
+        {
+          "source": 1158506,
+          "name": "qs",
+          "dependency": "qs",
+          "title": "qs array-limit bypass via bracket-key comma parsing",
+          "url": "https://github.com/advisories/GHSA-x5fp-wj9c-mxmx",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 3.7,
+            "vectorString": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=6.14.2 <=6.15.3"
+        },
+        {
+          "source": 1158507,
+          "name": "qs",
+          "dependency": "qs",
+          "title": "qs: Denial of Service via Attacker Controlled isBuffer",
+          "url": "https://github.com/advisories/GHSA-4mjr-xmp4-gh2g",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-248",
+            "CWE-703"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": ">=2.2.5 <6.16.0"
+        }
+      ],
+      "effects": [
+        "@n8n/backend-network",
+        "cohere-ai",
+        "n8n-core",
+        "n8n-nodes-base"
+      ],
+      "range": "<=6.15.3",
+      "nodes": [
+        "node_modules/@getzep/zep-cloud/node_modules/qs",
+        "node_modules/@n8n/ai-utilities/node_modules/qs",
+        "node_modules/cohere-ai/node_modules/qs",
+        "node_modules/qs"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "retry-request": {
+      "name": "retry-request",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "teeny-request"
+      ],
+      "effects": [
+        "@google-cloud/storage",
+        "google-gax"
+      ],
+      "range": "7.0.0 - 7.0.2",
+      "nodes": [
+        "node_modules/retry-request"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "sanitize-html": {
+      "name": "sanitize-html",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1153195,
+          "name": "sanitize-html",
+          "dependency": "sanitize-html",
+          "title": "ApostropheCMS: Stored XSS via SVG SMIL URI-list scheme-policy bypass",
+          "url": "https://github.com/advisories/GHSA-g8qq-57p8-ggw5",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-79"
+          ],
+          "cvss": {
+            "score": 5.4,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:L/UI:R/S:C/C:L/I:L/A:N"
+          },
+          "range": ">=1.9.0 <=2.17.6"
+        },
+        {
+          "source": 1164821,
+          "name": "sanitize-html",
+          "dependency": "sanitize-html",
+          "title": "ApostropheCMS: Mutation-XSS / allowedTags bypass via literal `</textarea/>` solidus close",
+          "url": "https://github.com/advisories/GHSA-jxwj-j7wr-gfrw",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-79"
+          ],
+          "cvss": {
+            "score": 6.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+          },
+          "range": "<=2.17.5"
+        }
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain",
+        "n8n-nodes-base"
+      ],
+      "range": "<=2.17.6",
+      "nodes": [
+        "node_modules/sanitize-html"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "semver": {
+      "name": "semver",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1112918,
+          "name": "semver",
+          "dependency": "semver",
+          "title": "semver vulnerable to Regular Expression Denial of Service",
+          "url": "https://github.com/advisories/GHSA-c2qf-rxjj-qqgw",
+          "severity": "high",
+          "cwe": [
+            "CWE-1333"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=2.0.0-alpha <5.7.2"
+        }
+      ],
+      "effects": [
+        "utf7"
+      ],
+      "range": "2.0.0-alpha - 5.7.1",
+      "nodes": [
+        "node_modules/utf7/node_modules/semver"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "showdown": {
+      "name": "showdown",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1117038,
+          "name": "showdown",
+          "dependency": "showdown",
+          "title": "Showdown vulnerable to Regular Expression Denial of Service (ReDoS) in link/anchor parsing",
+          "url": "https://github.com/advisories/GHSA-rmmh-p597-ppvv",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-674",
+            "CWE-777"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<=2.1.0"
+        },
+        {
+          "source": 1138814,
+          "name": "showdown",
+          "dependency": "showdown",
+          "title": "showdown metadata title handling allows cross-site scripting",
+          "url": "https://github.com/advisories/GHSA-cr32-g25g-vxjj",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-79"
+          ],
+          "cvss": {
+            "score": 6.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+          },
+          "range": "<=2.1.0"
+        },
+        {
+          "source": 1138815,
+          "name": "showdown",
+          "dependency": "showdown",
+          "title": "showdown allows stored cross-site scripting through table header ID injection",
+          "url": "https://github.com/advisories/GHSA-22g5-r2x5-97cx",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-79"
+          ],
+          "cvss": {
+            "score": 6.1,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N"
+          },
+          "range": "<=2.1.0"
+        }
+      ],
+      "effects": [
+        "n8n-nodes-base"
+      ],
+      "range": "*",
+      "nodes": [
+        "node_modules/showdown"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "snowflake-sdk": {
+      "name": "snowflake-sdk",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "@google-cloud/storage",
+        "fast-xml-parser",
+        "toml",
+        "uuid"
+      ],
+      "effects": [
+        "n8n-nodes-base"
+      ],
+      "range": ">=1.1.8",
+      "nodes": [
+        "node_modules/snowflake-sdk"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "sqlite3": {
+      "name": "sqlite3",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "node-gyp",
+        "tar"
+      ],
+      "effects": [
+        "@n8n/n8n-nodes-langchain",
+        "n8n"
+      ],
+      "range": "5.0.0 - 5.1.7",
+      "nodes": [
+        "node_modules/sqlite3"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "stream-json": {
+      "name": "stream-json",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1164823,
+          "name": "stream-json",
+          "dependency": "stream-json",
+          "title": "stream-json: pick/ignore/filter/replace filters are O(depth²) on nested input — small crafted JSON blocks the event loop for seconds→minutes (DoS)",
+          "url": "https://github.com/advisories/GHSA-528h-pc64-c93x",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-407"
+          ],
+          "cvss": {
+            "score": 6.2,
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=3.4.0"
+        }
+      ],
+      "effects": [
+        "@n8n/backend-common"
+      ],
+      "range": "<=3.4.0",
+      "nodes": [
+        "node_modules/stream-json"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "tar": {
+      "name": "tar",
+      "severity": "critical",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1112659,
+          "name": "tar",
+          "dependency": "tar",
+          "title": "node-tar Vulnerable to Arbitrary File Creation/Overwrite via Hardlink Path Traversal",
+          "url": "https://github.com/advisories/GHSA-34x7-hfp2-rc4v",
+          "severity": "high",
+          "cwe": [
+            "CWE-22",
+            "CWE-59"
+          ],
+          "cvss": {
+            "score": 8.2,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:L/A:N"
+          },
+          "range": "<7.5.7"
+        },
+        {
+          "source": 1113300,
+          "name": "tar",
+          "dependency": "tar",
+          "title": "node-tar is Vulnerable to Arbitrary File Overwrite and Symlink Poisoning via Insufficient Path Sanitization",
+          "url": "https://github.com/advisories/GHSA-8qq5-rm4j-mr97",
+          "severity": "high",
+          "cwe": [
+            "CWE-22"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=7.5.2"
+        },
+        {
+          "source": 1113375,
+          "name": "tar",
+          "dependency": "tar",
+          "title": "Arbitrary File Read/Write via Hardlink Target Escape Through Symlink Chain in node-tar Extraction",
+          "url": "https://github.com/advisories/GHSA-83g3-92jg-28cx",
+          "severity": "high",
+          "cwe": [
+            "CWE-22"
+          ],
+          "cvss": {
+            "score": 7.1,
+            "vectorString": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N"
+          },
+          "range": "<7.5.8"
+        },
+        {
+          "source": 1114200,
+          "name": "tar",
+          "dependency": "tar",
+          "title": "tar has Hardlink Path Traversal via Drive-Relative Linkpath",
+          "url": "https://github.com/advisories/GHSA-qffp-2rhf-9h96",
+          "severity": "high",
+          "cwe": [
+            "CWE-22",
+            "CWE-59"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=7.5.9"
+        },
+        {
+          "source": 1114302,
+          "name": "tar",
+          "dependency": "tar",
+          "title": "node-tar Symlink Path Traversal via Drive-Relative Linkpath",
+          "url": "https://github.com/advisories/GHSA-9ppj-qmqm-q256",
+          "severity": "high",
+          "cwe": [
+            "CWE-22"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=7.5.10"
+        },
+        {
+          "source": 1114680,
+          "name": "tar",
+          "dependency": "tar",
+          "title": "Race Condition in node-tar Path Reservations via Unicode Ligature Collisions on macOS APFS",
+          "url": "https://github.com/advisories/GHSA-r6q2-hw4h-h46w",
+          "severity": "high",
+          "cwe": [
+            "CWE-176",
+            "CWE-367"
+          ],
+          "cvss": {
+            "score": 8.8,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:H/A:L"
+          },
+          "range": "<=7.5.3"
+        },
+        {
+          "source": 1120782,
+          "name": "tar",
+          "dependency": "tar",
+          "title": "node-tar applies PAX size override to intermediary GNU long-name/long-link headers, causing tar parser interpretation differential (file smuggling)",
+          "url": "https://github.com/advisories/GHSA-vmf3-w455-68vh",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-436"
+          ],
+          "cvss": {
+            "score": 0,
+            "vectorString": null
+          },
+          "range": "<=7.5.15"
+        },
+        {
+          "source": 1123939,
+          "name": "tar",
+          "dependency": "tar",
+          "title": "node-tar: Process crash via PAX numeric path type confusion",
+          "url": "https://github.com/advisories/GHSA-w8wr-v893-vjvp",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-704"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<=7.5.17"
+        },
+        {
+          "source": 1123940,
+          "name": "tar",
+          "dependency": "tar",
+          "title": "node-tar: Decompression/parse DoS via unlimited input",
+          "url": "https://github.com/advisories/GHSA-23hp-3jrh-7fpw",
+          "severity": "critical",
+          "cwe": [
+            "CWE-770"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=7.5.18"
+        },
+        {
+          "source": 1123941,
+          "name": "tar",
+          "dependency": "tar",
+          "title": "node-tar: Negative tar entry size causes infinite loop in archive replace",
+          "url": "https://github.com/advisories/GHSA-8x88-c5mf-7j5w",
+          "severity": "high",
+          "cwe": [
+            "CWE-835"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=7.5.17"
+        },
+        {
+          "source": 1123942,
+          "name": "tar",
+          "dependency": "tar",
+          "title": "node-tar: Uncaught Exception DoS via NUL byte in PAX path/linkpath records",
+          "url": "https://github.com/advisories/GHSA-gvwx-54wh-qm9j",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-248"
+          ],
+          "cvss": {
+            "score": 5.3,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L"
+          },
+          "range": "<=7.5.16"
+        },
+        {
+          "source": 1145647,
+          "name": "tar",
+          "dependency": "tar",
+          "title": "node-tar: Uncontrolled recursion in mapHas/filesFilter allows uncatchable stack-overflow DoS via crafted long-path tar with member selection",
+          "url": "https://github.com/advisories/GHSA-r292-9mhp-454m",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-674"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<=7.5.20"
+        }
+      ],
+      "effects": [
+        "cacache",
+        "node-gyp",
+        "sqlite3"
+      ],
+      "range": "<=7.5.20",
+      "nodes": [
+        "node_modules/cacache/node_modules/tar",
+        "node_modules/node-gyp/node_modules/tar",
+        "node_modules/sqlite3/node_modules/tar"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "tedious": {
+      "name": "tedious",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "@azure/identity"
+      ],
+      "effects": [
+        "mssql"
+      ],
+      "range": "11.0.9 - 18.2.0",
+      "nodes": [
+        "node_modules/tedious"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "teeny-request": {
+      "name": "teeny-request",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [
+        "@google-cloud/storage",
+        "retry-request"
+      ],
+      "range": "3.9.1 - 9.0.0",
+      "nodes": [
+        "node_modules/teeny-request"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "toml": {
+      "name": "toml",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1164824,
+          "name": "toml",
+          "dependency": "toml",
+          "title": "toml-node: Uncontrolled Recursion",
+          "url": "https://github.com/advisories/GHSA-82x6-q7mm-w9cf",
+          "severity": "high",
+          "cwe": [
+            "CWE-674"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": "<4.2.0"
+        },
+        {
+          "source": 1164825,
+          "name": "toml",
+          "dependency": "toml",
+          "title": "toml-node: Prototype Pollution Leads to `Object.prototype` Corruption via `__proto__` Key-Path Desynchronization",
+          "url": "https://github.com/advisories/GHSA-v5mp-jgw5-2x6j",
+          "severity": "high",
+          "cwe": [
+            "CWE-1321"
+          ],
+          "cvss": {
+            "score": 8.2,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:L"
+          },
+          "range": "<4.1.2"
+        }
+      ],
+      "effects": [
+        "snowflake-sdk"
+      ],
+      "range": "<=4.1.2",
+      "nodes": [
+        "node_modules/toml"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "utf7": {
+      "name": "utf7",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        "semver"
+      ],
+      "effects": [
+        "imap"
+      ],
+      "range": ">=1.0.2",
+      "nodes": [
+        "node_modules/utf7"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "uuid": {
+      "name": "uuid",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1119441,
+          "name": "uuid",
+          "dependency": "uuid",
+          "title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+          "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+          "severity": "moderate",
+          "cwe": [
+            "CWE-787",
+            "CWE-1285"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N"
+          },
+          "range": "<11.1.1"
+        }
+      ],
+      "effects": [
+        "@1password/connect",
+        "@aws-sdk/client-secrets-manager",
+        "@azure/msal-node",
+        "@langchain/classic",
+        "@langchain/cohere",
+        "@langchain/community",
+        "@langchain/core",
+        "@langchain/google-common",
+        "@langchain/langgraph",
+        "@langchain/langgraph-checkpoint",
+        "@langchain/langgraph-sdk",
+        "@langchain/mistralai",
+        "@langchain/ollama",
+        "@langchain/pinecone",
+        "@langchain/qdrant",
+        "@langchain/weaviate",
+        "@microsoft/agents-a365-tooling-extensions-langchain",
+        "@n8n/typeorm",
+        "@oracle/langchain-oracledb",
+        "@rudderstack/rudder-sdk-node",
+        "bull",
+        "gaxios",
+        "google-gax",
+        "langchain",
+        "langsmith",
+        "minifaker",
+        "snowflake-sdk",
+        "teeny-request",
+        "weaviate-client"
+      ],
+      "range": "<11.1.1",
+      "nodes": [
+        "node_modules/@1password/connect/node_modules/uuid",
+        "node_modules/@aws-sdk/client-secrets-manager/node_modules/uuid",
+        "node_modules/@azure/msal-node/node_modules/uuid",
+        "node_modules/@google-cloud/storage/node_modules/uuid",
+        "node_modules/@google/genai/node_modules/uuid",
+        "node_modules/@langchain/classic/node_modules/uuid",
+        "node_modules/@langchain/cohere/node_modules/uuid",
+        "node_modules/@langchain/google-common/node_modules/uuid",
+        "node_modules/@langchain/langgraph-checkpoint/node_modules/uuid",
+        "node_modules/@langchain/mistralai/node_modules/uuid",
+        "node_modules/@langchain/ollama/node_modules/uuid",
+        "node_modules/@langchain/pinecone/node_modules/uuid",
+        "node_modules/@langchain/qdrant/node_modules/uuid",
+        "node_modules/@langchain/weaviate/node_modules/uuid",
+        "node_modules/@microsoft/agents-a365-tooling-extensions-langchain/node_modules/uuid",
+        "node_modules/@n8n/ai-utilities/node_modules/@langchain/community/node_modules/uuid",
+        "node_modules/@n8n/ai-workflow-builder/node_modules/@langchain/langgraph/node_modules/@langchain/langgraph-sdk/node_modules/uuid",
+        "node_modules/@n8n/ai-workflow-builder/node_modules/@langchain/langgraph/node_modules/uuid",
+        "node_modules/@n8n/ai-workflow-builder/node_modules/langsmith/node_modules/uuid",
+        "node_modules/@n8n/n8n-nodes-langchain/node_modules/@langchain/community/node_modules/uuid",
+        "node_modules/@n8n/n8n-nodes-langchain/node_modules/@langchain/langgraph/node_modules/@langchain/langgraph-sdk/node_modules/uuid",
+        "node_modules/@n8n/n8n-nodes-langchain/node_modules/@langchain/langgraph/node_modules/uuid",
+        "node_modules/@n8n/n8n-nodes-langchain/node_modules/@n8n/typeorm/node_modules/uuid",
+        "node_modules/@n8n/typeorm/node_modules/uuid",
+        "node_modules/@oracle/langchain-oracledb/node_modules/uuid",
+        "node_modules/@rudderstack/rudder-sdk-node/node_modules/bull/node_modules/uuid",
+        "node_modules/@rudderstack/rudder-sdk-node/node_modules/uuid",
+        "node_modules/bull/node_modules/uuid",
+        "node_modules/google-gax/node_modules/uuid",
+        "node_modules/langchain/node_modules/@langchain/textsplitters/node_modules/uuid",
+        "node_modules/langchain/node_modules/langsmith/node_modules/uuid",
+        "node_modules/langchain/node_modules/uuid",
+        "node_modules/minifaker/node_modules/uuid",
+        "node_modules/snowflake-sdk/node_modules/uuid",
+        "node_modules/tedious/node_modules/uuid",
+        "node_modules/teeny-request/node_modules/uuid",
+        "node_modules/weaviate-client/node_modules/uuid"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    },
+    "weaviate-client": {
+      "name": "weaviate-client",
+      "severity": "moderate",
+      "isDirect": false,
+      "via": [
+        "uuid"
+      ],
+      "effects": [],
+      "range": "3.0.0-alpha.0 - 3.12.1",
+      "nodes": [
+        "node_modules/weaviate-client"
+      ],
+      "fixAvailable": true
+    },
+    "ws": {
+      "name": "ws",
+      "severity": "high",
+      "isDirect": false,
+      "via": [
+        {
+          "source": 1123259,
+          "name": "ws",
+          "dependency": "ws",
+          "title": "ws: Memory exhaustion DoS from tiny fragments and data chunks",
+          "url": "https://github.com/advisories/GHSA-96hv-2xvq-fx4p",
+          "severity": "high",
+          "cwe": [
+            "CWE-400",
+            "CWE-770",
+            "CWE-1050"
+          ],
+          "cvss": {
+            "score": 7.5,
+            "vectorString": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H"
+          },
+          "range": ">=8.0.0 <8.21.0"
+        }
+      ],
+      "effects": [
+        "@n8n/mcp-browser",
+        "n8n"
+      ],
+      "range": "8.0.0 - 8.20.1",
+      "nodes": [
+        "node_modules/ws"
+      ],
+      "fixAvailable": {
+        "name": "n8n",
+        "version": "0.167.0",
+        "isSemVerMajor": true
+      }
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 2,
+      "moderate": 112,
+      "high": 37,
+      "critical": 7,
+      "total": 158
+    },
+    "dependencies": {
+      "prod": 2251,
+      "dev": 0,
+      "optional": 183,
+      "peer": 75,
+      "peerOptional": 0,
+      "total": 2488
+    }
+  }
+}

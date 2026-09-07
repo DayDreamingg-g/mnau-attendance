@@ -1,0 +1,206 @@
+[
+  {
+    "email": "teacher-01@test.com",
+    "teacher": "Ємельянов С.І."
+  },
+  {
+    "email": "teacher-02@test.com",
+    "teacher": "Іваненко Т.Я."
+  },
+  {
+    "email": "teacher-03@test.com",
+    "teacher": "Банєва І.О."
+  },
+  {
+    "email": "teacher-04@test.com",
+    "teacher": "Богатенкова О.Є."
+  },
+  {
+    "email": "teacher-05@test.com",
+    "teacher": "Богатєнкова О.Є."
+  },
+  {
+    "email": "teacher-06@test.com",
+    "teacher": "Богданов С.І."
+  },
+  {
+    "email": "teacher-07@test.com",
+    "teacher": "Бойчук О.В."
+  },
+  {
+    "email": "teacher-08@test.com",
+    "teacher": "Болотських С.В."
+  },
+  {
+    "email": "teacher-09@test.com",
+    "teacher": "Борчик Є.Ю."
+  },
+  {
+    "email": "teacher-10@test.com",
+    "teacher": "Бурковська А.І."
+  },
+  {
+    "email": "teacher-11@test.com",
+    "teacher": "Біліченко О.С."
+  },
+  {
+    "email": "teacher-12@test.com",
+    "teacher": "Галунець Н.І."
+  },
+  {
+    "email": "teacher-13@test.com",
+    "teacher": "Ганніченко Т.А."
+  },
+  {
+    "email": "teacher-14@test.com",
+    "teacher": "Гарбар Г.А."
+  },
+  {
+    "email": "teacher-15@test.com",
+    "teacher": "Гончаренко І.В."
+  },
+  {
+    "email": "teacher-16@test.com",
+    "teacher": "Гула Л.В."
+  },
+  {
+    "email": "teacher-17@test.com",
+    "teacher": "Гусенко А.А."
+  },
+  {
+    "email": "teacher-18@test.com",
+    "teacher": "Жебко О.О."
+  },
+  {
+    "email": "teacher-19@test.com",
+    "teacher": "Ключник А.В."
+  },
+  {
+    "email": "teacher-20@test.com",
+    "teacher": "Коломієць А.М."
+  },
+  {
+    "email": "teacher-21@test.com",
+    "teacher": "Крайній В.О."
+  },
+  {
+    "email": "teacher-22@test.com",
+    "teacher": "Кучмійова Т.С."
+  },
+  {
+    "email": "teacher-23@test.com",
+    "teacher": "Кушнірук В.С."
+  },
+  {
+    "email": "teacher-24@test.com",
+    "teacher": "Марковська А.В."
+  },
+  {
+    "email": "teacher-25@test.com",
+    "teacher": "Машкіна Л.В."
+  },
+  {
+    "email": "teacher-26@test.com",
+    "teacher": "Мірошник Р.С."
+  },
+  {
+    "email": "teacher-27@test.com",
+    "teacher": "Олійник Т.Г."
+  },
+  {
+    "email": "teacher-28@test.com",
+    "teacher": "Павлюк С.І."
+  },
+  {
+    "email": "teacher-29@test.com",
+    "teacher": "Пархоменко А.Ю."
+  },
+  {
+    "email": "teacher@test.com",
+    "teacher": "Пархоменко О.Ю."
+  },
+  {
+    "email": "teacher-31@test.com",
+    "teacher": "Петрова О.І."
+  },
+  {
+    "email": "teacher-32@test.com",
+    "teacher": "Побережець Г.С."
+  },
+  {
+    "email": "teacher-33@test.com",
+    "teacher": "Поживатенко В.В."
+  },
+  {
+    "email": "teacher-36@test.com",
+    "teacher": "Пономаренко Н.Г."
+  },
+  {
+    "email": "teacher-37@test.com",
+    "teacher": "Поточилова І.С."
+  },
+  {
+    "email": "teacher-38@test.com",
+    "teacher": "Потриваєва Н.В."
+  },
+  {
+    "email": "teacher-39@test.com",
+    "teacher": "Прогонюк Л.Ю."
+  },
+  {
+    "email": "teacher-40@test.com",
+    "teacher": "Піюренко І.О."
+  },
+  {
+    "email": "teacher-41@test.com",
+    "teacher": "Ракова А.Ю."
+  },
+  {
+    "email": "teacher-42@test.com",
+    "teacher": "Садовий О.С."
+  },
+  {
+    "email": "teacher-43@test.com",
+    "teacher": "Саламатіна О.О."
+  },
+  {
+    "email": "teacher-44@test.com",
+    "teacher": "Співак В.В."
+  },
+  {
+    "email": "teacher-45@test.com",
+    "teacher": "Суріна Г.Ю."
+  },
+  {
+    "email": "teacher-46@test.com",
+    "teacher": "Сухорукова А.Л."
+  },
+  {
+    "email": "teacher-47@test.com",
+    "teacher": "Табацкова Г.В."
+  },
+  {
+    "email": "teacher-48@test.com",
+    "teacher": "Тищенко С.І."
+  },
+  {
+    "email": "teacher-49@test.com",
+    "teacher": "Трибрат Р.О."
+  },
+  {
+    "email": "teacher-50@test.com",
+    "teacher": "Хилько І.І."
+  },
+  {
+    "email": "teacher-51@test.com",
+    "teacher": "Христенко О.А."
+  },
+  {
+    "email": "teacher-52@test.com",
+    "teacher": "Червен І.І."
+  },
+  {
+    "email": "teacher-53@test.com",
+    "teacher": "Шишпанова Н.О."
+  }
+]

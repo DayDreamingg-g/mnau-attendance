@@ -1,0 +1,9 @@
+n8n CLI 2.37.10. scripts/verify-n8n.mjs imports six workflows and asserts READY plus reused=true on the second execution of each.
+n8n attendance-alert50.json completed READY through the machine endpoint.
+n8n attendance-alert70.json completed READY through the machine endpoint.
+n8n daily-attendance.json completed READY through the machine endpoint.
+n8n monthly-attendance.json completed READY through the machine endpoint.
+n8n report-generation.json completed READY through the machine endpoint.
+n8n weekly-curator-summary.json completed READY through the machine endpoint.
+n8n internal database contains 131 tables and no application Attendance table.
+HTTP journal save persists and is audited after both n8n CLI workflows and their database have stopped.

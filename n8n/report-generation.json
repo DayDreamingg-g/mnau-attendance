@@ -1,0 +1,94 @@
+{
+  "name": "Manual PDF and CSV report generation",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "6a21ebd7-6c00-5556-b01a-c363aba875cb",
+      "name": "Manual run",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://web:3000/api/machine/reports",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"action\": \"REPORT\", \"kind\": \"MONTHLY\", \"requireReady\": true}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "4efefc65-0a12-5b21-bc87-a370febc203e",
+      "name": "Create and persist report",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        280
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "MNAU report machine"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const result = $input.first().json;\nif (result.state !== 'READY') {\n  throw new Error('MNAU automation did not reach READY: ' + String(result.state ?? 'missing state'));\n}\nreturn [{json: {...result, message: result.message ?? 'Report files and summary are persisted in MNAU Attendance.'}}];"
+      },
+      "id": "54cf8a24-38f5-5694-8294-23597ba38e4c",
+      "name": "Verify persisted result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        740,
+        280
+      ]
+    }
+  ],
+  "connections": {
+    "Manual run": {
+      "main": [
+        [
+          {
+            "node": "Create and persist report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create and persist report": {
+      "main": [
+        [
+          {
+            "node": "Verify persisted result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Kyiv",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": true,
+    "executionTimeout": 600
+  },
+  "active": false,
+  "pinData": {},
+  "tags": []
+}

@@ -1,0 +1,297 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+datasource db {
+  provider = "postgresql"
+}
+enum RoleCode {
+  ADMIN
+  DEAN_OFFICE
+  CURATOR
+  TEACHER
+  STAROSTA
+}
+enum StatusCode {
+  PRESENT
+  N
+  HV
+}
+enum JournalState {
+  EMPTY
+  DRAFT
+  CONFIRMED
+}
+enum ReportState {
+  PENDING
+  READY
+  FAILED
+}
+model Role {
+  id    RoleCode @id
+  label String
+  users UserRole[]
+}
+model User {
+  id           String @id @default(cuid())
+  email        String @unique
+  name         String
+  passwordHash String
+  active       Boolean @default(true)
+  createdAt    DateTime @default(now()) @db.Timestamptz(3)
+  roles        UserRole[]
+  sessions     Session[]
+  teacher      Teacher?
+  student      Student?
+  curatorAssignments CuratorAssignment[]
+  deanAssignments DeanAssignment[]
+  auditLogs    AuditLog[]
+  submissions  JournalSubmission[]
+  reports      Report[]
+}
+model UserRole {
+  userId String
+  roleId RoleCode
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  role Role @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  @@id([userId, roleId])
+}
+model Session {
+  id String @id @default(cuid())
+  tokenHash String @unique
+  userId String
+  expiresAt DateTime @db.Timestamptz(3)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  @@index([userId, expiresAt])
+}
+model LoginBucket {
+  key String @id
+  attempts Int @default(0)
+  resetAt DateTime @db.Timestamptz(3)
+}
+model Faculty {
+  id String @id @default(cuid())
+  slug String @unique
+  name String
+  sourceUrl String?
+  specialties Specialty[]
+  deanAssignments DeanAssignment[]
+  reports Report[]
+}
+model Specialty {
+  id String @id
+  name String
+  code String?
+  codeNote String?
+  programName String?
+  facultyId String
+  source Json
+  faculty Faculty @relation(fields: [facultyId], references: [id], onDelete: Restrict)
+  groups Group[]
+  @@index([facultyId])
+}
+model Group {
+  id String @id
+  name String @unique
+  course Int
+  specialtyId String
+  intakeYear Int?
+  source Json
+  specialty Specialty @relation(fields: [specialtyId], references: [id], onDelete: Restrict)
+  students Student[]
+  lessons LessonGroup[]
+  curatorAssignments CuratorAssignment[]
+  @@index([specialtyId, course])
+}
+model Student {
+  id String @id
+  fullName String
+  phone String?
+  isSynthetic Boolean @default(true)
+  groupId String
+  userId String? @unique
+  group Group @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  user User? @relation(fields: [userId], references: [id], onDelete: Restrict)
+  attendance Attendance[]
+  roster LessonStudent[]
+  @@index([groupId, fullName])
+}
+model Teacher {
+  id String @id
+  displayName String
+  userId String? @unique
+  source Json
+  user User? @relation(fields: [userId], references: [id], onDelete: Restrict)
+  lessons Lesson[]
+}
+model CuratorAssignment {
+  userId String
+  groupId String
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  group Group @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  @@id([userId, groupId])
+}
+model DeanAssignment {
+  userId String
+  facultyId String
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  faculty Faculty @relation(fields: [facultyId], references: [id], onDelete: Restrict)
+  @@id([userId, facultyId])
+}
+model Subject {
+  id String @id
+  name String
+  source Json
+  lessons Lesson[]
+}
+model Building {
+  id String @id
+  abbreviation String @unique
+  name String?
+  address String?
+  confirmed Boolean @default(false)
+  source Json
+  lessons Lesson[]
+  bells Bell[]
+}
+model Bell {
+  id String @id
+  pairNumber Int
+  startTime String
+  endTime String
+  buildingId String?
+  source String
+  building Building? @relation(fields: [buildingId], references: [id], onDelete: Restrict)
+  lessons Lesson[]
+}
+model SourceRecord {
+  id String @id
+  file String
+  page Int
+  raw String
+  bbox Json
+  data Json
+  issues Json
+  lessons Lesson[]
+  @@index([file, page])
+}
+model Lesson {
+  id String @id
+  startAt DateTime @db.Timestamptz(3)
+  endAt DateTime @db.Timestamptz(3)
+  pairNumber Int
+  subjectId String
+  teacherId String?
+  buildingId String
+  room String
+  bellId String
+  sourceId String?
+  synthetic Boolean @default(true)
+  cancelled Boolean @default(false)
+  starostaAllowed Boolean @default(true)
+  kind String @default("Демонстраційне заняття")
+  subgroup String?
+  weekPattern String?
+  journalState JournalState @default(EMPTY)
+  version Int @default(0)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Restrict)
+  teacher Teacher? @relation(fields: [teacherId], references: [id], onDelete: Restrict)
+  building Building @relation(fields: [buildingId], references: [id], onDelete: Restrict)
+  bell Bell @relation(fields: [bellId], references: [id], onDelete: Restrict)
+  source SourceRecord? @relation(fields: [sourceId], references: [id], onDelete: Restrict)
+  groups LessonGroup[]
+  roster LessonStudent[]
+  attendance Attendance[]
+  auditLogs AuditLog[]
+  submissions JournalSubmission[]
+  @@index([teacherId, startAt])
+  @@index([startAt, cancelled])
+  @@index([buildingId, room, startAt])
+}
+model LessonGroup {
+  lessonId String
+  groupId String
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Restrict)
+  group Group @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  @@id([lessonId, groupId])
+  @@index([groupId, lessonId])
+}
+model LessonStudent {
+  lessonId String
+  studentId String
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Restrict)
+  student Student @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  attendance Attendance?
+  @@id([lessonId, studentId])
+  @@index([studentId])
+}
+model AttendanceStatus {
+  code StatusCode @id
+  label String
+  records Attendance[]
+}
+model Attendance {
+  studentId String
+  lessonId String
+  statusCode StatusCode
+  confirmed Boolean @default(false)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+  student Student @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Restrict)
+  roster LessonStudent @relation(fields: [lessonId, studentId], references: [lessonId, studentId], onDelete: Restrict)
+  status AttendanceStatus @relation(fields: [statusCode], references: [code], onDelete: Restrict)
+  @@id([studentId, lessonId])
+  @@unique([lessonId, studentId])
+  @@index([lessonId, statusCode, confirmed])
+}
+model JournalSubmission {
+  id String @id
+  lessonId String
+  userId String
+  payloadHash String
+  resultVersion Int
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Restrict)
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+}
+model AuditLog {
+  id String @id @default(cuid())
+  actorId String?
+  lessonId String?
+  studentId String?
+  objectType String
+  objectId String
+  oldStatus StatusCode?
+  newStatus StatusCode?
+  reason String?
+  source String
+  details Json?
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  actor User? @relation(fields: [actorId], references: [id], onDelete: Restrict)
+  lesson Lesson? @relation(fields: [lessonId], references: [id], onDelete: Restrict)
+  @@index([lessonId, createdAt])
+  @@index([objectType, objectId, createdAt])
+}
+model Report {
+  id String @id @default(cuid())
+  key String @unique
+  facultyId String
+  createdById String?
+  kind String
+  fromDate String
+  toDate String
+  filters Json
+  state ReportState @default(PENDING)
+  summary Json?
+  csv Bytes?
+  pdf Bytes?
+  error String?
+  alertKey String? @unique
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+  faculty Faculty @relation(fields: [facultyId], references: [id], onDelete: Restrict)
+  createdBy User? @relation(fields: [createdById], references: [id], onDelete: Restrict)
+  @@index([facultyId, fromDate, toDate])
+}

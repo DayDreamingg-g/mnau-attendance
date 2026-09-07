@@ -1,0 +1,2 @@
+'use client';
+export function ThemeToggle(){return <button type="button" className="button ghost theme-toggle" aria-label="Змінити тему" onClick={()=>{const dark=!document.documentElement.classList.contains('dark');document.documentElement.classList.toggle('dark',dark);try{localStorage.setItem('mnau-theme',dark?'dark':'light');}catch{}}}><span className="sun">☀</span><span className="moon">☾</span><span>Тема</span></button>;}

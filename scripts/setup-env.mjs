@@ -1,0 +1,11 @@
+import { randomBytes } from 'node:crypto';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+if (existsSync('.env') || existsSync('.env.compose')) throw new Error('Environment already exists. No files changed.');
+const secret=()=>randomBytes(32).toString('hex');
+const app=secret(),machine=secret();
+const replacements={REPLACE_RANDOM_ADMIN_PASSWORD:secret(),REPLACE_RANDOM_APP_PASSWORD:app,REPLACE_RANDOM_N8N_PASSWORD:secret(),REPLACE_RANDOM_ENCRYPTION_KEY:secret(),REPLACE_RANDOM_MACHINE_TOKEN:machine};
+let compose=readFileSync('.env.compose.example','utf8');
+for(const [key,value] of Object.entries(replacements)) compose=compose.replaceAll(key,value);
+writeFileSync('.env.compose',compose,{mode:0o600,flag:'wx'});
+writeFileSync('.env',readFileSync('.env.example','utf8').replace('REPLACE_APP_PASSWORD',app).replace('REPLACE_WITH_RANDOM_64_HEX_CHARACTERS',machine),{mode:0o600,flag:'wx'});
+console.log('Created .env and .env.compose with independent random credentials. No credentials were printed.');

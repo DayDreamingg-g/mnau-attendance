@@ -1,0 +1,109 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> mnau-attendance@1.0.0 typecheck
+> tsc --noEmit
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> mnau-attendance@1.0.0 lint
+> eslint .
+
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> mnau-attendance@1.0.0 test
+> node --import tsx --test tests/*.test.ts
+
+✔ select without hydration renders a real named control with its selected value (9.572294ms)
+✔ controlled select and disabled state retain native form semantics before hydration (0.739636ms)
+✔ GET filters retain all non-dropdown context alongside the named select controls (1.830795ms)
+✔ journal data migration repairs partial rosters and preserves marks, provenance and existing audit (2096.162882ms)
+✔ a shared lesson is confirmed only after the entire expected roster is confirmed (1.122943ms)
+✔ scoped lesson cards derive the visible group segment independently (0.530952ms)
+✔ mixed curator/starosta permissions choose per-row confirmation (2.013623ms)
+✔ login displays only known error codes, never query text (1.134667ms)
+✔ 4 PRESENT, 1 N, 1 HV gives 80 percent and a distinct actual share (0.964547ms)
+✔ zero denominator and only HV have no threshold classification (0.496137ms)
+✔ aggregation weights raw counts instead of averaging percentages (0.201046ms)
+✔ thresholds are evaluated before display rounding; critical is a subset (0.174842ms)
+✔ unmarked and draft rows affect completeness without inventing absences (2.556244ms)
+✔ Kyiv dates use the correct daylight saving offset (31.931176ms)
+✔ six importable workflows use machine credentials, retriable requests and persisted-result validation (24.123799ms)
+✔ report period defaults use the previous complete Kyiv calendar week and month (68.297156ms)
+✔ report input rejects unknown kinds, invalid periods and malformed filter values (6.313882ms)
+✔ Ukrainian text sorting uses the Ukrainian alphabet and natural group numbers (2.657211ms)
+✔ numeric values and dates sort by value, with missing values last in both directions (0.386276ms)
+✔ ties remain stable and table-specific keys never reorder an unrelated table (0.210379ms)
+✔ sorting stays on the current page and preserves every active filter and threshold (0.625044ms)
+✔ new table keys are accepted while unsupported and repeated query values fail validation (17.296699ms)
+✔ rendered sort headers expose the selected direction and link to the group route (7.115361ms)
+✔ production clock uses real Kyiv calendar, even across UTC midnight (31.051408ms)
+✔ freezing clock requires both explicit demo flags and a valid date (2.596389ms)
+✔ invalid or leaked production demo settings fail closed (0.943079ms)
+ℹ tests 26
+ℹ suites 0
+ℹ pass 26
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2596.594651
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> mnau-attendance@1.0.0 build
+> prisma generate && next build --webpack
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma/schema.prisma.
+
+✔ Generated Prisma Client (7.10.0) to ./src/generated/prisma in 193ms
+
+▲ Next.js 16.3.4 (webpack)
+- Environments: .env
+✓ Running next.config.ts took 26ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 4.5s
+  Running TypeScript ...
+  Finished TypeScript in 3.2s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/17) ...
+  Generating static pages using 8 workers (4/17)
+  Generating static pages using 8 workers (8/17)
+  Generating static pages using 8 workers (12/17)
+✓ Generating static pages using 8 workers (17/17) in 653ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ƒ /
+├ ○ /_not-found
+├ ƒ /admin
+├ ƒ /api/admin/assignments
+├ ƒ /api/auth/login
+├ ƒ /api/auth/logout
+├ ƒ /api/health
+├ ƒ /api/lessons/[id]
+├ ƒ /api/machine/reports
+├ ƒ /api/reports
+├ ƒ /api/reports/[id]/[format]
+├ ƒ /api/reports/preview
+├ ƒ /groups
+├ ƒ /groups/[id]
+├ ƒ /login
+├ ƒ /reports
+├ ƒ /reports/[id]
+├ ƒ /sources
+├ ƒ /specialties/[id]
+├ ƒ /starosta
+├ ƒ /students
+├ ƒ /students/[id]
+├ ƒ /teacher
+└ ƒ /teacher/lessons/[id]
+
+
+ƒ Proxy (Middleware)
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

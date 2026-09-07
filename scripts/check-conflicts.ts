@@ -1,0 +1,2 @@
+import {db} from '../src/lib/db';
+try{const lessons=await db.lesson.findMany({where:{cancelled:false},include:{groups:true},orderBy:{startAt:'asc'}});const conflicts=[];for(let i=0;i<lessons.length;i++)for(let j=i+1;j<lessons.length;j++){const a=lessons[i],b=lessons[j];if(b.startAt>=a.endAt)break;if((a.teacherId&&a.teacherId===b.teacherId)||(a.buildingId===b.buildingId&&a.room===b.room)||a.groups.some(g=>b.groups.some(h=>h.groupId===g.groupId)))conflicts.push([a.id,b.id]);}console.log({conflicts});if(conflicts.length)process.exitCode=1;}finally{await db.$disconnect();}

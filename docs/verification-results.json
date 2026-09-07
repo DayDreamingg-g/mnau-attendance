@@ -1,0 +1,151 @@
+{
+  "date": "2026-09-06",
+  "runtime": {
+    "node": "24.19.0",
+    "platform": "Linux",
+    "database": "isolated PGlite over PostgreSQL wire protocol",
+    "web": "Next production standalone"
+  },
+  "stages": [
+    {
+      "stage": 1,
+      "typecheck": "passed",
+      "lint": "passed",
+      "unit_pass": 12,
+      "production_build": "passed"
+    },
+    {
+      "stage": 2,
+      "typecheck": "passed",
+      "lint": "passed",
+      "unit_pass": 15,
+      "production_build": "passed"
+    },
+    {
+      "stage": 3,
+      "typecheck": "passed",
+      "lint": "passed",
+      "unit_pass": 15,
+      "production_build": "passed"
+    },
+    {
+      "stage": 4,
+      "typecheck": "passed",
+      "lint": "passed",
+      "unit_pass": 16,
+      "production_build": "passed"
+    },
+    {
+      "stage": 5,
+      "typecheck": "passed",
+      "lint": "passed",
+      "unit_pass": 19,
+      "production_build": "passed"
+    },
+    {
+      "stage": 6,
+      "typecheck": "passed",
+      "lint": "passed",
+      "unit_pass": 19,
+      "production_build": "passed"
+    },
+    {
+      "stage": 7,
+      "typecheck": "passed",
+      "lint": "passed",
+      "unit_pass": 20,
+      "production_build": "passed"
+    },
+    {
+      "stage": 8,
+      "typecheck": "passed",
+      "lint": "passed",
+      "unit_pass": 23,
+      "production_build": "passed"
+    },
+    {
+      "stage": 9,
+      "typecheck": "passed",
+      "lint": "passed",
+      "unit_pass": 25,
+      "production_build": "passed"
+    },
+    {
+      "stage": 10,
+      "typecheck": "passed",
+      "lint": "passed",
+      "unit_pass": 26,
+      "production_build": "passed"
+    },
+    {
+      "stage": 11,
+      "typecheck": "passed",
+      "lint": "passed",
+      "unit_pass": 26,
+      "production_build": "passed"
+    }
+  ],
+  "integration": {
+    "passed": 48,
+    "failed": 0,
+    "skipped": 0,
+    "command": "npm run test:integration"
+  },
+  "n8n": {
+    "version": "2.37.10",
+    "workflows_imported": 6,
+    "successful_executions": 12,
+    "repeat_reused": true,
+    "internal_tables": 131,
+    "application_tables_absent": true,
+    "journal_after_n8n_shutdown": "passed"
+  },
+  "clean_install": {
+    "command": "npm ci --no-audit --no-fund --fetch-timeout=15000 --fetch-retries=0",
+    "exit_code": 0,
+    "packages_added": 534,
+    "duration_seconds": 55,
+    "lockfile_preserved": true,
+    "installed_package_versions_checked": 534,
+    "version_mismatches": [],
+    "linux_binaries_executable": true,
+    "main_node_modules_untouched": true,
+    "lifecycle_scripts_enabled": true
+  },
+  "integrity": {
+    "archive": "mnau-attendance.zip",
+    "source_data": {
+      "original_files": 8,
+      "current_files": 8,
+      "byte_identical": true,
+      "missing": [],
+      "added": [],
+      "changed": []
+    },
+    "prisma_schema_unchanged": true,
+    "initial_migration_unchanged": true,
+    "environment_files": {
+      ".env": {
+        "original_exists": true,
+        "current_exists": true,
+        "bytes_preserved": true
+      },
+      ".env.compose": {
+        "original_exists": true,
+        "current_exists": true,
+        "bytes_preserved": true
+      }
+    }
+  },
+  "pdf_visual_qa": "Poppler rendered and inspected; Ukrainian text and table readable",
+  "native_docker": {
+    "result": "unavailable",
+    "build_exit_code": 127
+  },
+  "browser": {
+    "result": "blocked",
+    "reason": "ERR_BLOCKED_BY_CLIENT",
+    "visual_desktop_mobile_themes": "unverified"
+  },
+  "private_env_values_in_docs": false
+}

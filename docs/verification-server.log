@@ -1,0 +1,132 @@
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> mnau-attendance@1.0.0 test:integration
+> node scripts/verify.mjs
+
+Loaded Prisma config from prisma.config.ts.
+
+Prisma schema loaded from prisma/schema.prisma.
+Datasource "db": PostgreSQL database "mnau_attendance", schema "public" at "127.0.0.1:5543"
+
+2 migrations found in prisma/migrations
+
+Applying migration `202609060001_initial`
+Applying migration `202609060002_complete_roster_journal_state`
+
+The following migration(s) have been applied:
+
+migrations/
+  └─ 202609060001_initial/
+    └─ migration.sql
+  └─ 202609060002_complete_roster_journal_state/
+    └─ migration.sql
+
+All migrations have been successfully applied.
+{"faculties":2,"groups":28,"students":420,"teachers":53,"subjects":112,"lessons":288,"attendance":2604,"sourceRecords":411}
+[ { database: 'mnau_attendance', schema: 'public', role: 'postgres' } ]
+{ groups: 28, students: 420, lessons: 288 }
+{ conflicts: [] }
+▲ Next.js 16.3.4
+- Local:         http://127.0.0.1:3001
+- Network:       http://127.0.0.1:3001
+✓ Ready in 0ms
+✓ Running next.config took 3ms
+✔ administration requires a server-side active ADMIN, including direct API requests (626.8982ms)
+✔ assignment validation and self-admin protection fail without mutations (72.686868ms)
+✔ curator add/remove and role revocation immediately change an existing session scope (439.045883ms)
+✔ dean scopes add/remove symmetrically and require both role and faculty assignment (162.634332ms)
+✔ global ADMIN is grantable and revocable, and stale principals cannot retain it (128.704974ms)
+✔ teacher profile attach/detach preserves source and lessons, blocks ownership tampering, and revokes API access (229.838376ms)
+✔ starosta profile attach/detach preserves the student and marks and revokes group access (194.443982ms)
+✔ assignment audit captures before/after atomically and repeat additions do not duplicate changes (72.993031ms)
+✔ admin can revoke all target sessions without touching another account (185.597284ms)
+✔ all protected direct URLs redirect without a session (297.814552ms)
+✔ random, expired and revoked tokens cannot authenticate (54.196868ms)
+✔ login uses POST even before hydration, generic errors, origin validation and rate limiting (4175.046226ms)
+✔ logout revokes only the current opaque server session (769.562777ms)
+✔ teacher cannot read or mutate another lesson by replacing its ID (496.60569ms)
+✔ starosta and dean have no cross-group or cross-faculty fallback (1039.687876ms)
+✔ unknown students and invalid statuses cannot be submitted (433.399733ms)
+✔ starosta draft does not enter confirmed analytics and teacher confirms it (369.752961ms)
+✔ successful save is persistent, audited and idempotent (105.050741ms)
+✔ two editors with one version cannot silently overwrite each other (212.899677ms)
+✔ past edits require the assigned authority and a reason (107.027278ms)
+✔ future/cancelled lessons are not marked and report filtering uses the same math (29.197498ms)
+✔ repeat seed preserves manual attendance, passwords and sessions (7160.749402ms)
+Report automation failed { operation: 'UNPARSED', status: 401 }
+✔ machine endpoint requires its own secret; reports contain real PDF/CSV and are deduplicated (1052.090267ms)
+✔ dean follows specialty, group, student and lesson links with scoped periods and a safe student return breadcrumb (995.762292ms)
+✔ group lesson links honor the same selected subject as analytics (242.187391ms)
+✔ AUTO submission confirms curator scope and drafts own starosta scope atomically (615.748131ms)
+✔ draft replay after teacher confirmation returns current state without overwriting (366.195372ms)
+✔ simultaneous identical requests replay once; mismatched key and stale version conflict (208.43526ms)
+✔ write refreshes assignments and inactive-account permissions instead of trusting UI principal (61.9275ms)
+✔ starosta API hides other group rows and rejects forged roster writes and confirmation (109.458676ms)
+✔ shared lesson confirmation never blocks the other group; clearing a row reopens only that row (305.487951ms)
+✔ legacy CONFIRMED state with missing roster does not prevent the second starosta from drafting (54.491793ms)
+✔ different group editors keep optimistic locking and can retry against the new version (101.79481ms)
+
+========================================
+DEMO ATTENDANCE GENERATION COMPLETED
+========================================
+
+Eligible lessons: 262
+Lessons changed: 259
+Lessons confirmed: 258
+Already complete: 3
+
+Existing marks preserved: 2616
+New marks created: 1213
+
+PRESENT: 973
+N: 190
+HV: 50
+Generated attendance rate: 80.2%
+
+Existing teacher/starosta marks were not overwritten.
+Future and cancelled lessons were not modified.
+
+========================================
+DEMO ATTENDANCE GENERATION COMPLETED
+========================================
+
+Eligible lessons: 262
+Lessons changed: 0
+Lessons confirmed: 0
+Already complete: 262
+
+Existing marks preserved: 3829
+New marks created: 0
+
+PRESENT: 0
+N: 0
+HV: 0
+Generated attendance rate: 0.0%
+
+Existing teacher/starosta marks were not overwritten.
+Future and cancelled lessons were not modified.
+✔ demo generation preserves manual marks, bumps versions with drafts, and skips future/cancelled lessons (4619.458466ms)
+✔ a guessed future version cannot authorize writes against a different permission snapshot (55.289745ms)
+✔ mixed teacher and curator rights stay correlated with the specific lesson and roster group (418.694645ms)
+✔ curator plus starosta sees only the curator segment when starosta access is disabled for a shared lesson (139.037719ms)
+✔ HTTPS always requires Secure cookies and production rejects HTTP (634.833392ms)
+✔ actual HTML form POST creates opaque DB session and redirects into protected pages (554.768899ms)
+✔ HTML failures use generic rendered messages without credentials in redirect URLs (755.117473ms)
+✔ HTML and JSON login share the same rate limit bucket (3092.797392ms)
+✔ malformed JSON and duplicate HTML fields are validation errors (8.516166ms)
+✔ weekly automation uses actual curator assignments and deduplicates reports per group (690.78294ms)
+✔ threshold alerts persist separate deduplicated snapshots without any delivery (144.597686ms)
+Report automation failed { operation: 'UNPARSED', status: 400 }
+✔ machine API rejects malformed JSON and returns retriable503 for an active generation lease (99.440179ms)
+✔ preview has exact student/group raw counts and produces no persisted report (473.452977ms)
+✔ report scope rejects mismatched hierarchy and unauthorized previews/downloads (35.35012ms)
+✔ weekly report is deduplicated concurrently, refreshes renamed cells and exports exactly the chosen student (445.660132ms)
+ℹ tests 48
+ℹ suites 0
+ℹ pass 48
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 41753.936569
+Server integration verification completed against PostgreSQL WASM. Native Docker remains unverified.

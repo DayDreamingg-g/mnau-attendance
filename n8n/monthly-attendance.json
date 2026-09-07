@@ -1,0 +1,125 @@
+{
+  "name": "Monthly attendance certification",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "79e1a44c-36a1-4272-bbad-89d6febd6dbd",
+      "name": "Manual run",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        200,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 7 1 * *"
+            }
+          ]
+        }
+      },
+      "id": "ab929381-9e97-4f12-81b0-7e2a352e9be3",
+      "name": "Scheduled run",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        200,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://web:3000/api/machine/reports",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"kind\": \"MONTHLY\", \"requireReady\": true}",
+        "options": {
+          "timeout": 120000
+        }
+      },
+      "id": "91c11774-bb93-4549-981e-d942982b079c",
+      "name": "Create and persist report",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        280
+      ],
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 5000,
+      "credentials": {
+        "httpHeaderAuth": {
+          "name": "MNAU report machine"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const result = $input.first().json;\nif (result.state !== 'READY') {\n  throw new Error('MNAU automation did not reach READY: ' + String(result.state ?? 'missing state'));\n}\nreturn [{json: {...result, message: result.message ?? 'Report files and summary are persisted in MNAU Attendance.'}}];"
+      },
+      "id": "cd17a83c-b291-5a80-aa01-c0f644b7effc",
+      "name": "Verify persisted result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        740,
+        280
+      ]
+    }
+  ],
+  "connections": {
+    "Manual run": {
+      "main": [
+        [
+          {
+            "node": "Create and persist report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scheduled run": {
+      "main": [
+        [
+          {
+            "node": "Create and persist report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create and persist report": {
+      "main": [
+        [
+          {
+            "node": "Verify persisted result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "Europe/Kyiv",
+    "saveDataErrorExecution": "all",
+    "saveDataSuccessExecution": "all",
+    "saveExecutionProgress": true,
+    "executionTimeout": 600
+  },
+  "active": false,
+  "pinData": {},
+  "tags": []
+}

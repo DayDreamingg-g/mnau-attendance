@@ -1,16 +1,15 @@
-# Environment files
+node_modules/
+.next/
 .env
 .env.*
 !.env.example
-
-# Logs
-*.log
-
-# OS / editor
+!.env.compose.example
+*.tsbuildinfo
+src/generated/
+test-results/
+runtime/
+/reports/
 .DS_Store
-Thumbs.db
-.vscode/
-.idea/
 
-# Docker / local runtime
-docker-data/
+__pycache__/
+*.pyc

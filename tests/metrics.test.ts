@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {metrics,sumCounts,emptyCounts} from '../src/lib/metrics';
+import {atKyiv,dayOf} from '../src/lib/time';
+test('4 PRESENT, 1 N, 1 HV gives 80 percent and a distinct actual share',()=>{const result=metrics({...emptyCounts(),PRESENT:4,N:1,HV:1});assert.equal(result.percentage,80);assert.ok(Math.abs(result.actualPresence!-66.6666666667)<1e-7);});
+test('zero denominator and only HV have no threshold classification',()=>{for(const c of [emptyCounts(),{...emptyCounts(),HV:9}]){assert.equal(metrics(c).percentage,null);assert.equal(metrics(c).below70,false);}});
+test('aggregation weights raw counts instead of averaging percentages',()=>{const result=metrics(sumCounts([{...emptyCounts(),PRESENT:1},{...emptyCounts(),PRESENT:1,N:9}]));assert.equal(result.percentage,2/11*100);});
+test('thresholds are evaluated before display rounding; critical is a subset',()=>{const r=metrics({...emptyCounts(),PRESENT:69999,N:30001});assert.equal(r.below70,true);assert.equal(r.below50,false);assert.equal(metrics({...emptyCounts(),N:1}).below50,true);});
+test('unmarked and draft rows affect completeness without inventing absences',()=>{const r=metrics({...emptyCounts(),PRESENT:4,N:1,HV:1,unmarked:2,pending:2});assert.equal(r.percentage,80);assert.equal(r.completion,60);});
+test('Kyiv dates use the correct daylight saving offset',()=>{assert.equal(atKyiv('2026-09-07','08:30').toISOString(),'2026-09-07T05:30:00.000Z');assert.equal(atKyiv('2026-01-07','08:30').toISOString(),'2026-01-07T06:30:00.000Z');assert.equal(dayOf(new Date('2026-09-06T22:00:00Z')),'2026-09-07');});
