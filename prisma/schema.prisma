@@ -7,6 +7,8 @@ datasource db {
 }
 enum RoleCode {
   ADMIN
+  DEVELOPER
+  STUDENT
   DEAN_OFFICE
   CURATOR
   TEACHER
@@ -44,6 +46,7 @@ model User {
   teacher      Teacher?
   student      Student?
   curatorAssignments CuratorAssignment[]
+  starostaAssignments StarostaAssignment[]
   deanAssignments DeanAssignment[]
   auditLogs    AuditLog[]
   submissions  JournalSubmission[]
@@ -102,6 +105,8 @@ model Group {
   students Student[]
   lessons LessonGroup[]
   curatorAssignments CuratorAssignment[]
+  starostaAssignments StarostaAssignment[]
+  roster LessonStudent[]
   @@index([specialtyId, course])
 }
 model Student {
@@ -109,6 +114,12 @@ model Student {
   fullName String
   phone String?
   isSynthetic Boolean @default(true)
+  active Boolean @default(true)
+  archivedAt DateTime? @db.Timestamptz(3)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  joinedAt DateTime @default(now()) @db.Timestamptz(3)
+  source Json?
+  importKey String? @unique
   groupId String
   userId String? @unique
   group Group @relation(fields: [groupId], references: [id], onDelete: Restrict)
@@ -131,6 +142,18 @@ model CuratorAssignment {
   user User @relation(fields: [userId], references: [id], onDelete: Restrict)
   group Group @relation(fields: [groupId], references: [id], onDelete: Restrict)
   @@id([userId, groupId])
+}
+model StarostaAssignment {
+  userId String
+  groupId String
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  group Group @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  @@id([userId, groupId])
+}
+model SystemState {
+  id String @id
+  value Json
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
 }
 model DeanAssignment {
   userId String
@@ -221,11 +244,15 @@ model LessonGroup {
 model LessonStudent {
   lessonId String
   studentId String
+  // Snapshot of membership at this lesson, preserved across transfers.
+  groupId String?
+  group Group? @relation(fields: [groupId], references: [id], onDelete: Restrict)
   lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Restrict)
   student Student @relation(fields: [studentId], references: [id], onDelete: Restrict)
   attendance Attendance?
   @@id([lessonId, studentId])
   @@index([studentId])
+  @@index([groupId, lessonId])
 }
 model AttendanceStatus {
   code StatusCode @id
@@ -237,6 +264,7 @@ model Attendance {
   lessonId String
   statusCode StatusCode
   confirmed Boolean @default(false)
+  isDemo Boolean @default(false)
   updatedAt DateTime @updatedAt @db.Timestamptz(3)
   student Student @relation(fields: [studentId], references: [id], onDelete: Restrict)
   lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Restrict)
@@ -261,6 +289,7 @@ model AuditLog {
   actorId String?
   lessonId String?
   studentId String?
+  groupId String?
   objectType String
   objectId String
   oldStatus StatusCode?

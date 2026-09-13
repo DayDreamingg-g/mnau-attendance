@@ -7,7 +7,7 @@ import { HttpError } from './errors';
 import { demoEnabled } from './time';
 export const COOKIE='mnau_session';
 export const hashToken=(token:string)=>createHash('sha256').update(token).digest('hex');
-export const principalSelect={id:true,name:true,email:true,active:true,roles:{select:{roleId:true}},teacher:{select:{id:true}},student:{select:{id:true,groupId:true}},curatorAssignments:{select:{groupId:true}},deanAssignments:{select:{facultyId:true}}} as const;
+export const principalSelect={id:true,name:true,email:true,active:true,roles:{select:{roleId:true}},teacher:{select:{id:true}},student:{select:{id:true,groupId:true}},starostaAssignments:{select:{groupId:true}},curatorAssignments:{select:{groupId:true}},deanAssignments:{select:{facultyId:true}}} as const;
 export async function principalFromToken(token:string|undefined) {
   if(!token || !/^[a-f0-9]{64}$/.test(token))return null;
   const session=await db.session.findUnique({where:{tokenHash:hashToken(token)},select:{expiresAt:true,user:{select:principalSelect}}});
@@ -19,6 +19,8 @@ export async function currentUser(){return principalFromToken((await cookies()).
 export async function requireUser(){const user=await currentUser();if(!user)redirect('/login');return user;}
 export async function requireApi(){const user=await currentUser();if(!user)throw new HttpError(401,'Увійдіть до системи.');return user;}
 export function hasRole(user:Principal,role:string){return user.roles.some(r=>r.roleId===role);}
+export function isManager(user:Principal){return hasRole(user,'ADMIN')||hasRole(user,'DEVELOPER');}
+export function starostaGroups(user:Principal){return hasRole(user,'STAROSTA')?user.starostaAssignments.map(a=>a.groupId):[];}
 export function cookieOptions(){
   const secure=process.env.COOKIE_SECURE==='true'||process.env.APP_ORIGIN?.startsWith('https://')===true;
   if(process.env.APP_ENV==='production' && (!secure || !process.env.APP_ORIGIN?.startsWith('https://')))throw new Error('Production requires HTTPS and secure cookies');

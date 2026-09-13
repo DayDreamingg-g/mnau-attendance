@@ -91,7 +91,7 @@ export async function machineUser(request:Request):Promise<Principal>{
   const supplied=request.headers.get('authorization')?.replace(/^Bearer /,'')??'';
   if(!timingSafeEqual(Buffer.from(digest(configured),'hex'),Buffer.from(digest(supplied),'hex')))throw new HttpError(401,'Неавторизований службовий запит.');
   const faculty=await db.faculty.findUnique({where:{slug:process.env.REPORT_FACULTY_SLUG??'management'}});if(!faculty)throw new HttpError(503,'Факультет звітності не налаштовано.');
-  return {id:'machine-reports',name:'Report automation',email:'',active:true,roles:[{roleId:'DEAN_OFFICE'}],teacher:null,student:null,curatorAssignments:[],deanAssignments:[{facultyId:faculty.id}]};
+  return {id:'machine-reports',name:'Report automation',email:'',active:true,roles:[{roleId:'DEAN_OFFICE'}],teacher:null,student:null,starostaAssignments:[],curatorAssignments:[],deanAssignments:[{facultyId:faculty.id}]};
 }
 
 export {reportPeriod,reportBody,readReportBody,parseReportKind} from './report-input';
