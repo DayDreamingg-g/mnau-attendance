@@ -1,0 +1,62 @@
+[
+  {
+    "file": "1-kurs (1).pdf",
+    "page": 1,
+    "containsCS": true
+  },
+  {
+    "file": "1-kurs (1).pdf",
+    "page": 2,
+    "containsCS": false
+  },
+  {
+    "file": "1-kurs (1).pdf",
+    "page": 3,
+    "containsCS": false
+  },
+  {
+    "file": "2-kurs (1).pdf",
+    "page": 1,
+    "containsCS": true
+  },
+  {
+    "file": "2-kurs (1).pdf",
+    "page": 2,
+    "containsCS": false
+  },
+  {
+    "file": "2-kurs (1).pdf",
+    "page": 3,
+    "containsCS": false
+  },
+  {
+    "file": "3-kurs (1).pdf",
+    "page": 1,
+    "containsCS": true
+  },
+  {
+    "file": "3-kurs (1).pdf",
+    "page": 2,
+    "containsCS": false
+  },
+  {
+    "file": "3-kurs (1).pdf",
+    "page": 3,
+    "containsCS": false
+  },
+  {
+    "file": "4-kurs (1).pdf",
+    "page": 1,
+    "containsCS": true
+  },
+  {
+    "file": "4-kurs (1).pdf",
+    "page": 2,
+    "containsCS": false
+  },
+  {
+    "file": "4-kurs (1).pdf",
+    "page": 3,
+    "containsCS": false
+  }
+]

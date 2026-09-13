@@ -1,0 +1,11 @@
+{
+  "baseMonday": "2026-09-14",
+  "baseWeekType": "DENOMINATOR",
+  "baseHalf": "lower",
+  "nextMonday": "2026-09-21",
+  "nextWeekType": "NUMERATOR",
+  "nextHalf": "upper",
+  "repeat": "alternate each Monday relative to baseMonday, including earlier weeks",
+  "unsplit": "EVERY_WEEK",
+  "source": "Explicit user clarification on 2026-09-13"
+}
