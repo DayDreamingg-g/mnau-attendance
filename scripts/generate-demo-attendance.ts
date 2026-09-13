@@ -125,16 +125,17 @@ export async function generateDemoAttendance() {
       if (!locked.length) return null;
       const lesson = await tx.lesson.findUniqueOrThrow({
         where: { id: candidate.id },
-        include: { roster: { include: { attendance: true } } },
+        include: { roster: { include: { attendance: true, student: {select: {isSynthetic: true}} } } },
       });
       const existing = lesson.roster.flatMap((row) => row.attendance ? [row.attendance] : []);
-      const missing = lesson.roster.filter((row) => row.attendance === null);
+      const missing = lesson.roster.filter((row) => row.attendance === null && row.student.isSynthetic);
       if (!missing.length) return { generated: [], preserved: existing.length, completed: false };
       const generated = missing.map((row) => ({
         studentId: row.studentId,
         lessonId: lesson.id,
         statusCode: generateStatus(row.studentId, lesson.id),
         confirmed: true,
+        isDemo: true,
       }));
       await tx.attendance.createMany({ data: generated });
       await tx.auditLog.createMany({
