@@ -2,6 +2,7 @@ import {LinkedRow} from '@/components/linked-row';
 import {SortHeader} from '@/components/sort-header';
 import {sortRows} from '@/lib/sorting';
 import Link from 'next/link';
+import {db} from '@/lib/db';
 import {redirect} from 'next/navigation';
 import {requireUser,hasRole} from '@/lib/auth';
 import {analytics,filterOptions} from '@/lib/analytics';
@@ -33,7 +34,10 @@ export default async function Dashboard({
     redirect('/starosta');
   }
 
-  const filters=parseFilters(await searchParams);
+  if(user.roles.length===1&&hasRole(user,'CURATOR'))redirect('/curator');
+  if(user.roles.length===1&&hasRole(user,'STUDENT')&&user.student)redirect('/students/'+user.student.id);
+  const search=await searchParams;
+  const filters=parseFilters(search);
   const options=await filterOptions(user);
 
   const selected=options.faculties.find(
@@ -50,6 +54,9 @@ export default async function Dashboard({
     filters.faculty=selected.id;
   }
 
+  const beta=await db.systemState.findUnique({where:{id:'cs-beta'}});
+  const cs=options.groups.find(g=>g.id==='g-1-4')?.specialty;
+  if(beta&&cs&&!filters.specialty&&!filters.group&&search.scope!=='faculty')filters.specialty=cs.id;
   const data=await analytics(user,filters);
 
   const critical=data.students
@@ -61,10 +68,10 @@ export default async function Dashboard({
   return <>
     <PageTitle
       eyebrow="ОГЛЯД ВІДВІДУВАНОСТІ"
-      title={selected?.name??'Ваш робочий простір'}
+      title={beta&&cs&&filters.specialty===cs.id?'Комп’ютерні науки':selected?.name??'Ваш робочий простір'}
       description="Актуальний стан журналів і студенти, яким потрібна увага."
       action={
-        hasRole(user,'ADMIN')||hasRole(user,'DEAN_OFFICE')
+        (hasRole(user,'ADMIN')||hasRole(user,'DEVELOPER'))||hasRole(user,'DEAN_OFFICE')
           ?<Link
             className="button"
             href={filterLink('/reports',filters)}
@@ -101,6 +108,8 @@ export default async function Dashboard({
       </nav>
     }
 
+    {beta&&cs&&<nav className="tabs"><Link className={filters.specialty===cs.id?'active':''} href={filterLink('/',filters,{specialty:cs.id,group:undefined})}>Комп’ютерні науки · beta</Link><Link className={!filters.specialty?'active':''} href={filterLink('/',filters,{specialty:undefined,group:undefined})+'&scope=faculty'}>Увесь факультет</Link></nav>}
+    {beta&&cs&&filters.specialty===cs.id&&<nav className="tabs">{options.groups.filter(g=>g.specialty.id===cs.id).map(g=><Link key={g.id} href={filterLink('/groups/'+g.id,filters,{group:g.id})}>{g.name.toUpperCase()}</Link>)}</nav>}
     <Filters
       value={filters}
       options={options}

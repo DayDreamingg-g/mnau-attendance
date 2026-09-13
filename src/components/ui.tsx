@@ -333,7 +333,7 @@ export function StudentTable({
       <tbody>
         {sortedStudents.map(
           (student:StudentRow)=>
-            <LinkedRow key={student.id} href={filterLink(`/students/${student.id}`,filters,{student:student.id})}>
+            <LinkedRow key={student.groupId+':'+student.id} href={filterLink(`/students/${student.id}`,filters,{student:student.id})}>
               <td>
                 <Link
                   className="row-link"
