@@ -55,6 +55,7 @@ after(async()=>{
   await db.userRole.deleteMany({where:{userId:{in:fixtureIds}}});
   await db.curatorAssignment.deleteMany({where:{userId:{in:fixtureIds}}});
   await db.deanAssignment.deleteMany({where:{userId:{in:fixtureIds}}});
+  await db.starostaAssignment.deleteMany({where:{userId:{in:fixtureIds}}});
   await db.user.deleteMany({where:{id:{in:fixtureIds}}});
   await db.$disconnect();
 });
@@ -168,35 +169,21 @@ test('teacher profile attach/detach preserves source and lessons, blocks ownersh
   }
 });
 
-test('starosta profile attach/detach preserves the student and marks and revokes group access',async()=>{
-  const student=await db.student.findFirstOrThrow({where:{userId:null,roster:{some:{lesson:{starostaAllowed:true}}}},orderBy:{id:'asc'}});
-  const spare=await db.student.findFirstOrThrow({where:{userId:null,id:{not:student.id}}});
-  const lesson=await db.lesson.findFirstOrThrow({where:{starostaAllowed:true,roster:{some:{studentId:student.id}}}});
-  const attendanceBefore=await db.attendance.findMany({where:{studentId:student.id},orderBy:{lessonId:'asc'}});
-  const rosterBefore=await db.lessonStudent.findMany({where:{studentId:student.id},orderBy:{lessonId:'asc'}});
+test('starosta group assignment needs no fictitious student and revokes immediately',async()=>{
   const auth=await session(fixtureIds[0]);
-  try{
-    await change('ADD_ROLE','STAROSTA');
-    await change('ASSIGN_STAROSTA',student.id);
-    assert.equal(await lessonStatus(auth.cookie,lesson.id),200);
-    assert.deepEqual((await db.group.findMany({where:groupScope(await authenticated(auth.token)),select:{id:true}})).map(g=>g.id),[student.groupId]);
-    await rejected(()=>change('REMOVE_STAROSTA',student.id,fixtureIds[1]),409);
-    await rejected(()=>change('ASSIGN_STAROSTA',student.id,fixtureIds[1]),409);
-    await rejected(()=>change('ASSIGN_STAROSTA',spare.id),409);
-    await change('REMOVE_ROLE','STAROSTA');
-    assert.equal((await db.student.findUniqueOrThrow({where:{id:student.id}})).userId,fixtureIds[0]);
-    assert.equal(await lessonStatus(auth.cookie,lesson.id),404);
-    await change('ADD_ROLE','STAROSTA');
-    await change('REMOVE_STAROSTA',student.id);
-    assert.equal(await lessonStatus(auth.cookie,lesson.id),404);
-    assert.equal((await authenticated(auth.token)).student,null);
-    assert.deepEqual(await db.student.findUniqueOrThrow({where:{id:student.id}}),student);
-    assert.deepEqual(await db.attendance.findMany({where:{studentId:student.id},orderBy:{lessonId:'asc'}}),attendanceBefore);
-    assert.deepEqual(await db.lessonStudent.findMany({where:{studentId:student.id},orderBy:{lessonId:'asc'}}),rosterBefore);
-  }finally{
-    await db.student.update({where:{id:student.id},data:{userId:null}});
-    await change('REMOVE_ROLE','STAROSTA');
-  }
+  const lesson=await db.lesson.findFirstOrThrow({where:{starostaAllowed:true,groups:{some:{groupId}}}});
+  await change('ADD_ROLE','STAROSTA');
+  await change('ASSIGN_STAROSTA',groupId);
+  await change('ASSIGN_STAROSTA',groupId);
+  assert.equal(await db.starostaAssignment.count({where:{userId:fixtureIds[0],groupId}}),1);
+  assert.equal((await authenticated(auth.token)).student,null);
+  assert.equal(await lessonStatus(auth.cookie,lesson.id),200);
+  await change('REMOVE_ROLE','STAROSTA');
+  assert.equal(await lessonStatus(auth.cookie,lesson.id),404);
+  await change('ADD_ROLE','STAROSTA');
+  await change('REMOVE_STAROSTA',groupId);
+  assert.equal(await lessonStatus(auth.cookie,lesson.id),404);
+  await change('REMOVE_ROLE','STAROSTA');
 });
 
 test('assignment audit captures before/after atomically and repeat additions do not duplicate changes',async()=>{

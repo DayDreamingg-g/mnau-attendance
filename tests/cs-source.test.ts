@@ -1,0 +1,28 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import {CS_COUNTS,readCSData,teacherEmail,teacherKey} from '../src/lib/cs-beta-data';
+import {weekHalf} from '../scripts/generate-semester-schedule';
+test('the supplied roster preserves 58 source names, exact counts, pages and raw spelling',async()=>{
+  const {students}=await readCSData();
+  for(const [id,count] of Object.entries(CS_COUNTS))assert.equal(students.filter(s=>s.groupId===id).length,count);
+  assert.equal(students.find(s=>s.fullName.startsWith('Штикер'))?.fullName,'Штикер Міхаіл Андрійович');
+  assert.equal(students.find(s=>s.fullName.startsWith('Ломпас'))?.fullName,'Ломпас Олександр Ігоревич');
+  assert.ok(students.every(s=>s.source.page>=1&&s.source.page<=3&&s.source.rawName.trim()===s.fullName));
+});
+test('teacher identity normalizes titles/case/spacing and user-confirmed aliases',async()=>{
+  assert.equal(teacherKey('  доц. ПАРХОМЕНКО О. Ю.'),teacherKey('Пархоменко А.Ю.'));
+  assert.equal(teacherKey('ас. Богатенкова О.Є.'),teacherKey('ст.в. Богатєнкова О.Є.'));
+  assert.equal(teacherEmail('Ємельянов С.І.'),'yemelianov.si@test.com');
+  const {cells}=await readCSData();assert.equal(new Set(cells.flatMap(c=>c.teacher?[teacherKey(c.teacher)]:[])).size,19);
+  assert.ok(cells.some(c=>c.groups.length===2&&c.subject?.includes('ІТ-')));
+  assert.ok(cells.every(c=>c.page===1&&c.bbox.length===4&&c.sourceCell));
+  assert.ok(cells.filter(c=>c.raw.includes('Вакансія')).every(c=>c.teacher===null));
+});
+test('week alternation uses the approved actual base week, including ISO year and DST boundaries',async()=>{
+  const mapping=JSON.parse(await readFile('source-data/cs-beta/week-mapping.json','utf8'));
+  assert.equal(mapping.baseMonday,'2026-09-14');
+  assert.equal(weekHalf('2026-09-14'),'lower');assert.equal(weekHalf('2026-09-20'),'lower');
+  assert.equal(weekHalf('2026-09-21'),'upper');assert.equal(weekHalf('2026-09-28'),'lower');
+  assert.equal(weekHalf('2026-09-07'),'upper');assert.equal(weekHalf('2026-10-26'),'lower');
+});

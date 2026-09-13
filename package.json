@@ -22,11 +22,15 @@
     "schedule:generate": "node --import tsx scripts/generate-semester-schedule.ts",
     "setup:env": "node scripts/setup-env.mjs",
     "test": "node --import tsx --test tests/*.test.ts",
-    "test:integration": "node scripts/verify.mjs",
+    "test:integration": "node scripts/verify.mjs && node scripts/verify-beta.mjs",
     "test:database": "node scripts/test-database.mjs",
     "check:conflicts": "node --import tsx scripts/check-conflicts.ts",
     "verify:server": "node scripts/verify.mjs",
-    "dev:next": "next dev --hostname 0.0.0.0 --port 4173"
+    "dev:next": "next dev --hostname 0.0.0.0 --port 4173",
+    "beta:prepare-cs": "node --import tsx scripts/prepare-cs-beta.ts",
+    "test:beta": "node scripts/verify-beta.mjs",
+    "schedule:generate-faculty": "node --import tsx scripts/generate-faculty-schedule.ts",
+    "beta:realtime": "node scripts/beta-realtime.mjs"
   },
   "dependencies": {
     "@pdf-lib/fontkit": "1.1.1",

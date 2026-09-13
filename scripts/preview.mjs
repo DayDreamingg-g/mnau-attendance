@@ -7,11 +7,15 @@ const testPreview=process.env.MNAU_PREVIEW_TEST_DATABASE==='true';
 let env={...process.env,PORT:'4173',HOSTNAME:'0.0.0.0',NEXT_TELEMETRY_DISABLED:'1'};
 if(testPreview){
   if(process.env.APP_ENV==='production')throw new Error('Test preview cannot run in a production environment.');
-  env=isolatedEnvironment({PORT:'4173',HOSTNAME:'0.0.0.0',APP_ORIGIN:'http://terminal.local:4173'});
+  env=isolatedEnvironment({PORT:'4173',HOSTNAME:'0.0.0.0',APP_ORIGIN:'http://localhost:4173',...(process.env.MNAU_PREVIEW_CS_BETA==='true'?{DEMO_DATE:'2026-09-14',SEED_TEST_ATTENDANCE:'false'}:{})});
   database=await startTestDatabase();
   try{
     await migrateTestDatabase(env);
     await runNode(['--import','tsx','prisma/seed.ts'],env);
+    if(process.env.MNAU_PREVIEW_CS_BETA==='true'){
+      await runNode(['--import','tsx','scripts/generate-semester-schedule.ts','--from=2026-09-14','--to=2026-09-27'],env);
+      await runNode(['--import','tsx','scripts/prepare-cs-beta.ts'],env);
+    }
     await cp('public','.next/standalone/public',{recursive:true});
     await cp('.next/static','.next/standalone/.next/static',{recursive:true});
   }catch(error){await database.close();throw error;}

@@ -18,7 +18,7 @@ async function fixture(){
   // Test roster members are synthetic fixtures in existing, source-confirmed groups.
   const studentA=await db.student.create({data:{id:`journal-a-${key}`,fullName:'Тест журналу А',groupId:groupA}});
   const studentB=await db.student.create({data:{id:`journal-b-${key}`,fullName:'Тест журналу Б',groupId:groupB}});
-  const actor=await db.user.create({data:{email:`journal-${key}@test.com`,name:'Тестовий староста',passwordHash:'not-a-login-credential',roles:{create:{roleId:'STAROSTA'}},student:{connect:{id:studentB.id}}},select:principalSelect});
+  const actor=await db.user.create({data:{email:`journal-${key}@test.com`,name:'Тестовий староста',passwordHash:'not-a-login-credential',roles:{create:{roleId:'STAROSTA'}},starostaAssignments:{create:{groupId:groupB}},student:{connect:{id:studentB.id}}},select:principalSelect});
   const lesson=await db.lesson.create({data:{id:`journal-${key}`,startAt:atKyiv(today(),'08:30'),endAt:atKyiv(today(),'09:50'),pairNumber:1,subjectId:template.subjectId,teacherId:template.teacherId,buildingId:template.buildingId,room:template.room,bellId:template.bellId,sourceId:template.sourceId,synthetic:true,kind:'Ізольована перевірка журналу',groups:{create:[{groupId:groupA},{groupId:groupB}]},roster:{create:[{studentId:studentA.id},{studentId:studentB.id}]}}});
   const teacher=await p(template.teacher!.userId!);
   return {actor,teacher,lesson,studentA,studentB,groupA,groupB};
@@ -90,7 +90,7 @@ test('starosta API hides other group rows and rejects forged roster writes and c
 
 test('shared lesson confirmation never blocks the other group; clearing a row reopens only that row',async()=>{
   const f=await fixture();
-  const first=await db.user.create({data:{email:`first-${randomUUID()}@test.com`,name:'Староста першої групи',passwordHash:'not-a-login-credential',roles:{create:{roleId:'STAROSTA'}},student:{connect:{id:f.studentA.id}}},select:principalSelect});
+  const first=await db.user.create({data:{email:`first-${randomUUID()}@test.com`,name:'Староста першої групи',passwordHash:'not-a-login-credential',roles:{create:{roleId:'STAROSTA'}},starostaAssignments:{create:{groupId:f.groupA}},student:{connect:{id:f.studentA.id}}},select:principalSelect});
   const draftA=await saveJournal(first,f.lesson.id,request(0,f.studentA.id,'PRESENT','DRAFT'));
   await saveJournal(f.teacher,f.lesson.id,request(draftA.version,f.studentA.id,'PRESENT'));
   const groupA=await journal(first,f.lesson.id),groupB=await journal(f.actor,f.lesson.id);
@@ -121,7 +121,7 @@ test('legacy CONFIRMED state with missing roster does not prevent the second sta
 
 test('different group editors keep optimistic locking and can retry against the new version',async()=>{
   const f=await fixture();
-  const first=await db.user.create({data:{email:`parallel-${randomUUID()}@test.com`,name:'Староста першої групи',passwordHash:'not-a-login-credential',roles:{create:{roleId:'STAROSTA'}},student:{connect:{id:f.studentA.id}}},select:principalSelect});
+  const first=await db.user.create({data:{email:`parallel-${randomUUID()}@test.com`,name:'Староста першої групи',passwordHash:'not-a-login-credential',roles:{create:{roleId:'STAROSTA'}},starostaAssignments:{create:{groupId:f.groupA}},student:{connect:{id:f.studentA.id}}},select:principalSelect});
   const actors=[first,f.actor],students=[f.studentA.id,f.studentB.id];
   const results=await Promise.allSettled(actors.map((actor,index)=>saveJournal(actor,f.lesson.id,request(0,students[index],'N','DRAFT'))));
   assert.equal(results.filter(result=>result.status==='fulfilled').length,1);

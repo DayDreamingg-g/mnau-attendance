@@ -16,6 +16,7 @@ export function isolatedEnvironment(overrides = {}) {
     REPORT_MACHINE_TOKEN: randomBytes(32).toString('hex'),
     REPORT_FACULTY_SLUG: 'management',
     MNAU_TEST_ISOLATED: 'true',
+    SEED_TEST_ATTENDANCE: 'true',
     NEXT_TELEMETRY_DISABLED: '1',
     APP_ORIGIN: 'http://localhost:3000',
     TEST_BASE_URL: 'http://127.0.0.1:3001',
