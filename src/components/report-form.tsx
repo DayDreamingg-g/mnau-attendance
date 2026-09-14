@@ -12,13 +12,13 @@ export type ReportOptions={
 export function ReportForm({filters,options,periods}:{filters:ReportFilters;options:ReportOptions;periods:Record<ReportKind,{from:string;to:string}>}){
   const router=useRouter();
   const [busy,setBusy]=useState(false),[message,setMessage]=useState(''),[error,setError]=useState(false);
-  const [faculty,setFaculty]=useState(filters.faculty??options.faculties[0]?.id??''),[specialty,setSpecialty]=useState(filters.specialty??''),[group,setGroup]=useState(filters.group??''),[student,setStudent]=useState(filters.student??''),[course,setCourse]=useState(filters.course?String(filters.course):'');
+  const [faculty,setFaculty]=useState(filters.faculty??options.specialties[0]?.facultyId??options.faculties[0]?.id??''),[specialty,setSpecialty]=useState(filters.specialty??(options.specialties.length===1?options.specialties[0].id:'')),[group,setGroup]=useState(filters.group??''),[student,setStudent]=useState(filters.student??''),[course,setCourse]=useState(filters.course?String(filters.course):'');
   const [threshold,setThreshold]=useState(filters.threshold?String(filters.threshold):'');
   const [kind,setKind]=useState<ReportKind>('MONTHLY'),[from,setFrom]=useState(filters.from),[to,setTo]=useState(filters.to);
   const specialties=options.specialties.filter(s=>s.facultyId===faculty);
   const groups=options.groups.filter(g=>specialties.some(s=>s.id===g.specialtyId)&&(!specialty||g.specialtyId===specialty)&&(!course||g.course===Number(course)));
   const students=options.students.filter(s=>groups.some(g=>g.id===s.groupId)&&(!group||s.groupId===group));
-  const values={faculty,kind,from,to,course,specialty:specialty||(options.specialties.length===1?options.specialties[0].id:''),group,student,threshold};
+  const values={faculty,kind,from,to,course,specialty:specialty||(options.specialties.length===1&&options.specialties[0].facultyId===faculty?options.specialties[0].id:''),group,student,threshold};
   function changed(){setMessage('');}
   async function submit(){
     setBusy(true);setMessage('');setError(false);
