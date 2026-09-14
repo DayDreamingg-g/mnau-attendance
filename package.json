@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "node scripts/preview.mjs",
     "dev:local": "next dev --port 3000",
-    "build": "prisma generate && next build --webpack",
+    "build": "prisma generate && npm run beta:verify-source && next build --webpack",
     "start": "next start --hostname 0.0.0.0",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
@@ -28,6 +28,9 @@
     "verify:server": "node scripts/verify.mjs",
     "dev:next": "next dev --hostname 0.0.0.0 --port 4173",
     "beta:prepare-cs": "node --import tsx scripts/prepare-cs-beta.ts",
+    "beta:repair-cs": "node --import tsx scripts/repair-cs-beta.ts",
+    "beta:verify-source": "node --import tsx scripts/verify-cs-source.ts",
+    "beta:verify-cs": "node --import tsx scripts/verify-cs-beta.ts",
     "test:beta": "node scripts/verify-beta.mjs",
     "schedule:generate-faculty": "node --import tsx scripts/generate-faculty-schedule.ts",
     "beta:realtime": "node scripts/beta-realtime.mjs"
