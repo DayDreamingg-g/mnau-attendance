@@ -55,7 +55,7 @@ export async function syncCSSchedule(tx:Prisma.TransactionClient,options:{from?:
   const history=(l:typeof old[number])=>{
     const exclusive=l.groups.every(g=>ids.includes(g.groupId));
     const members=new Set(l.roster.filter(r=>r.groupId&&ids.includes(r.groupId)).map(r=>r.studentId));
-    return l.attendance.some(a=>exclusive||members.has(a.studentId))||exclusive&&l.submissions.length>0||l.auditLogs.some(a=>!['CS_CALENDAR_SYNC','CS_BETA_REPAIR','SEED','DEMO_SEED'].includes(a.source)&&(exclusive||a.studentId&&members.has(a.studentId)||a.groupId&&ids.includes(a.groupId)||!a.studentId&&!a.groupId));
+    return l.attendance.some(a=>exclusive||members.has(a.studentId))||exclusive&&l.submissions.length>0||l.auditLogs.some(a=>!['CS_CALENDAR_SYNC','CS_BETA_REPAIR','SEED','DEMO_SEED','DEMO_RANDOM_ATTENDANCE'].includes(a.source)&&(exclusive||a.studentId&&members.has(a.studentId)||a.groupId&&ids.includes(a.groupId)||!a.studentId&&!a.groupId));
   };
   const identity=(l:typeof old[number])=>signature(DateTime.fromJSDate(l.startAt,{zone:ZONE}).toISODate()!,l.pairNumber,l.groups.filter(g=>ids.includes(g.groupId)).map(g=>g.groupId),l.subject.name);
   const wanted=new Map(calendar.map(l=>[signature(l.date,l.cell.pairNumber,l.groups,l.cell.subject!),l]));

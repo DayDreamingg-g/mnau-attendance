@@ -72,6 +72,7 @@ export async function reportPreview(user:Principal,facultyId:string,f:ReportFilt
 
 export async function createReport(user:Principal,facultyId:string,f:ReportFilters,kind:ReportKind,machine=false){
   const {data,filters,faculty,summary}=await reportPreview(user,facultyId,f,kind);
+  if(!summary.groups||!summary.students||!summary.stats.expected)throw new HttpError(422,'За вибраний період даних немає. Змініть період або область звіту.');
   const key=digest(JSON.stringify({kind,...filters}));
   let report=await db.report.findUnique({where:{key}});
   const previous=report?.summary as {fingerprint?:string}|null;
