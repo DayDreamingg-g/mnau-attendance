@@ -7,6 +7,7 @@ import hashlib
 import json
 import re
 import sys
+from datetime import date, timedelta
 from pathlib import Path
 from xml.etree import ElementTree as ET
 from zipfile import ZipFile
@@ -100,7 +101,9 @@ for course in range(1, 5):
                             name, title = 'Пархоменко О.Ю.', 'доц.'
                         if name in ['Богатенкова О.Є.', 'Богатєнкова О.Є.']:
                             name, title = 'Богатєнкова О.Є.', 'ст.в.'
-                        cells.append(dict(id=source_id, file=filename, page=page_no, bbox=box, raw=raw,
+                        cells.append(dict(id=source_id, file=filename, sha256=hashlib.sha256((INPUT / filename).read_bytes()).hexdigest(), page=page_no, bbox=box, raw=raw,
+                            pairBbox=[round(n, 3) for n in pair_box],
+                            groupNames=[name for name, gid in group_ids.items() if gid in [g for _, x, g in headers if bbox[0] <= x <= bbox[2]]],
                             boundaryRaw=boundary, groups=[g for _, x, g in headers if bbox[0] <= x <= bbox[2]],
                             weekday=['MON', 'TUE', 'WED', 'THU', 'FRI'][day], pairNumber=pair,
                             splitCell=split, splitPart=('upper' if centre < (pair_box[1]+pair_box[3])/2 else 'lower') if split else None,
@@ -135,4 +138,21 @@ expected = {'КН 1/1': 17, 'КН 3/1': 20, 'КН 3/2': 21}
 assert {g: sum(s['groupName'] == g for s in students) for g in expected} == expected
 for name, value in [('schedule-cells.json', cells), ('students.json', students), ('page-inventory.json', inventory)]:
     (OUTPUT / name).write_text(json.dumps(value, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
-print(json.dumps({'students': expected, 'cells': len(cells), 'teachers': sorted({c['teacherDisplayName'] for c in cells if c['teacher']}), 'splitCells': sum(c['splitCell'] for c in cells)}, ensure_ascii=False, indent=2))
+mapping = json.loads((OUTPUT / 'week-mapping.json').read_text(encoding='utf-8'))
+base = date.fromisoformat(mapping['baseMonday'])
+dates = [date(2026, 9, 1) + timedelta(days=n) for n in range((date(2027, 1, 31) - date(2026, 9, 1)).days + 1)]
+diagnostic = []
+for name in ['КН 1/1', 'КН 2/1', 'КН 3/1', 'КН 3/2', 'КН 4/1']:
+    source = [c for c in cells if group_ids[name] in c['groups']]
+    slots = set()
+    for day in dates:
+        half = 'lower' if ((day - base).days // 7) % 2 == 0 else 'upper'
+        for cell in source:
+            if day.weekday() < 5 and cell['weekday'] == ['MON', 'TUE', 'WED', 'THU', 'FRI'][day.weekday()] and (not cell['splitCell'] or cell['splitPart'] == half):
+                slot = (str(day), cell['pairNumber'])
+                assert slot not in slots, (name, slot, 'Conflicting PDF cells')
+                slots.add(slot)
+    assert source and slots, (name, 'Missing schedule')
+    diagnostic.append(dict(group=name, weeklySourceCells=len(source), uniqueSubjects=len({c['subject'].lower().strip(' .') for c in source}), teachers=sorted({c['teacherDisplayName'] for c in source if c['teacher']}), semesterLessons=len(slots)))
+(OUTPUT / 'diagnostics.json').write_text(json.dumps(diagnostic, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+print(json.dumps(diagnostic, ensure_ascii=False, indent=2))

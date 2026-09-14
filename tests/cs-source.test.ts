@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {CS_COUNTS,readCSData,teacherEmail,teacherKey} from '../src/lib/cs-beta-data';
 import {weekHalf} from '../scripts/generate-semester-schedule';
+import {scheduleWeek} from '../src/lib/schedule-week';
+import {verifyCSSource,expandCSCalendar} from '../src/lib/cs-schedule';
 test('the supplied roster preserves 58 source names, exact counts, pages and raw spelling',async()=>{
   const {students}=await readCSData();
   for(const [id,count] of Object.entries(CS_COUNTS))assert.equal(students.filter(s=>s.groupId===id).length,count);
@@ -24,5 +26,17 @@ test('week alternation uses the approved actual base week, including ISO year an
   assert.equal(mapping.baseMonday,'2026-09-14');
   assert.equal(weekHalf('2026-09-14'),'lower');assert.equal(weekHalf('2026-09-20'),'lower');
   assert.equal(weekHalf('2026-09-21'),'upper');assert.equal(weekHalf('2026-09-28'),'lower');
+  for(const [date,week] of [['2026-09-14','DENOMINATOR'],['2026-09-20','DENOMINATOR'],['2026-09-21','NUMERATOR'],['2026-09-27','NUMERATOR'],['2026-09-28','DENOMINATOR']])assert.equal(scheduleWeek(date),week);
   assert.equal(weekHalf('2026-09-07'),'upper');assert.equal(weekHalf('2026-10-26'),'lower');
+});
+
+test('PDF checksums and generated semester cover every group, all teachers and shared cells without slot conflicts',async()=>{
+  const {cells}=await verifyCSSource(),lessons=expandCSCalendar(cells);
+  for(const id of Object.keys(CS_COUNTS))assert.ok(lessons.some(l=>l.groups.includes(id)),id);
+  const teachers=new Set(cells.flatMap(c=>c.teacher?[teacherKey(c.teacher)]:[]));
+  for(const key of teachers)assert.ok(lessons.some(l=>l.cell.teacher&&teacherKey(l.cell.teacher)===key),key);
+  assert.ok(!lessons.some(l=>l.groups.includes('g-4-4')&&teacherKey(l.cell.teacher??'')===teacherKey('Пархоменко О.Ю.')));
+  for(const cell of cells.filter(c=>c.groups.length>1))assert.ok(lessons.some(l=>l.cells.some(c=>c.id===cell.id)&&cell.groups.every(g=>l.groups.includes(g))));
+  const empty=cells.filter(c=>!c.groups.includes('g-3-4'));
+  assert.throws(()=>expandCSCalendar([...empty,...cells.filter(c=>c.groups.includes('g-3-4')).map(c=>({...c,weekday:'INVALID'}))]));
 });
