@@ -4,14 +4,15 @@ import {randomUUID,randomBytes} from 'node:crypto';
 import bcrypt from 'bcryptjs';
 import {z} from 'zod';
 import {db} from './db';
-import {principalSelect,type Principal} from './auth';
+import {principalSelect,isManager,type Principal} from './auth';
+import {hardDeleteStudent} from './student-cleanup';
 import {canCorrectGroup,canManageStudents} from './access';
 import {effectiveNow} from './time';
 import {HttpError} from './errors';
 import {journalStateFromCounts} from './journal-state';
 import type {Prisma} from '../generated/prisma/client';
 
-const input=z.object({action:z.enum(['ADD','EDIT','ARCHIVE','RESTORE','TRANSFER']),groupId:z.string().min(1).max(100),studentId:z.string().max(100).optional(),fullName:z.string().trim().min(2).max(200).optional(),phone:z.string().trim().max(40).nullable().optional(),targetGroupId:z.string().max(100).optional(),reason:z.string().trim().min(5).max(500)}).strict();
+const input=z.object({action:z.enum(['ADD','EDIT','ARCHIVE','RESTORE','TRANSFER','DELETE']),groupId:z.string().min(1).max(100),studentId:z.string().max(100).optional(),confirmDelete:z.literal(true).optional(),fullName:z.string().trim().min(2).max(200).optional(),phone:z.string().trim().max(40).nullable().optional(),targetGroupId:z.string().max(100).optional(),reason:z.string().trim().min(5).max(500)}).strict();
 export async function refreshRosterState(tx:Prisma.TransactionClient,lessonIds:string[]){
   for(const id of [...new Set(lessonIds)].sort()){
     const expected=await tx.lessonStudent.count({where:{lessonId:id}});
@@ -52,10 +53,18 @@ export async function changeStudent(user:Principal,raw:unknown){
       if(before.groupId!==group.id)throw new HttpError(403,'Студент не належить обраній групі.');
     }
     let changed:string[]=[];
+    if(p.action==='DELETE'){
+      if(!isManager(actor))throw new HttpError(403,'Видалення доступне адміністратору або розробнику.');
+      if(!p.confirmDelete)throw new HttpError(400,'Підтвердіть остаточне видалення.');
+      const result=await hardDeleteStudent(tx,before!.id);
+      await refreshRosterState(tx,result.lessonIds);
+      await tx.auditLog.create({data:{actorId:actor.id,studentId:before!.id,groupId:group.id,objectType:'Student',objectId:before!.id,source:'ROSTER_MANAGEMENT',reason:p.reason,details:{action:'DELETE',fullName:before!.fullName,userId:before!.userId}}});
+      return {ok:true,studentId:before!.id};
+    }
     let after;
     if(p.action==='ADD'){
       if(!p.fullName)throw new HttpError(400,'Вкажіть ПІБ.');
-      after=await tx.student.create({data:{id:randomUUID(),fullName:p.fullName,phone:p.phone||null,groupId:group.id,isSynthetic:false,joinedAt:now,source:{type:'MANUAL',actorId:actor.id,importedAt:now.toISOString()}}});
+      after=await tx.student.create({data:{id:randomUUID(),fullName:p.fullName,phone:p.phone||null,groupId:group.id,isSynthetic:false,joinedAt:now,source:{type:'MANUAL',actorId:actor.id,actorName:actor.name,createdAt:now.toISOString(),reason:p.reason}}});
       changed=await addCurrentRoster(tx,after,now);
     }else if(p.action==='EDIT'){
       after=await tx.student.update({where:{id:before!.id},data:{fullName:p.fullName,phone:p.phone===undefined?undefined:p.phone||null}});
@@ -68,7 +77,7 @@ export async function changeStudent(user:Principal,raw:unknown){
         if(target.id===group.id||!before!.active)throw new HttpError(400,'Оберіть іншу групу для активного студента.');
       }
       if(p.action!=='RESTORE'){
-        const future=await tx.lessonStudent.findMany({where:{studentId:before!.id,groupId:group.id,lesson:{startAt:{gt:now}}},select:{lessonId:true}});
+        const future=await tx.lessonStudent.findMany({where:{studentId:before!.id,groupId:group.id,OR:[{lesson:{startAt:{gt:now}}},{lesson:{startAt:{lte:now},endAt:{gt:now}},attendance:null}]},select:{lessonId:true}});
         for(const row of future)await tx.$queryRaw`SELECT "id" FROM "Lesson" WHERE "id"=${row.lessonId} FOR UPDATE`;
         if(await tx.attendance.count({where:{studentId:before!.id,lessonId:{in:future.map(r=>r.lessonId)}}}))throw new HttpError(409,'У майбутньому журналі є відмітки; зверніться до адміністратора.');
         await tx.lessonStudent.deleteMany({where:{studentId:before!.id,lessonId:{in:future.map(r=>r.lessonId)}}});

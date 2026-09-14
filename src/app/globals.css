@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "./dialogs.css";
 @custom-variant dark (&:where(.dark, .dark *));
 :root{--bg:#f3f5fa;--surface:#fff;--surface-alt:#f7f8fc;--text:#182238;--muted:#69758b;--border:#e2e7f0;--accent:#4d4ce8;--accent-soft:#edecff;--green:#147a51;--red:#c33745;--blue:#2c68bf;--orange:#9c6517;--shadow:0 3px 16px #12264b05;color-scheme:light}
 .dark{--bg:#101624;--surface:#192235;--surface-alt:#202b40;--text:#ecf0fa;--muted:#a7b4ca;--border:#303c53;--accent:#aaa5ff;--accent-soft:#343052;--green:#7bdfad;--red:#ff94a0;--blue:#90baff;--orange:#edc574;--shadow:none;color-scheme:dark}
