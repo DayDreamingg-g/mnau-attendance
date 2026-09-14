@@ -24,6 +24,13 @@ before(async()=>{
   await db.attendance.createMany({data:[{lessonId:'test-report-lesson',studentId:student,statusCode:'N',confirmed:true},{lessonId:'test-report-lesson',studentId:'test-report-other-student',statusCode:'PRESENT',confirmed:true}]});
 });
 after(async()=>{await db.$disconnect();});
+
+test('no-data reports return a clear result without saving a report or files',async()=>{
+  const before=await db.report.count();
+  await assert.rejects(()=>createReport(admin,faculty,{from:'2020-01-01',to:'2020-01-02',group},'DAILY'),e=>e instanceof HttpError&&e.status===422);
+  const r=await fetch(base+'/api/reports',{method:'POST',headers:{cookie,origin,'Content-Type':'application/json'},body:JSON.stringify({faculty,kind:'DAILY',from:'2020-01-01',to:'2020-01-02',group})});
+  assert.equal(r.status,422);assert.match((await r.json()).error,/даних немає/);assert.equal(await db.report.count(),before);
+});
 test('preview has exact student/group raw counts and produces no persisted report',async()=>{
   const where={kind:'WEEKLY',filters:{path:['group'],equals:group}};const count=await db.report.count({where});
   const single=await reportPreview(dean,faculty,filters(),'WEEKLY');
