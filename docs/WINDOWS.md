@@ -16,8 +16,8 @@ docker compose --env-file .env.compose build web migrate seed
 docker compose --env-file .env.compose up -d postgres
 docker compose --env-file .env.compose run --rm migrate
 docker compose --env-file .env.compose run --rm seed
-docker compose --env-file .env.compose run --rm seed npm run schedule:generate -- --from=2026-09-01 --to=2027-01-31
 docker compose --env-file .env.compose run --rm seed npm run beta:prepare-cs
+docker compose --env-file .env.compose run --rm seed npm run beta:repair-cs
 docker compose --env-file .env.compose up -d web
 docker compose --env-file .env.compose ps
 Invoke-RestMethod http://localhost:3000/api/health
@@ -33,7 +33,25 @@ Invoke-RestMethod http://localhost:3000/api/health
 
 ## Обновление существующей рабочей копии
 
-Сохраните существующие .env, .env.compose, Git history и volumes. setup:env повторно не нужен. После обновления кода выполните npm.cmd ci, npm.cmd run beta:realtime, затем Docker-команды начиная со build, включая migrations, seed, schedule generation и beta preparation. Изменения env загружаются при пересоздании web через up -d.
+Сохраните существующие .env, .env.compose, Git history и volumes. Для уже подготовленной CS beta не запускайте setup:env, beta:realtime, normal seed или повторную beta preparation. Сначала сделайте backup, затем примените целевой repair:
+
+```powershell
+npm.cmd ci
+npm.cmd run db:generate
+docker compose --env-file .env.compose build web migrate seed
+docker compose --env-file .env.compose up -d postgres
+New-Item -ItemType Directory -Force runtime/backups
+docker compose --env-file .env.compose exec -T postgres pg_dump -U postgres -d mnau_attendance -Fc -f /tmp/mnau-cs-before-repair.dump
+docker compose --env-file .env.compose cp postgres:/tmp/mnau-cs-before-repair.dump runtime/backups/mnau-cs-before-repair.dump
+docker compose --env-file .env.compose run --rm migrate
+docker compose --env-file .env.compose run --rm seed npm run beta:repair-cs
+docker compose --env-file .env.compose run --rm seed npm run beta:verify-cs
+docker compose --env-file .env.compose up -d --force-recreate web
+docker compose --env-file .env.compose ps
+Invoke-RestMethod http://localhost:3000/api/health
+```
+
+При следующем repair выберите новое имя dump, чтобы сохранить предыдущую точку восстановления. `runtime/` исключён из Git. `beta:verify-cs` проверяет исходные 58 студентов; после законных переводов/добавлений его фиксированные roster counts могут отличаться. Repair не откатывает такие изменения, но восстанавливает согласованный beta-пароль и назначения. Не используйте его как регулярную фоновую задачу.
 
 beta:prepare-cs является явной destructive командой для synthetic студентов пяти КН-групп. Она не удаляет Lessons, реальных студентов, другие специальности или n8n. Повторный запуск сохраняет ручные данные, архивирование, переводы и настройки аккаунтов. Normal seed не является reset. Не используйте db:reset-demo для перехода к beta.
 
@@ -47,8 +65,8 @@ beta:prepare-cs является явной destructive командой для 
 docker compose --env-file .env.compose -f compose.yaml -f compose.local-db.yaml up -d postgres
 npm.cmd run db:migrate
 npm.cmd run db:seed
-npm.cmd run schedule:generate -- --from=2026-09-01 --to=2027-01-31
 npm.cmd run beta:prepare-cs
+npm.cmd run beta:repair-cs
 npm.cmd run build
 npm.cmd start
 ```
@@ -78,7 +96,7 @@ npm.cmd run dev
 
 Preview: http://localhost:4173. Он использует тестовые часы 14.09.2026 21:00 только в отдельной БД; рабочие env не меняются. Остановите Ctrl+C. Для beta в рабочей среде эти preview-переменные не нужны.
 
-В среде подготовки прошли typecheck, lint, 29 unit-тестов, production build, 48 integration и 13 beta tests. Docker build был вызван, но Engine не доступен по dockerDesktopLinuxEngine. Compose-конфигурация проверяется отдельно; запуск штатного PostgreSQL и применение изменений к рабочей БД не подтверждены до восстановления Docker. Не используйте factory reset или удаление volumes ради этой ошибки.
+Во втором pass 14.09.2026 прошли typecheck, lint, 30 unit-тестов, production build, 49 integration и 18 beta tests. Docker build, migrations, целевой repair и повторный repair выполнены на настоящем PostgreSQL; web проверен через браузер. Подробности и ограничения: [CS-BETA-PASS2.md](CS-BETA-PASS2.md).
 
 ## Ежедневная работа
 
