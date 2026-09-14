@@ -6,6 +6,7 @@ import { DateTime } from 'luxon';
 import { db } from '../src/lib/db';
 import { atKyiv,demoEnabled,today,ZONE } from '../src/lib/time';
 import { teacherKey } from '../src/lib/cs-beta-data';
+import {isCSSpecialty} from '../src/lib/cs-structure';
 import { journalStateForRoster } from '../src/lib/journal-state';
 import type { Prisma,RoleCode,StatusCode } from '../src/generated/prisma/client';
 type SourceGroup={id:string;name:string;course:number;specialty:string;source:Prisma.InputJsonObject};
@@ -26,7 +27,8 @@ async function main(){
   const refs:Record<string,{code:string;url:string}>={"Комп'ютерні науки":{code:'122',url:'https://www.mnau.edu.ua/faculty-men/opc-122-kn/'},'Менеджмент':{code:'073',url:'https://www.mnau.edu.ua/faculty-men/opc_073_men/'},'Економіка':{code:'051',url:'https://www.mnau.edu.ua/faculty-men/'},'Публічне управління та адміністрування':{code:'281',url:'https://www.mnau.edu.ua/faculty-men/'},'Готельно- ресторанна справа':{code:'241',url:'https://www.mnau.edu.ua/faculty-men/opc-241-grs/'},'Туризм і рекреація':{code:'242',url:'https://www.mnau.edu.ua/faculty-men/opc_242/'}};
   for(const g of groups){
     // PDF header and cohort boundary are retained. Do not infer intake year or map modern codes from course.
-    const sid=id('specialty',g.specialty+(g.course<=2?':junior':':senior'));
+    const canonical=isCSSpecialty(g.specialty)?(await db.specialty.findMany({orderBy:{id:'asc'}})).find(s=>isCSSpecialty(s.name)):undefined;
+    const sid=canonical?.id??id('specialty',g.specialty+(isCSSpecialty(g.specialty)?'':g.course<=2?':junior':':senior'));
     const ref=refs[g.specialty];
     await db.specialty.upsert({where:{id:sid},create:{id:sid,name:g.specialty.replace('Готельно- ресторанна','Готельно-ресторанна'),code:null,codeNote:ref?`Довідковий код на сторінці МНАУ: ${ref.code}. Код цього набору потребує підтвердження.`:'Код цього набору не вказаний у PDF.',facultyId:faculty.id,source:json({pdf:g.source,facultyUrl:faculty.sourceUrl,programReference:ref??null,cohortBand:g.course<=2?'1–2 курс':'3–4 курс'})},update:{}});
     await db.group.upsert({where:{id:g.id},create:{id:g.id,name:g.name,course:g.course,specialtyId:sid,source:json(g.source)},update:{}});
