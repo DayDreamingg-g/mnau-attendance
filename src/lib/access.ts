@@ -6,7 +6,7 @@ export function groupScope(u:Principal):Prisma.GroupWhereInput {
   const OR:Prisma.GroupWhereInput[]=[];
   if(hasRole(u,'DEAN_OFFICE'))OR.push({specialty:{facultyId:{in:u.deanAssignments.map(a=>a.facultyId)}}});
   if(hasRole(u,'CURATOR'))OR.push({id:{in:u.curatorAssignments.map(a=>a.groupId)}});
-  if(hasRole(u,'TEACHER')&&u.teacher)OR.push({lessons:{some:{lesson:{teacherId:u.teacher.id}}}});
+  if(hasRole(u,'TEACHER')&&u.teacher)OR.push({lessons:{some:{lesson:{teacherId:u.teacher.id,cancelled:false}}}});
   if(starostaGroups(u).length)OR.push({id:{in:starostaGroups(u)}});
   return OR.length?{OR}:{id:{in:[]}};
 }
@@ -68,3 +68,4 @@ export function reportScope(u:Principal):Prisma.ReportWhereInput {
 }
 export function requireReportFaculty(u:Principal,facultyId:string){if(!isManager(u)&&!(hasRole(u,'DEAN_OFFICE')&&u.deanAssignments.some(a=>a.facultyId===facultyId)))throw new HttpError(403,'Немає доступу до звітності факультету.');}
 export function requireAdmin(u:Principal){if(!isManager(u))throw new HttpError(403,'Потрібні права адміністратора або розробника.');}
+export function canViewSources(u:Principal){return isManager(u)||hasRole(u,'CURATOR')||hasRole(u,'DEAN_OFFICE');}

@@ -27,19 +27,22 @@ const actions=[
   {value:'REMOVE_ROLE',label:'Зняти роль'},
   {value:'ASSIGN_TEACHER',label:'Зв’язати профіль викладача'},
   {value:'REMOVE_TEACHER',label:'Від’єднати профіль викладача'},
+  {value:'ASSIGN_STUDENT',label:'Зв’язати профіль студента'},
+  {value:'REMOVE_STUDENT',label:'Від’єднати профіль студента'},
   {value:'ASSIGN_STAROSTA',label:'Зв’язати профіль старости'},
   {value:'REMOVE_STAROSTA',label:'Від’єднати профіль старости'},
   {value:'REVOKE_SESSIONS',label:'Відкликати всі сесії'},
 ];
 const selectOptions=(options:Option[])=>options.map(o=>({value:o.id,label:o.name}));
 
-export function AdminForm({actorId,users,groups,faculties,teachers,demo}:{actorId:string;users:AdminUser[];groups:Option[];faculties:Option[];teachers:ProfileOption[];demo:boolean}){
+export function AdminForm({actorId,users,groups,faculties,teachers,students=[],demo}:{actorId:string;users:AdminUser[];groups:Option[];faculties:Option[];teachers:ProfileOption[];students?:ProfileOption[];demo:boolean}){
   const router=useRouter();
   const [userId,setUserId]=useState(users[0]?.id??'');
-  const [action,setAction]=useState('ASSIGN_CURATOR');
+  const [action,setAction]=useState('RESET_PASSWORD');
   const [busy,setBusy]=useState(false),[message,setMessage]=useState(''),[error,setError]=useState(false);
   const inFlight=useRef(false);
   const user=users.find(u=>u.id===userId);
+  const visibleActions=actions.filter(a=>{const role=a.value.match(/(?:ASSIGN|REMOVE)_(CURATOR|DEAN|TEACHER|STAROSTA|STUDENT)$/)?.[1];return !role||user?.roles.includes(role==='DEAN'?'DEAN_OFFICE':role);});
   let targets:Option[]=[];
   if(user){
     if(action==='ADD_ROLE')targets=roles.filter(r=>!user.roles.includes(r.id));
@@ -50,6 +53,8 @@ export function AdminForm({actorId,users,groups,faculties,teachers,demo}:{actorI
     else if(action==='REMOVE_DEAN')targets=faculties.filter(f=>user.deanFacultyIds.includes(f.id));
     else if(action==='ASSIGN_TEACHER')targets=teachers.filter(t=>(!t.userId||t.userId===userId)&&(!user.teacherId||t.id===user.teacherId));
     else if(action==='REMOVE_TEACHER')targets=teachers.filter(t=>t.id===user.teacherId);
+    else if(action==='ASSIGN_STUDENT')targets=students.filter(t=>(!t.userId||t.userId===userId)&&(!user.studentId||t.id===user.studentId));
+    else if(action==='REMOVE_STUDENT')targets=students.filter(t=>t.id===user.studentId);
     else if(action==='ASSIGN_STAROSTA')targets=groups.filter(g=>!user.starostaGroupIds.includes(g.id));
     else if(action==='REMOVE_STAROSTA')targets=groups.filter(g=>user.starostaGroupIds.includes(g.id));
     else targets=[{id:action==='REVOKE_SESSIONS'?'sessions':userId,name:action==='REVOKE_SESSIONS'?'Усі сесії користувача':'Обраний обліковий запис'}];
@@ -67,8 +72,8 @@ export function AdminForm({actorId,users,groups,faculties,teachers,demo}:{actorI
     }catch(e){setError(true);setMessage(e instanceof Error?e.message:'Не вдалося зберегти.');}
     finally{inFlight.current=false;setBusy(false);}
   }}>
-    <label>Користувач<CustomSelect name="userId" label="Користувач" options={selectOptions(users)} value={userId} onChange={setUserId} disabled={busy} required/></label>
-    <label>Дія<CustomSelect name="action" label="Дія" options={demo?[...actions,{value:'RESET_BETA_PASSWORD',label:'Скинути на beta-пароль'}]:actions} value={action} onChange={setAction} disabled={busy} required/></label>
+    <label>Користувач<CustomSelect name="userId" label="Користувач" options={selectOptions(users)} value={userId} onChange={id=>{setUserId(id);setAction('RESET_PASSWORD');setMessage('');}} disabled={busy} required/></label>
+    <label>Дія<CustomSelect name="action" label="Дія" options={demo?[...visibleActions,{value:'RESET_BETA_PASSWORD',label:'Скинути на beta-пароль'}]:visibleActions} value={action} onChange={setAction} disabled={busy} required/></label>
     <label>Об’єкт<CustomSelect key={`${action}:${userId}:${targets.map(t=>t.id).join(',')}`} name="target" label="Об’єкт" options={selectOptions(targets)} defaultValue={targets[0]?.id??''} disabled={busy||!targets.length} required/></label>
     {!targets.length&&<p className="muted small full-row">Немає доступних об’єктів для цієї дії. Власну роль адміністратора зняти не можна.</p>}
     <label className="full-row">Причина зміни<input name="reason" required minLength={5} maxLength={500} disabled={busy}/></label>

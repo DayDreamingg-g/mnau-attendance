@@ -8,7 +8,7 @@ import {demoEnabled} from './time';
 import {HttpError} from './errors';
 const input=z.object({
   userId:z.string().min(1).max(100),
-  action:z.enum(['ADD_ROLE','REMOVE_ROLE','ASSIGN_CURATOR','REMOVE_CURATOR','ASSIGN_DEAN','REMOVE_DEAN','ASSIGN_TEACHER','REMOVE_TEACHER','ASSIGN_STAROSTA','REMOVE_STAROSTA','REVOKE_SESSIONS','ENABLE','DISABLE','RESET_PASSWORD','RESET_BETA_PASSWORD']),
+  action:z.enum(['ADD_ROLE','REMOVE_ROLE','ASSIGN_CURATOR','REMOVE_CURATOR','ASSIGN_DEAN','REMOVE_DEAN','ASSIGN_TEACHER','REMOVE_TEACHER','ASSIGN_STUDENT','REMOVE_STUDENT','ASSIGN_STAROSTA','REMOVE_STAROSTA','REVOKE_SESSIONS','ENABLE','DISABLE','RESET_PASSWORD','RESET_BETA_PASSWORD']),
   target:z.string().min(1).max(100),reason:z.string().trim().min(5).max(500),
 }).strict();
 const role=z.enum(['ADMIN','DEVELOPER','DEAN_OFFICE','CURATOR','TEACHER','STAROSTA','STUDENT']);
@@ -65,6 +65,19 @@ export async function adminChange(actor:Principal,body:unknown){
         if(teacher.userId!==p.userId)throw new HttpError(409,'Цей профіль не належить обраному користувачу.');
         await tx.teacher.updateMany({where:{id:p.target,userId:p.userId},data:{userId:null}});
       }
+    }else if(p.action==='ASSIGN_STUDENT'||p.action==='REMOVE_STUDENT'){
+      await tx.$queryRaw`SELECT "id" FROM "Student" WHERE "id"=${p.target} FOR UPDATE`;
+      const student=await tx.student.findUnique({where:{id:p.target}});
+      if(!student)throw new HttpError(404,'Профіль студента не знайдено.');
+      if(p.action==='ASSIGN_STUDENT'){
+        if(!user.roles.some(r=>r.roleId==='STUDENT')||!student.active)throw new HttpError(400,'Потрібна роль STUDENT та активний профіль.');
+        if(student.userId&&student.userId!==p.userId||user.student&&user.student.id!==student.id)throw new HttpError(409,'Профіль вже пов’язаний.');
+        await tx.student.update({where:{id:student.id},data:{userId:p.userId}});
+      }else{
+        if(student.userId!==p.userId)throw new HttpError(409,'Профіль належить іншому користувачу.');
+        await tx.student.update({where:{id:student.id},data:{userId:null}});
+      }
+      await tx.session.deleteMany({where:{userId:p.userId}});
     }else if(p.action==='DISABLE'||p.action==='ENABLE'){
       if(p.action==='DISABLE'&&p.userId===actor.id)throw new HttpError(403,'Не можна вимкнути власний обліковий запис.');
       await tx.user.update({where:{id:p.userId},data:{active:p.action==='ENABLE'}});

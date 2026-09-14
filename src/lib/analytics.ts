@@ -6,6 +6,7 @@ import {emptyCounts,metrics,sumCounts} from './metrics';
 import {range,type Filters} from './filters';
 import {effectiveNow} from './time';
 import type {Prisma} from '../generated/prisma/client';
+import {betaUIScope} from './beta-ui';
 export async function analytics(user:Principal,f:Filters){
   const groupWhere:Prisma.GroupWhereInput={AND:[groupScope(user),{course:f.course,id:f.group,specialtyId:f.specialty,specialty:f.faculty?{facultyId:f.faculty}:undefined}]};
   const currentGroups=await db.group.findMany({where:groupWhere,include:{specialty:{include:{faculty:true}},students:{where:{active:true},select:{id:true,fullName:true,groupId:true},orderBy:{fullName:'asc'}}},orderBy:[{course:'asc'},{name:'asc'}]});
@@ -31,8 +32,8 @@ export async function analytics(user:Principal,f:Filters){
 }
 
 export type Analytics=Awaited<ReturnType<typeof analytics>>;
-export async function filterOptions(user:Principal){
-  const groups=await db.group.findMany({where:groupScope(user),select:{id:true,name:true,specialty:{select:{id:true,name:true,faculty:{select:{id:true,name:true,slug:true}}}}},orderBy:{name:'asc'}});
+export async function filterOptions(user:Principal,all=false){
+  const groups=await db.group.findMany({where:betaUIScope(user,all),select:{id:true,name:true,specialty:{select:{id:true,name:true,faculty:{select:{id:true,name:true,slug:true}}}}},orderBy:{name:'asc'}});
   const faculties=Array.from(new Map(groups.map(g=>[g.specialty.faculty.id,g.specialty.faculty])).values());
   return {groups,specialties:Array.from(new Map(groups.map(g=>[g.specialty.id,g.specialty])).values()),faculties};
 }

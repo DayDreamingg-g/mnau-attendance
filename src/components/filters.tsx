@@ -83,6 +83,7 @@ export function Filters({
     )}
 
     {value.student&&<input type="hidden" name="student" value={value.student}/>}
+    {value.scope&&<input type="hidden" name="scope" value={value.scope}/>}
 
     {value.faculty&&
       <input

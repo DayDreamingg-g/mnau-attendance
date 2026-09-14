@@ -6,6 +6,8 @@ import {db} from '@/lib/db';
 import {redirect} from 'next/navigation';
 import {requireUser,hasRole} from '@/lib/auth';
 import {analytics,filterOptions} from '@/lib/analytics';
+import {betaFilters} from '@/lib/beta-ui';
+import {BetaScopeSwitch} from '@/components/beta-scope-switch';
 import {parseFilters,filterLink,type Search} from '@/lib/filters';
 import {Filters} from '@/components/filters';
 import {
@@ -37,8 +39,8 @@ export default async function Dashboard({
   if(user.roles.length===1&&hasRole(user,'CURATOR'))redirect('/curator');
   if(user.roles.length===1&&hasRole(user,'STUDENT')&&user.student)redirect('/students/'+user.student.id);
   const search=await searchParams;
-  const filters=parseFilters(search);
-  const options=await filterOptions(user);
+  const filters=await betaFilters(user,parseFilters(search));
+  const options=await filterOptions(user,filters.scope==='faculty');
 
   const selected=options.faculties.find(
     (faculty)=>faculty.id===filters.faculty,
@@ -66,6 +68,7 @@ export default async function Dashboard({
     );
 
   return <>
+    <BetaScopeSwitch all={filters.scope==='faculty'} path="/"/>
     <PageTitle
       eyebrow="ОГЛЯД ВІДВІДУВАНОСТІ"
       title={beta&&cs&&filters.specialty===cs.id?'Комп’ютерні науки':selected?.name??'Ваш робочий простір'}
