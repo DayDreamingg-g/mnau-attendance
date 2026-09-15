@@ -1,7 +1,6 @@
 import {obsoleteCSCalendar} from './beta-calendar';
 import {CS_GROUP_IDS} from './cs-beta-data';
-import {randomUUID,randomBytes} from 'node:crypto';
-import bcrypt from 'bcryptjs';
+import {randomUUID} from 'node:crypto';
 import {z} from 'zod';
 import {db} from './db';
 import {principalSelect,isManager,type Principal} from './auth';
@@ -23,7 +22,7 @@ export async function refreshRosterState(tx:Prisma.TransactionClient,lessonIds:s
 }
 /** Caller owns group locks; schedule generation takes the same locks. */
 export async function addCurrentRoster(tx:Prisma.TransactionClient,student:{id:string;groupId:string},now:Date){
-  const lessons=await tx.lesson.findMany({where:{...(CS_GROUP_IDS.includes(student.groupId as typeof CS_GROUP_IDS[number])?{NOT:obsoleteCSCalendar}:{}),cancelled:false,endAt:{gt:now},groups:{some:{groupId:student.groupId}}},select:{id:true},orderBy:{id:'asc'}});
+  const lessons=await tx.lesson.findMany({where:{...(CS_GROUP_IDS.includes(student.groupId as typeof CS_GROUP_IDS[number])?{NOT:obsoleteCSCalendar}:{}),cancelled:false,OR:[{termId:null},{term:{archivedAt:null}}],endAt:{gt:now},groups:{some:{groupId:student.groupId}}},select:{id:true},orderBy:{id:'asc'}});
   const changed:string[]=[];
   for(const lesson of lessons){
     await tx.$queryRaw`SELECT "id" FROM "Lesson" WHERE "id"=${lesson.id} FOR UPDATE`;
@@ -38,7 +37,7 @@ export async function changeStudent(user:Principal,raw:unknown){
   return db.$transaction(async tx=>{
     await tx.$queryRaw`SELECT "id" FROM "User" WHERE "id"=${user.id} FOR UPDATE`;
     const actor=await tx.user.findUnique({where:{id:user.id},select:principalSelect});
-    if(!actor?.active)throw new HttpError(401,'Обліковий запис недоступний.');
+    if(!actor?.active||actor.mustChangePassword)throw new HttpError(401,'Обліковий запис недоступний.');
     for(const id of [...new Set([p.groupId,p.targetGroupId].filter((id):id is string=>!!id))].sort())await tx.$queryRaw`SELECT "id" FROM "Group" WHERE "id"=${id} FOR UPDATE`;
     const group=await tx.group.findUnique({where:{id:p.groupId},include:{specialty:true}});
     if(!group)throw new HttpError(404,'Групу не знайдено.');
@@ -77,7 +76,7 @@ export async function changeStudent(user:Principal,raw:unknown){
         if(target.id===group.id||!before!.active)throw new HttpError(400,'Оберіть іншу групу для активного студента.');
       }
       if(p.action!=='RESTORE'){
-        const future=await tx.lessonStudent.findMany({where:{studentId:before!.id,groupId:group.id,OR:[{lesson:{startAt:{gt:now}}},{lesson:{startAt:{lte:now},endAt:{gt:now}},attendance:null}]},select:{lessonId:true}});
+        const future=await tx.lessonStudent.findMany({where:{studentId:before!.id,groupId:group.id,AND:[{OR:[{lesson:{termId:null}},{lesson:{term:{archivedAt:null}}}]}],OR:[{lesson:{startAt:{gt:now}}},{lesson:{startAt:{lte:now},endAt:{gt:now}},attendance:null}]},select:{lessonId:true}});
         for(const row of future)await tx.$queryRaw`SELECT "id" FROM "Lesson" WHERE "id"=${row.lessonId} FOR UPDATE`;
         if(await tx.attendance.count({where:{studentId:before!.id,lessonId:{in:future.map(r=>r.lessonId)}}}))throw new HttpError(409,'У майбутньому журналі є відмітки; зверніться до адміністратора.');
         await tx.lessonStudent.deleteMany({where:{studentId:before!.id,lessonId:{in:future.map(r=>r.lessonId)}}});
@@ -93,23 +92,4 @@ export async function changeStudent(user:Principal,raw:unknown){
     return {ok:true,studentId:after.id};
   },{maxWait:10000,timeout:60000});
 }
-const accountInput=z.object({studentId:z.string().min(1),email:z.email().max(200).transform(s=>s.toLowerCase()),reason:z.string().trim().min(5).max(500)}).strict();
-export async function createStudentAccount(user:Principal,raw:unknown){
-  const parsed=accountInput.safeParse(raw);if(!parsed.success)throw new HttpError(400,'Перевірте email та причину.');
-  const p=parsed.data,password=randomBytes(18).toString('base64url'),passwordHash=await bcrypt.hash(password,12);
-  return db.$transaction(async tx=>{
-    await tx.$queryRaw`SELECT "id" FROM "User" WHERE "id"=${user.id} FOR UPDATE`;
-    const actor=await tx.user.findUnique({where:{id:user.id},select:principalSelect});
-    if(!actor?.active)throw new HttpError(401,'Обліковий запис недоступний.');
-    await tx.$queryRaw`SELECT "id" FROM "Student" WHERE "id"=${p.studentId} FOR UPDATE`;
-    const student=await tx.student.findUnique({where:{id:p.studentId},include:{group:{include:{specialty:true}}}});
-    if(!student)throw new HttpError(404,'Студента не знайдено.');
-    if(!canCorrectGroup(actor,student.group))throw new HttpError(403,'Створювати облікові записи може куратор, деканат, адміністратор або розробник.');
-    if(!student.active||student.userId||await tx.user.findUnique({where:{email:p.email}}))throw new HttpError(409,'Студент неактивний або обліковий запис вже існує.');
-    await tx.role.upsert({where:{id:'STUDENT'},create:{id:'STUDENT',label:'Студент'},update:{}});
-    const account=await tx.user.create({data:{email:p.email,name:student.fullName,passwordHash,roles:{create:{roleId:'STUDENT'}}}});
-    await tx.student.update({where:{id:student.id},data:{userId:account.id}});
-    await tx.auditLog.create({data:{actorId:actor.id,groupId:student.groupId,studentId:student.id,objectType:'StudentAccount',objectId:account.id,reason:p.reason,source:'ACCOUNT_MANAGEMENT',details:{action:'CREATE',email:p.email}}});
-    return {ok:true,email:p.email,password};
-  });
-}
+export async function createStudentAccount(user:Principal,raw:unknown){void user;void raw;throw new HttpError(403,'Студентські облікові записи відкладено.');}

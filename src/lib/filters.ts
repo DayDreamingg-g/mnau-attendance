@@ -27,6 +27,7 @@ export type SortKey=(typeof sortKeys)[number];
 export type SortOrder='asc'|'desc';
 
 export type Filters={
+  term?:string;
   scope?:'faculty';
   from:string;
   to:string;
@@ -50,6 +51,7 @@ const validDate=z
   );
 
 const schema=z.object({
+  term:z.string().max(100).optional(),
   scope:z.literal('faculty').optional(),
   from:validDate,
   to:validDate,

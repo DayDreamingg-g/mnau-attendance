@@ -1,3 +1,4 @@
+import {studentTotals} from '@/lib/metrics';
 import {LinkedRow} from '@/components/linked-row';
 import {SortHeader} from '@/components/sort-header';
 import {sortRows} from '@/lib/sorting';
@@ -61,7 +62,7 @@ export default async function Dashboard({
   if(beta&&cs&&!filters.specialty&&!filters.group&&search.scope!=='faculty')filters.specialty=cs.id;
   const data=await analytics(user,filters);
 
-  const critical=data.students
+  const critical=studentTotals(data.students)
     .filter((student)=>student.stats.below50)
     .sort(
       (a,b)=>a.stats.percentage!-b.stats.percentage!,
@@ -111,7 +112,7 @@ export default async function Dashboard({
       </nav>
     }
 
-    {beta&&cs&&<nav className="tabs"><Link className={filters.specialty===cs.id?'active':''} href={filterLink('/',filters,{specialty:cs.id,group:undefined})}>Комп’ютерні науки · beta</Link><Link className={!filters.specialty?'active':''} href={filterLink('/',filters,{specialty:undefined,group:undefined})+'&scope=faculty'}>Увесь факультет</Link></nav>}
+    {beta&&cs&&<nav className="tabs"><Link className={filters.specialty===cs.id?'active':''} href={filterLink('/',filters,{specialty:cs.id,group:undefined})}>Комп’ютерні науки · TEST</Link><Link className={!filters.specialty?'active':''} href={filterLink('/',filters,{specialty:undefined,group:undefined})+'&scope=faculty'}>Увесь факультет</Link></nav>}
     {beta&&cs&&filters.specialty===cs.id&&<nav className="tabs">{options.groups.filter(g=>g.specialty.id===cs.id).map(g=><Link key={g.id} href={filterLink('/groups/'+g.id,filters,{group:g.id})}>{g.name.toUpperCase()}</Link>)}</nav>}
     <Filters
       value={filters}

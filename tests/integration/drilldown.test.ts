@@ -39,7 +39,7 @@ test('dean follows specialty, group, student and lesson links with scoped period
   const groupAttention=links(group).find(link=>link.startsWith('/students?')&&link.includes('threshold=50'));assert.ok(groupAttention);assert.equal(period(groupAttention).get('group'),groupId);
   const studentLink=findLink(group,`/students/${studentId}`);assert.equal(period(studentLink).get('student'),studentId);
   const student=await html(studentLink);
-  assert.match(student,/Підтвердження/);assert.match(student,/Корпус \/ аудиторія/);
+  assert.match(student,/Збереження/);assert.match(student,/Корпус \/ аудиторія/);
   const lessonLink=links(student).find(link=>link.startsWith('/teacher/lessons/'));assert.ok(lessonLink);assert.equal(period(lessonLink).get('student'),studentId);
   const lesson=await html(lessonLink);
   const returnLink=findLink(lesson,`/students/${studentId}`);assert.equal(period(returnLink).get('student'),studentId);

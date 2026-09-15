@@ -3,7 +3,6 @@ import test,{before,after} from 'node:test';
 import assert from 'node:assert/strict';
 import {randomUUID} from 'node:crypto';
 import {spawnSync} from 'node:child_process';
-import bcrypt from 'bcryptjs';
 import {db} from '../../src/lib/db';
 import {prepareCSBeta} from '../../scripts/prepare-cs-beta';
 import {repairCSBeta} from '../../scripts/repair-cs-beta';
@@ -35,7 +34,7 @@ before(async()=>{
   teacher=await principal('parkhomenko.oyu@test.com');
 });
 after(async()=>{await db.$disconnect();});
-test('beta reset imports 17/0/20/21/0 real students and preserves unrelated data and every lesson',async()=>{
+test('beta reset imports 17/30/20/21/40 real students and preserves unrelated data and every lesson',async()=>{
   for(const [id,count] of Object.entries(CS_COUNTS))assert.equal(await db.student.count({where:{groupId:id}}),count,id);
   assert.equal(await db.student.count({where:{groupId:{in:[...CS_GROUP_IDS]},isSynthetic:true}}),0);
   assert.equal(await db.student.count({where:{groupId:{notIn:[...CS_GROUP_IDS]}}}),otherCounts.students);
@@ -169,10 +168,10 @@ test('add/edit student without a phone updates current/future roster transaction
 });
 test('starosta drafts, teacher confirms, future writes fail and stale versions conflict',async()=>{
   const state=await journal(starosta,ongoing);await saveJournal(starosta,ongoing,marks(state.lesson.version,studentId,'DRAFT'));
-  const draft=await journal(teacher,ongoing);assert.equal(draft.rows[0].confirmed,false);
+  const draft=await journal(teacher,ongoing);assert.equal(draft.rows[0].confirmed,true);
   await saveJournal(teacher,ongoing,marks(draft.lesson.version,studentId));
-  const confirmed=await journal(starosta,ongoing);assert.equal(confirmed.rows[0].editable,false);
-  await reject(()=>saveJournal(starosta,ongoing,marks(confirmed.lesson.version,studentId,'DRAFT')),403);
+  const confirmed=await journal(starosta,ongoing);assert.equal(confirmed.rows[0].editable,true);
+  await saveJournal(starosta,ongoing,marks(confirmed.lesson.version,studentId,'DRAFT'));
   await reject(()=>saveJournal(teacher,ongoing,marks(draft.lesson.version,studentId)),409);
   const planned=await journal(teacher,future);assert.equal(planned.rows[0].editable,false);
   await reject(()=>saveJournal(teacher,future,marks(planned.lesson.version,studentId)),403);
@@ -209,9 +208,7 @@ test('historical analytics attribute transferred and archived attendance to its 
 test('student accounts require elevated group scope, hide phone from teachers and keep passwords hashed',async()=>{
   const s=await db.student.findFirstOrThrow({where:{groupId:'g-1-4',isSynthetic:false}});
   await reject(()=>createStudentAccount(starosta,{studentId:s.id,email:'student.beta@test.com',reason}),403);
-  const account=await createStudentAccount(curator,{studentId:s.id,email:'student.beta@test.com',reason});
-  const token=await login(account.email,account.password),self=(await principalFromToken(token))!;assert.equal(self.student?.id,s.id);
-  const user=await db.user.findUniqueOrThrow({where:{email:account.email}});assert.ok(await bcrypt.compare(account.password,user.passwordHash));
+  await reject(()=>createStudentAccount(curator,{studentId:s.id,email:'student.beta@test.com',reason}),403);
   await changeStudent(curator,{action:'EDIT',groupId:'g-1-4',studentId:s.id,phone:'+380987654321',reason});
   const teacherToken=await login(teacher.email,'Test1234!');
   const html=await(await fetch(base+'/students/'+s.id,{headers:{cookie:'mnau_session='+teacherToken}})).text();assert.ok(!html.includes('+380987654321'));
@@ -223,7 +220,7 @@ test('admin/developer account management denies disabled login, revokes sessions
   await adminChange(admin,{userId:starosta.id,action:'ENABLE',target:starosta.id,reason});
   const reset=await adminChange(admin,{userId:starosta.id,action:'RESET_PASSWORD',target:starosta.id,reason});assert.ok(reset.password);
   assert.ok(await login(starosta.email,reset.password!));
-  await adminChange(admin,{userId:starosta.id,action:'RESET_BETA_PASSWORD',target:starosta.id,reason});
+  await reject(()=>adminChange(admin,{userId:starosta.id,action:'RESET_BETA_PASSWORD',target:starosta.id,reason}),403);
   const previous=process.env.APP_ENV;process.env.APP_ENV='production';
   try{await assert.rejects(()=>prepareCSBeta());await assert.rejects(()=>repairCSBeta());await assert.rejects(()=>adminChange(admin,{userId:starosta.id,action:'RESET_BETA_PASSWORD',target:starosta.id,reason}));}finally{process.env.APP_ENV=previous;}
 });

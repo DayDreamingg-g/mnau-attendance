@@ -46,7 +46,7 @@ test('report scope rejects mismatched hierarchy and unauthorized previews/downlo
   await assert.rejects(()=>reportPreview(dean,faculty,{...filters(),student:foreign.id},'DAILY'),e=>e instanceof HttpError&&e.status===404);
   await assert.rejects(()=>reportPreview(dean,faculty,{...filters(),specialty:'missing-specialty'},'DAILY'),e=>e instanceof HttpError&&e.status===404);
   await assert.rejects(()=>createReport(teacher,faculty,filters(),'DAILY'),e=>e instanceof HttpError&&e.status===403);
-  const r=await fetch(`${base}/api/reports/preview?faculty=${faculty}&kind=DAILY`,{headers:{cookie:teacherCookie}});assert.equal(r.status,403);
+  const r=await fetch(`${base}/api/reports/preview?faculty=${faculty}&kind=DAILY`,{headers:{cookie:teacherCookie}});assert.equal(r.status,200);
   const noauth=await fetch(`${base}/api/reports/preview?faculty=${faculty}&kind=DAILY`);assert.equal(noauth.status,401);
 });
 test('weekly report is deduplicated concurrently, refreshes renamed cells and exports exactly the chosen student',async()=>{
@@ -56,8 +56,20 @@ test('weekly report is deduplicated concurrently, refreshes renamed cells and ex
   await db.student.update({where:{id:student},data:{fullName:'Оновлене Ім’я Студента'}});
   const updated=await createReport(admin,faculty,filters(),'WEEKLY');assert.equal(updated.id,a.id);assert.equal(updated.reused,false);
   const record=await db.report.findUniqueOrThrow({where:{id:a.id}});const summary=record.summary as unknown as ReportSummary;assert.equal(summary.rows[0].fullName,'Оновлене Ім’я Студента');assert.equal(summary.students,1);
-  const csv=await fetch(`${base}/api/reports/${a.id}/csv`,{headers:{cookie}});assert.equal(csv.status,200);const bytes=Buffer.from(await csv.arrayBuffer());assert.equal(bytes.subarray(0,3).toString('hex'),'efbbbf');const text=bytes.toString('utf8');assert.equal(text.split('\r\n').length,2);assert.ok(text.includes('Оновлене Ім’я Студента'));
+  const csv=await fetch(`${base}/api/reports/${a.id}/csv`,{headers:{cookie}});assert.equal(csv.status,200);const bytes=Buffer.from(await csv.arrayBuffer());assert.equal(bytes.subarray(0,3).toString('hex'),'efbbbf');const text=bytes.toString('utf8');assert.equal(text.split('\r\n').length,3);assert.ok(text.includes('TEST-REPORT'));assert.ok(record.xlsx);
   const pdf=await fetch(`${base}/api/reports/${a.id}/pdf`,{headers:{cookie}});assert.equal(Buffer.from(await pdf.arrayBuffer()).subarray(0,5).toString(),'%PDF-');
   assert.equal((await fetch(`${base}/api/reports/${a.id}/pdf`,{headers:{cookie:teacherCookie}})).status,404);
   const api=await fetch(`${base}/api/reports`,{method:'POST',headers:{cookie,origin,'Content-Type':'application/json'},body:JSON.stringify({kind:'WEEKLY',faculty,...filters()})});assert.equal(api.status,200);assert.equal((await api.json()).id,a.id);
+});
+
+test('transferred students keep historical group exports and aggregate thresholds across groups',async()=>{
+  const target='test-report-transfer-target';await db.group.create({data:{id:target,specialtyId:specialty,name:'TEST-REPORT-TRANSFER',course:1,source:{test:true}}});
+  await db.student.update({where:{id:student},data:{groupId:target}});
+  const reference=await db.lesson.findUniqueOrThrow({where:{id:'test-report-lesson'}});
+  await db.lesson.create({data:{id:'test-report-transfer-lesson',startAt:atKyiv(today(),'10:05'),endAt:atKyiv(today(),'11:25'),pairNumber:2,subjectId:reference.subjectId,buildingId:reference.buildingId,bellId:reference.bellId,room:reference.room,groups:{create:{groupId:target}},roster:{create:{studentId:student,groupId:target}}}});
+  await db.attendance.create({data:{lessonId:'test-report-transfer-lesson',studentId:student,statusCode:'PRESENT'}});
+  const historical=await reportPreview(admin,faculty,filters(),'DAILY');assert.equal(historical.summary.stats.N,1);assert.equal(historical.summary.students,1);
+  const aggregate=await reportPreview(admin,faculty,{...filters(),group:undefined,threshold:70},'DAILY');
+  assert.equal(aggregate.summary.students,1);assert.equal(aggregate.summary.below70.length,1);assert.equal(aggregate.summary.below50,0);assert.equal(aggregate.summary.stats.percentage,50);
+  assert.equal(aggregate.summary.lessons?.reduce((n,l)=>n+l.stats.expected,0),aggregate.summary.stats.expected);
 });

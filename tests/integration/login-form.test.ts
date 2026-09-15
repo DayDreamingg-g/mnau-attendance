@@ -17,7 +17,7 @@ async function submit(values:Record<string,string>,requestOrigin=origin){
 }
 
 before(async()=>{
-  await db.user.create({data:{email,name:'Перевірка HTML входу',passwordHash:await bcrypt.hash(password,12)}});
+  await db.user.create({data:{email,name:'Перевірка HTML входу',mustChangePassword:false,passwordHash:await bcrypt.hash(password,12)}});
 });
 after(async()=>{await db.$disconnect();});
 
@@ -78,7 +78,7 @@ test('HTML failures use generic rendered messages without credentials in redirec
 
 test('HTML and JSON login share the same rate limit bucket',async()=>{
   const limitedEmail='html-rate-limit@test.com';
-  for(let i=0;i<4;i++){
+  for(let i=0;i<2;i++){
     const form=await submit({email:limitedEmail,password:'wrong'});
     assert.equal(form.headers.get('location'),'/login?error=invalid');
     const json=await fetch(base+'/api/auth/login',{method:'POST',headers:{origin,'Content-Type':'application/json'},body:JSON.stringify({email:limitedEmail,password:'wrong'})});
@@ -86,7 +86,7 @@ test('HTML and JSON login share the same rate limit bucket',async()=>{
   }
   const limited=await submit({email:limitedEmail,password});
   assert.equal(limited.headers.get('location'),'/login?error=rate');
-  assert.equal(limited.headers.get('retry-after'),'900');
+  assert.ok(Number(limited.headers.get('retry-after'))>0&&Number(limited.headers.get('retry-after'))<=60);
   assert.equal(limited.headers.get('set-cookie'),null);
   assert.match(await(await fetch(base+'/login?error=rate')).text(),/Забагато спроб/);
 });

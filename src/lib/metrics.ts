@@ -9,3 +9,10 @@ export function metrics(c:Counts) {
 }
 export function sumCounts(values:Counts[]):Counts {return values.reduce((a,b)=>({PRESENT:a.PRESENT+b.PRESENT,N:a.N+b.N,HV:a.HV+b.HV,unmarked:a.unmarked+b.unmarked,pending:a.pending+b.pending}),emptyCounts());}
 export function percent(value:number|null) {return value===null?'Немає даних':`${value.toLocaleString('uk-UA',{maximumFractionDigits:1})}%`;}
+
+// A student may have roster rows in several groups after a transfer.
+export function studentTotals<T extends {id:string;groupName:string;stats:Counts}>(rows:T[]){
+  const grouped=new Map<string,T[]>();
+  for(const row of rows)grouped.set(row.id,[...(grouped.get(row.id)??[]),row]);
+  return [...grouped.values()].map(values=>({...values[0],groupName:[...new Set(values.map(v=>v.groupName))].join(' → '),stats:metrics(sumCounts(values.map(v=>v.stats)))}));
+}

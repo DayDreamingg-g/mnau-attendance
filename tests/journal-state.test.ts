@@ -1,10 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {journalStateFromCounts,journalStateForRoster,journalStateLabel} from '../src/lib/journal-state';
-test('a shared lesson is confirmed only after the entire expected roster is confirmed',()=>{
+test('a shared lesson is complete after the entire roster is marked regardless of legacy confirmation',()=>{
   assert.equal(journalStateFromCounts(30,0,0),'EMPTY');
   assert.equal(journalStateFromCounts(30,15,15),'DRAFT');
-  assert.equal(journalStateFromCounts(30,30,15),'DRAFT');
+  assert.equal(journalStateFromCounts(30,30,15),'CONFIRMED');
   assert.equal(journalStateFromCounts(30,30,30),'CONFIRMED');
   assert.equal(journalStateFromCounts(30,29,29),'DRAFT');
   assert.equal(journalStateFromCounts(0,0,0),'EMPTY');
@@ -12,6 +12,6 @@ test('a shared lesson is confirmed only after the entire expected roster is conf
 test('scoped lesson cards derive the visible group segment independently',()=>{
   assert.equal(journalStateForRoster(2,[{confirmed:true},{confirmed:true}]),'CONFIRMED');
   assert.equal(journalStateForRoster(2,[{confirmed:true}]),'DRAFT');
-  assert.equal(journalStateForRoster(2,[{confirmed:false},{confirmed:true}]),'DRAFT');
+  assert.equal(journalStateForRoster(2,[{confirmed:false},{confirmed:true}]),'CONFIRMED');
   assert.match(journalStateLabel('DRAFT'),/Частково/);
 });

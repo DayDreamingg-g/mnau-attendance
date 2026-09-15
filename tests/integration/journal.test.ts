@@ -18,14 +18,14 @@ async function fixture(){
   // Test roster members are synthetic fixtures in existing, source-confirmed groups.
   const studentA=await db.student.create({data:{id:`journal-a-${key}`,fullName:'Тест журналу А',groupId:groupA}});
   const studentB=await db.student.create({data:{id:`journal-b-${key}`,fullName:'Тест журналу Б',groupId:groupB}});
-  const actor=await db.user.create({data:{email:`journal-${key}@test.com`,name:'Тестовий староста',passwordHash:'not-a-login-credential',roles:{create:{roleId:'STAROSTA'}},starostaAssignments:{create:{groupId:groupB}},student:{connect:{id:studentB.id}}},select:principalSelect});
+  const actor=await db.user.create({data:{email:`journal-${key}@test.com`,name:'Тестовий староста',mustChangePassword:false,passwordHash:'not-a-login-credential',roles:{create:{roleId:'STAROSTA'}},starostaAssignments:{create:{groupId:groupB}},student:{connect:{id:studentB.id}}},select:principalSelect});
   const lesson=await db.lesson.create({data:{id:`journal-${key}`,startAt:atKyiv(today(),'08:30'),endAt:atKyiv(today(),'09:50'),pairNumber:1,subjectId:template.subjectId,teacherId:template.teacherId,buildingId:template.buildingId,room:template.room,bellId:template.bellId,sourceId:template.sourceId,synthetic:true,kind:'Ізольована перевірка журналу',groups:{create:[{groupId:groupA},{groupId:groupB}]},roster:{create:[{studentId:studentA.id},{studentId:studentB.id}]}}});
   const teacher=await p(template.teacher!.userId!);
   return {actor,teacher,lesson,studentA,studentB,groupA,groupB};
 }
 after(async()=>{await db.$disconnect();});
 
-test('AUTO submission confirms curator scope and drafts own starosta scope atomically',async()=>{
+test('AUTO submission saves curator and own starosta scope atomically',async()=>{
   const f=await fixture();
   await db.userRole.create({data:{userId:f.actor.id,roleId:'CURATOR'}});
   await db.curatorAssignment.create({data:{userId:f.actor.id,groupId:f.groupA}});
@@ -34,10 +34,10 @@ test('AUTO submission confirms curator scope and drafts own starosta scope atomi
   assert.deepEqual(new Set(current.rows.map(row=>row.id)),new Set([f.studentA.id,f.studentB.id]));
   const result=await saveJournal(actor,f.lesson.id,{version:current.lesson.version,requestId:randomUUID(),mode:'AUTO',rows:[{studentId:f.studentA.id,status:'PRESENT'},{studentId:f.studentB.id,status:'N'}]});
   assert.equal(result.rows.find(row=>row.id===f.studentA.id)?.confirmed,true);
-  assert.equal(result.rows.find(row=>row.id===f.studentB.id)?.confirmed,false);
+  assert.equal(result.rows.find(row=>row.id===f.studentB.id)?.confirmed,true);
   assert.equal(await db.auditLog.count({where:{lessonId:f.lesson.id}}),2);
   const state=await journal(f.actor,f.lesson.id);
-  await rejected(()=>saveJournal(f.actor,f.lesson.id,request(state.lesson.version,f.studentB.id,'PRESENT','CONFIRM')),403);
+  await saveJournal(f.actor,f.lesson.id,request(state.lesson.version,f.studentB.id,'PRESENT','CONFIRM'));
 });
 
 test('draft replay after teacher confirmation returns current state without overwriting',async()=>{
@@ -48,7 +48,7 @@ test('draft replay after teacher confirmation returns current state without over
   const count=await db.auditLog.count({where:{lessonId:f.lesson.id}});
   const replay=await saveJournal(f.actor,f.lesson.id,draft);
   assert.equal(replay.replayed,true);assert.equal(replay.submittedVersion,saved.version);
-  assert.equal(replay.rows[0].status,'HV');assert.equal(replay.rows[0].confirmed,true);assert.equal(replay.rows[0].editable,false);
+  assert.equal(replay.rows[0].status,'HV');assert.equal(replay.rows[0].confirmed,true);assert.equal(replay.rows[0].editable,true);
   assert.equal(await db.auditLog.count({where:{lessonId:f.lesson.id}}),count);
 });
 
@@ -82,7 +82,7 @@ test('starosta API hides other group rows and rejects forged roster writes and c
   const headers={cookie:`mnau_session=${token}`,origin:process.env.APP_ORIGIN??'http://localhost:3000','Content-Type':'application/json'};
   const response=await fetch(`${base}/api/lessons/${f.lesson.id}`,{headers});assert.equal(response.status,200);
   const body=await response.json();assert.deepEqual(body.rows.map((row:{id:string})=>row.id),[f.studentB.id]);
-  for(const submission of [request(0,f.studentA.id,'N','DRAFT'),request(0,f.studentB.id,'N','CONFIRM')]){
+  for(const submission of [request(0,f.studentA.id,'N','DRAFT'),request(0,f.studentA.id,'N','CONFIRM')]){
     const result=await fetch(`${base}/api/lessons/${f.lesson.id}`,{method:'POST',headers,body:JSON.stringify(submission)});assert.equal(result.status,403);
   }
   assert.equal(await db.attendance.count({where:{lessonId:f.lesson.id}}),0);
@@ -90,21 +90,21 @@ test('starosta API hides other group rows and rejects forged roster writes and c
 
 test('shared lesson confirmation never blocks the other group; clearing a row reopens only that row',async()=>{
   const f=await fixture();
-  const first=await db.user.create({data:{email:`first-${randomUUID()}@test.com`,name:'Староста першої групи',passwordHash:'not-a-login-credential',roles:{create:{roleId:'STAROSTA'}},starostaAssignments:{create:{groupId:f.groupA}},student:{connect:{id:f.studentA.id}}},select:principalSelect});
+  const first=await db.user.create({data:{email:`first-${randomUUID()}@test.com`,name:'Староста першої групи',mustChangePassword:false,passwordHash:'not-a-login-credential',roles:{create:{roleId:'STAROSTA'}},starostaAssignments:{create:{groupId:f.groupA}},student:{connect:{id:f.studentA.id}}},select:principalSelect});
   const draftA=await saveJournal(first,f.lesson.id,request(0,f.studentA.id,'PRESENT','DRAFT'));
   await saveJournal(f.teacher,f.lesson.id,request(draftA.version,f.studentA.id,'PRESENT'));
   const groupA=await journal(first,f.lesson.id),groupB=await journal(f.actor,f.lesson.id);
-  assert.equal(groupA.rows[0].confirmed,true);assert.equal(groupA.rows[0].editable,false);
+  assert.equal(groupA.rows[0].confirmed,true);assert.equal(groupA.rows[0].editable,true);
   assert.equal(groupB.lesson.journalState,'DRAFT');assert.equal(groupB.rows[0].status,null);assert.equal(groupB.rows[0].editable,true);
   await rejected(()=>saveJournal(f.actor,f.lesson.id,request(groupB.lesson.version,f.studentA.id,'HV','DRAFT')),403);
   const draftB=await saveJournal(f.actor,f.lesson.id,request(groupB.lesson.version,f.studentB.id,'N','DRAFT'));
-  const teacher=await journal(f.teacher,f.lesson.id);assert.equal(teacher.lesson.journalState,'DRAFT');
+  const teacher=await journal(f.teacher,f.lesson.id);assert.equal(teacher.lesson.journalState,'CONFIRMED');
   const completed=await saveJournal(f.teacher,f.lesson.id,request(draftB.version,f.studentB.id,'N'));
   assert.equal((await journal(f.actor,f.lesson.id)).lesson.journalState,'CONFIRMED');
   const cleared=await saveJournal(f.teacher,f.lesson.id,request(completed.version,f.studentB.id,null));
   assert.equal((await journal(f.actor,f.lesson.id)).lesson.journalState,'DRAFT');
   assert.equal((await journal(f.actor,f.lesson.id)).rows[0].editable,true);
-  assert.equal((await journal(first,f.lesson.id)).rows[0].editable,false);
+  assert.equal((await journal(first,f.lesson.id)).rows[0].editable,true);
   await saveJournal(f.teacher,f.lesson.id,request(cleared.version,f.studentA.id,null));
   assert.equal((await journal(f.teacher,f.lesson.id)).lesson.journalState,'EMPTY');
 });
@@ -116,12 +116,12 @@ test('legacy CONFIRMED state with missing roster does not prevent the second sta
   const state=await journal(f.actor,f.lesson.id);
   assert.equal(state.lesson.journalState,'DRAFT');assert.equal(state.rows[0].editable,true);
   await saveJournal(f.actor,f.lesson.id,request(state.lesson.version,f.studentB.id,'N','DRAFT'));
-  assert.equal((await db.lesson.findUniqueOrThrow({where:{id:f.lesson.id}})).journalState,'DRAFT');
+  assert.equal((await db.lesson.findUniqueOrThrow({where:{id:f.lesson.id}})).journalState,'CONFIRMED');
 });
 
 test('different group editors keep optimistic locking and can retry against the new version',async()=>{
   const f=await fixture();
-  const first=await db.user.create({data:{email:`parallel-${randomUUID()}@test.com`,name:'Староста першої групи',passwordHash:'not-a-login-credential',roles:{create:{roleId:'STAROSTA'}},starostaAssignments:{create:{groupId:f.groupA}},student:{connect:{id:f.studentA.id}}},select:principalSelect});
+  const first=await db.user.create({data:{email:`parallel-${randomUUID()}@test.com`,name:'Староста першої групи',mustChangePassword:false,passwordHash:'not-a-login-credential',roles:{create:{roleId:'STAROSTA'}},starostaAssignments:{create:{groupId:f.groupA}},student:{connect:{id:f.studentA.id}}},select:principalSelect});
   const actors=[first,f.actor],students=[f.studentA.id,f.studentB.id];
   const results=await Promise.allSettled(actors.map((actor,index)=>saveJournal(actor,f.lesson.id,request(0,students[index],'N','DRAFT'))));
   assert.equal(results.filter(result=>result.status==='fulfilled').length,1);
@@ -129,7 +129,7 @@ test('different group editors keep optimistic locking and can retry against the 
   const failure=results[index];assert.ok(failure.status==='rejected'&&failure.reason instanceof HttpError&&failure.reason.status===409);
   const state=await journal(actors[index],f.lesson.id);
   await saveJournal(actors[index],f.lesson.id,request(state.lesson.version,students[index],'N','DRAFT'));
-  assert.equal(await db.attendance.count({where:{lessonId:f.lesson.id,confirmed:false}}),2);
+  assert.equal(await db.attendance.count({where:{lessonId:f.lesson.id,confirmed:true}}),2);
 });
 
 test('demo generation preserves manual marks, bumps versions with drafts, and skips future/cancelled lessons',async()=>{
@@ -147,7 +147,7 @@ test('demo generation preserves manual marks, bumps versions with drafts, and sk
   const before=await db.lesson.findUniqueOrThrow({where:{id:f.lesson.id},include:{attendance:{orderBy:{studentId:'asc'}}}});
   const result=await generateDemoAttendance();assert.ok(result.createdAttendance>0);
   const after=await db.lesson.findUniqueOrThrow({where:{id:f.lesson.id},include:{attendance:{orderBy:{studentId:'asc'}}}});
-  assert.equal(after.version,before.version+1);assert.equal(after.journalState,'DRAFT');
+  assert.equal(after.version,before.version+1);assert.equal(after.journalState,'CONFIRMED');
   assert.deepEqual(after.attendance.filter(row=>row.studentId!==seedStudent.id),before.attendance);
   assert.equal(after.attendance.find(row=>row.studentId===seedStudent.id)?.confirmed,true);
   assert.equal(await db.auditLog.count({where:{lessonId:f.lesson.id,source:'DEMO_RANDOM_ATTENDANCE'}}),1);

@@ -43,8 +43,8 @@ before(async()=>{
   const group=await db.group.findFirstOrThrow({where:{specialty:{facultyId:'faculty-management'}},include:{specialty:true},orderBy:{id:'asc'}});
   groupId=group.id;facultyId=group.specialty.facultyId;
   groupStudentName=(await db.student.findFirstOrThrow({where:{groupId},orderBy:{id:'asc'}})).fullName;
-  const passwordHash=(await db.user.findUniqueOrThrow({where:{id:admin.id},select:{passwordHash:true}})).passwordHash;
-  for(const id of fixtureIds)await db.user.create({data:{id,email:`${id}@test.invalid`,name:'Тест призначень',passwordHash}});
+  const passwordHash=(await db.user.findUniqueOrThrow({where:{id:admin.id},select:{mustChangePassword:false,passwordHash:true}})).passwordHash;
+  for(const id of fixtureIds)await db.user.create({data:{id,email:`${id}@test.invalid`,name:'Тест призначень',mustChangePassword:false,passwordHash}});
 });
 after(async()=>{
   // Only test-created accounts are removed; all source profiles remain intact.

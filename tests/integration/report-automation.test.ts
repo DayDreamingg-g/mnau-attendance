@@ -16,7 +16,7 @@ before(async()=>{
   await db.specialty.create({data:{id:specialty,name:'Тест автоматизації звітів',facultyId:machine.deanAssignments[0].facultyId,source:{test:true}}});
   await db.group.create({data:{id:group,name:'TEST-AUTOMATION',course:1,specialtyId:specialty,source:{test:true}}});
   await db.student.create({data:{id:'test-automation-student',fullName:'Тестовий Студент Автоматизації',groupId:group}});
-  await db.user.create({data:{id:curator,email:'automation-curator@test.com',name:'Тестовий Куратор Автоматизації',passwordHash:'disabled-test-login',roles:{create:{roleId:'CURATOR'}},curatorAssignments:{create:{groupId:group}}}});
+  await db.user.create({data:{id:curator,email:'automation-curator@test.com',name:'Тестовий Куратор Автоматизації',mustChangePassword:false,passwordHash:'disabled-test-login',roles:{create:{roleId:'CURATOR'}},curatorAssignments:{create:{groupId:group}}}});
   const source=await db.lesson.findFirstOrThrow();await db.lesson.create({data:{id:'test-automation-lesson',startAt:atKyiv(today(),'08:30'),endAt:atKyiv(today(),'09:50'),pairNumber:1,subjectId:source.subjectId,buildingId:source.buildingId,bellId:source.bellId,room:source.room,groups:{create:{groupId:group}},roster:{create:{studentId:'test-automation-student'}}}});
   await db.attendance.create({data:{lessonId:'test-automation-lesson',studentId:'test-automation-student',statusCode:'N',confirmed:true}});
 });

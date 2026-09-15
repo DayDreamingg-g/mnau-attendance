@@ -4,6 +4,9 @@ export const reportKindLabels={DAILY:'Щоденне зведення',WEEKLY:'�
 export type ReportKind=keyof typeof reportKindLabels;
 export type ReportFilters=Filters & {student?:string};
 export type ReportSummary={
+  lessons?:{lessonId:string;groupId:string;group:string;teacher:string;subject:string;date:string;time:string;pair:number;onlineUrl:string|null;stats:ReturnType<typeof metrics>}[];
+  lessonCount?:number;
+  incompleteLessons?:number;
   fingerprint:string;
   curators?:{id:string;name:string;groupId:string;groupName:string}[];
   scope:string;

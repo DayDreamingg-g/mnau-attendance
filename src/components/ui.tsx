@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {demoEnabled} from '@/lib/time';
 import type {ReactNode} from 'react';
 
 import {percent} from '@/lib/metrics';
@@ -58,7 +59,7 @@ export function PageTitle({
     <div>
       {eyebrow&&
         <p className="eyebrow">
-          {eyebrow}
+          {eyebrow} {demoEnabled()&&<span className="test-badge">TEST</span>}
         </p>
       }
 
@@ -111,7 +112,6 @@ export function Percentage({
 
 export function Status({
   value,
-  pending=false,
 }:{
   value:string|null;
   pending?:boolean;
@@ -123,7 +123,7 @@ export function Status({
       value==='PRESENT'
         ?'• Присутність'
         :value==='N'
-          ?'N · Без причини'
+          ?'N · Відсутній'
           :value==='HV'
             ?'HV · Поважна'
             :value==='CANCELLED'
@@ -131,10 +131,6 @@ export function Status({
               :'Не відмічено'
     }
 
-    {pending
-      ?' · Чернетка'
-      :''
-    }
   </span>;
 }
 
@@ -156,7 +152,7 @@ export function Stats({
     },
     {
       label:'Студенти',
-      value:data.students.length,
+      value:new Set(data.students.map(s=>s.id)).size,
       detail:`${data.groups.length} груп у вибірці`,
       accent:'',
     },
@@ -231,7 +227,7 @@ export function Completion({
       </strong>
 
       <span>
-        {percent(data.stats.completion)} підтверджено
+        {percent(data.stats.completion)} заповнено
       </span>
     </div>
 
@@ -244,7 +240,7 @@ export function Completion({
     </div>
 
     <p className="muted small">
-      {data.lessonCount} занять · {data.stats.marked} підтверджених відміток · {data.stats.pending} очікують підтвердження · {data.stats.unmarked} не відмічено
+      {data.lessonCount} занять · {data.stats.marked} збережених відміток · {data.stats.unmarked} не відмічено
     </p>
   </div>;
 }
@@ -315,13 +311,6 @@ export function StudentTable({
           />
 
           <SortHeader
-            label="Чернетки"
-            sortKey="pending"
-            filters={filters}
-            path={path}
-          />
-
-          <SortHeader
             label="Показник"
             sortKey="percentage"
             filters={filters}
@@ -376,10 +365,6 @@ export function StudentTable({
               </td>
 
               <td>
-                {student.stats.pending}
-              </td>
-
-              <td>
                 <Percentage
                   value={student.stats.percentage}
                 />
@@ -393,7 +378,7 @@ export function StudentTable({
 
 export function FormulaNote(){
   return <p className="formula-note">
-    Формула демо: PRESENT / (PRESENT + N) × 100. HV виключено зі знаменника. Враховано підтверджені відмітки завершених, нескасованих занять. Це не офіційне положення МНАУ.
+    Формула TEST: PRESENT / (PRESENT + N) × 100. HV виключено зі знаменника. Враховано збережені відмітки завершених, нескасованих занять. Це не офіційне положення МНАУ.
   </p>;
 }
 

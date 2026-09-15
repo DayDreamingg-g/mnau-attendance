@@ -64,8 +64,8 @@ export function canSeePhone(u:Principal,s:{id:string;group:{id:string;specialty:
 export function reportScope(u:Principal):Prisma.ReportWhereInput {
   if(isManager(u))return {};
   if(hasRole(u,'DEAN_OFFICE'))return {facultyId:{in:u.deanAssignments.map(a=>a.facultyId)}};
-  return {id:{in:[]}};
+  return {createdById:u.id};
 }
-export function requireReportFaculty(u:Principal,facultyId:string){if(!isManager(u)&&!(hasRole(u,'DEAN_OFFICE')&&u.deanAssignments.some(a=>a.facultyId===facultyId)))throw new HttpError(403,'Немає доступу до звітності факультету.');}
+export function requireReportFaculty(u:Principal,facultyId:string){if(!isManager(u)&&!(hasRole(u,'DEAN_OFFICE')&&u.deanAssignments.some(a=>a.facultyId===facultyId))&&!hasRole(u,'TEACHER')&&!hasRole(u,'CURATOR')&&!hasRole(u,'STAROSTA'))throw new HttpError(403,'Немає доступу до звітності факультету.');}
 export function requireAdmin(u:Principal){if(!isManager(u))throw new HttpError(403,'Потрібні права адміністратора або розробника.');}
 export function canViewSources(u:Principal){return isManager(u)||hasRole(u,'CURATOR')||hasRole(u,'DEAN_OFFICE');}
