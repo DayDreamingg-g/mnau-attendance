@@ -3,7 +3,9 @@
 
 .plain-fieldset{border:0;padding:0;margin:0;min-width:0}.range-note{margin-top:16px}
 
-.stack>.status{justify-self:start}.beta-scope{margin-bottom:0}.button.danger{color:var(--red);border-color:color-mix(in srgb,var(--red) 40%,var(--border))}.wizard-footer{position:sticky;bottom:-24px;background:var(--surface);padding:16px 0 0}.app-dialog .admin-form{grid-template-columns:1fr}
+.stack>.status{justify-self:start}.beta-scope{margin-bottom:0}.button.danger{color:var(--red);border-color:color-mix(in srgb,var(--red) 40%,var(--border))}.wizard-footer{position:sticky;bottom:-24px;background:var(--surface);padding:16px 0 0}.journal-row-state{display:flex;flex-direction:column;gap:3px;min-width:110px;max-width:180px;white-space:normal;overflow-wrap:anywhere}
+.button.active{border-color:var(--accent);font-weight:700}
+.app-dialog .admin-form{grid-template-columns:1fr}
 
 .topbar{position:sticky;top:0;z-index:30}
 .mode-control{position:relative;display:inline-flex}

@@ -22,5 +22,7 @@ export function clockDescription(){
 export function today() { return effectiveNow().toISODate()!; }
 export function atKyiv(date:string, time:string) { const result=DateTime.fromISO(`${date}T${time}`,{zone:ZONE});if(!result.isValid)throw new Error('Invalid Kyiv date');return result.toJSDate(); }
 export function dateLabel(value:Date) { return DateTime.fromJSDate(value).setZone(ZONE).setLocale('uk').toFormat('dd LLL yyyy'); }
+export function timestampLabel(value:Date) { return DateTime.fromJSDate(value).setZone(ZONE).setLocale('uk').toFormat('dd MMMM yyyy, HH:mm'); }
+export function calendarDateLabel(value:string) { return DateTime.fromISO(value,{zone:ZONE}).setLocale('uk').toFormat('dd MMMM yyyy'); }
 export function timeLabel(value:Date) { return DateTime.fromJSDate(value).setZone(ZONE).toFormat('HH:mm'); }
 export function dayOf(value:Date) { return DateTime.fromJSDate(value).setZone(ZONE).toISODate()!; }

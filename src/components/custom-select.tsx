@@ -38,6 +38,7 @@ function SelectControl({name,id,label,options,value,defaultValue,onChange,disabl
   const [open,setOpen]=useState(false);
   const [active,setActive]=useState(selectedIndex);
   const [position,setPosition]=useState<CSSProperties>({});
+  const [portalHost,setPortalHost]=useState<HTMLElement|null>(null);
   const [invalid,setInvalid]=useState(false);
   const button=useRef<HTMLButtonElement>(null);
   const menu=useRef<HTMLDivElement>(null);
@@ -57,6 +58,8 @@ function SelectControl({name,id,label,options,value,defaultValue,onChange,disabl
 
   function show(index=selectedIndex) {
     if(inactive) return;
+    // Native modal dialogs make body siblings inert, regardless of their z-index.
+    setPortalHost(button.current?.closest('dialog')??document.body);
     locate();
     setActive(available.includes(index)?index:available[0]);
     setOpen(true);
@@ -99,7 +102,7 @@ function SelectControl({name,id,label,options,value,defaultValue,onChange,disabl
 
   function keyboard(event:KeyboardEvent<HTMLButtonElement>) {
     if(inactive) return;
-    if(event.key==='Escape'){event.preventDefault();setOpen(false);return;}
+    if(event.key==='Escape'&&open){event.preventDefault();event.stopPropagation();setOpen(false);return;}
     if(event.key==='Tab'){setOpen(false);return;}
     if(event.key==='Enter'||event.key===' '){
       event.preventDefault();
@@ -148,14 +151,14 @@ function SelectControl({name,id,label,options,value,defaultValue,onChange,disabl
         <span>{options[selectedIndex]?.label??'Немає варіантів'}</span><span aria-hidden="true" className="custom-select-chevron">⌄</span>
       </button>
       {invalid&&<span id={`${controlId}-error`} className="error-text small">Оберіть значення.</span>}
-      {open&&createPortal(<div ref={menu} id={listId} role="listbox" aria-label={label} className="custom-select-options" style={position}>
+      {open&&portalHost&&createPortal(<div ref={menu} id={listId} role="listbox" aria-label={label} className="custom-select-options" style={position}>
         {options.map((option,index)=><div key={option.value} id={`${listId}-${index}`} role="option" aria-selected={index===selectedIndex}
           aria-disabled={option.disabled||undefined} data-option-index={index}
           className={`custom-select-option${index===active?' active':''}${option.disabled?' disabled':''}`}
           onMouseDown={event=>event.preventDefault()} onPointerMove={()=>{if(!option.disabled)setActive(index);}} onClick={()=>choose(index)}>
           <span>{option.label}</span><span aria-hidden="true">{index===selectedIndex?'✓':''}</span>
         </div>)}
-      </div>,document.body)}
+      </div>,portalHost)}
     </>}
   </span>;
 }

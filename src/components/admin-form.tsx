@@ -35,9 +35,9 @@ const actions=[
 ];
 const selectOptions=(options:Option[])=>options.map(o=>({value:o.id,label:o.name}));
 
-export function AdminForm({actorId,users,groups,faculties,teachers,students=[],onBusy}:{actorId:string;users:AdminUser[];groups:Option[];faculties:Option[];teachers:ProfileOption[];students?:ProfileOption[];demo:boolean;onBusy?:(busy:boolean)=>void}){
+export function AdminForm({actorId,users,initialUserId,groups,faculties,teachers,students=[],onBusy}:{actorId:string;users:AdminUser[];initialUserId?:string;groups:Option[];faculties:Option[];teachers:ProfileOption[];students?:ProfileOption[];demo:boolean;onBusy?:(busy:boolean)=>void}){
   const router=useRouter();
-  const [userId,setUserId]=useState(users[0]?.id??'');
+  const [userId,setUserId]=useState(initialUserId??users[0]?.id??'');
   const [action,setAction]=useState('RESET_PASSWORD');
   const [password,setPassword]=useState('');
   const [busy,setBusy]=useState(false),[message,setMessage]=useState(''),[error,setError]=useState(false);
