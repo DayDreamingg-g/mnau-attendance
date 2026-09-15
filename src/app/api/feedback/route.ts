@@ -1,0 +1,7 @@
+import {readJson} from '@/lib/request-body';
+import {z} from 'zod';
+import {requireApi,checkOrigin,principalSelect} from '@/lib/auth';
+import {db} from '@/lib/db';
+import {apiError,HttpError} from '@/lib/errors';
+const schema=z.object({text:z.string().trim().min(5).max(4000),page:z.string().max(300)}).strict();
+export async function POST(request:Request){try{checkOrigin(request);const u=await requireApi();const parsed=schema.safeParse(await readJson(request));if(!parsed.success)throw new HttpError(400,'Відгук має містити 5–4000 символів.');const page=parsed.data.page.split(/[?#]/)[0];if(!/^\/[a-zA-Z0-9/_-]*$/.test(page)||page.startsWith('//'))throw new HttpError(400,'Некоректна адреса сторінки.');const feedback=await db.$transaction(async tx=>{await tx.$queryRaw`SELECT id FROM "User" WHERE id=${u.id} FOR UPDATE`;const actor=await tx.user.findUniqueOrThrow({where:{id:u.id},select:principalSelect});if(!actor.active||actor.mustChangePassword)throw new HttpError(403,'Дія недоступна.');if(await tx.feedback.count({where:{userId:u.id,createdAt:{gt:new Date(Date.now()-60000)}}})>=3)throw new HttpError(429,'Зачекайте хвилину перед наступним відгуком.',60);const record=await tx.feedback.create({data:{userId:u.id,roles:actor.roles.map(r=>r.roleId),workspace:actor.workspace,page,text:parsed.data.text}});await tx.auditLog.create({data:{actorId:u.id,objectType:'Feedback',objectId:record.id,source:'FEEDBACK_CREATED'}});return record;});return Response.json({ok:true,id:feedback.id});}catch(e){return apiError(e);}}

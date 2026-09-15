@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import { z } from 'zod';
-import { COOKIE,checkOrigin,cookieOptions,login } from '@/lib/auth';
+import { COOKIE,checkOrigin,cookieOptions,login,loginSource,principalFromToken,homeFor } from '@/lib/auth';
 import { apiError,HttpError } from '@/lib/errors';
 const schema=z.object({
   email:z.string().trim().toLowerCase().pipe(z.email().max(200)),
@@ -32,16 +32,17 @@ export async function POST(request:Request){
     const parsed=schema.safeParse(body);
     if(!parsed.success)throw new HttpError(400,'Перевірте електронну пошту та пароль.');
     const options=cookieOptions();
-    const token=await login(parsed.data.email,parsed.data.password);
+    const token=await login(parsed.data.email,parsed.data.password,loginSource(request),request.headers.get('user-agent')??'');
     (await cookies()).set(COOKIE,token,options);
+    const destination=homeFor((await principalFromToken(token))!);
     return formSubmit
-      ?new Response(null,{status:303,headers:{Location:'/'}})
-      :Response.json({ok:true});
+      ?new Response(null,{status:303,headers:{Location:destination}})
+      :Response.json({ok:true,destination});
   }catch(error){
     if(!formSubmit)return apiError(error);
     const status=error instanceof HttpError?error.status:503;
     const code=status===401?'invalid':status===429?'rate':status===403?'origin':status===400?'validation':'unavailable';
     if(!(error instanceof HttpError))console.error('Login form failed',error instanceof Error?error.name:'UnknownError');
-    return new Response(null,{status:303,headers:{Location:`/login?error=${code}`,...(status===429?{'Retry-After':'900'}:{})}});
+    return new Response(null,{status:303,headers:{Location:`/login?error=${code}`,...(status===429?{'Retry-After':String(error instanceof HttpError?error.retryAfter??60:60)}:{})}});
   }
 }

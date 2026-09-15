@@ -44,7 +44,7 @@ export default async function Login({
 
             {isDemo && (
               <span className="outline-badge shrink-0">
-                DEMO
+                TEST
               </span>
             )}
           </div>
