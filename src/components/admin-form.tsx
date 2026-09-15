@@ -35,7 +35,7 @@ const actions=[
 ];
 const selectOptions=(options:Option[])=>options.map(o=>({value:o.id,label:o.name}));
 
-export function AdminForm({actorId,users,groups,faculties,teachers,students=[]}:{actorId:string;users:AdminUser[];groups:Option[];faculties:Option[];teachers:ProfileOption[];students?:ProfileOption[];demo:boolean}){
+export function AdminForm({actorId,users,groups,faculties,teachers,students=[],onBusy}:{actorId:string;users:AdminUser[];groups:Option[];faculties:Option[];teachers:ProfileOption[];students?:ProfileOption[];demo:boolean;onBusy?:(busy:boolean)=>void}){
   const router=useRouter();
   const [userId,setUserId]=useState(users[0]?.id??'');
   const [action,setAction]=useState('RESET_PASSWORD');
@@ -64,14 +64,14 @@ export function AdminForm({actorId,users,groups,faculties,teachers,students=[]}:
     e.preventDefault();
     if(inFlight.current||!targets.length)return;
     const fd=new FormData(e.currentTarget);
-    inFlight.current=true;setBusy(true);setMessage('');
+    inFlight.current=true;setBusy(true);onBusy?.(true);setMessage('');
     try{
       const r=await fetch('/api/admin/assignments',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(Object.fromEntries(fd))});
       const data=await r.json();
       if(!r.ok)throw new Error(data.error);
       setPassword(data.password??'');setError(false);setMessage(data.password?'Тимчасовий пароль показано один раз. При вході потрібна зміна.':data.changed?'Призначення оновлено. Зміну записано в аудит.':'Призначення вже має обраний стан.');router.refresh();
     }catch(e){setError(true);setMessage(e instanceof Error?e.message:'Не вдалося зберегти.');}
-    finally{inFlight.current=false;setBusy(false);}
+    finally{inFlight.current=false;setBusy(false);onBusy?.(false);}
   }}>
     <label>Користувач<CustomSelect name="userId" label="Користувач" options={selectOptions(users)} value={userId} onChange={id=>{setUserId(id);setAction('RESET_PASSWORD');setMessage('');setPassword('');}} disabled={busy} required/></label>
     <label>Дія<CustomSelect name="action" label="Дія" options={visibleActions} value={action} onChange={value=>{setAction(value);setPassword('');}} disabled={busy} required/></label>

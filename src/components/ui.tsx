@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import {PageHeader,SectionCard} from './design-system';
 import {demoEnabled} from '@/lib/time';
 import type {ReactNode} from 'react';
 
@@ -19,62 +20,8 @@ import type {
 type StudentRow=
   Analytics['students'][number];
 
-export function Panel({
-  title,
-  action,
-  children,
-  className='',
-}:{
-  title?:string;
-  action?:ReactNode;
-  children:ReactNode;
-  className?:string;
-}){
-  return <section
-    className={`panel ${className}`}
-  >
-    {title&&
-      <div className="panel-heading">
-        <h2>{title}</h2>
-        {action}
-      </div>
-    }
-
-    {children}
-  </section>;
-}
-
-export function PageTitle({
-  eyebrow,
-  title,
-  description,
-  action,
-}:{
-  eyebrow?:string;
-  title:string;
-  description?:string;
-  action?:ReactNode;
-}){
-  return <div className="page-title">
-    <div>
-      {eyebrow&&
-        <p className="eyebrow">
-          {eyebrow} {demoEnabled()&&<span className="test-badge">TEST</span>}
-        </p>
-      }
-
-      <h1>{title}</h1>
-
-      {description&&
-        <p className="muted">
-          {description}
-        </p>
-      }
-    </div>
-
-    {action}
-  </div>;
-}
+export const Panel=SectionCard;
+export function PageTitle(props:React.ComponentProps<typeof PageHeader>){return <PageHeader {...props} test={demoEnabled()}/>;}
 
 export function Empty({
   children='За обраними фільтрами даних немає.',
@@ -106,7 +53,7 @@ export function Percentage({
             :'success'
     }`}
   >
-    {percent(value)}
+    {percent(value)}{value!==null&&value<70&&<span className="threshold-badge">{value<50?"! <50%":"△ <70%"}</span>}
   </span>;
 }
 
@@ -121,7 +68,7 @@ export function Status({
   >
     {
       value==='PRESENT'
-        ?'• Присутність'
+        ?'Присутній'
         :value==='N'
           ?'N · Відсутній'
           :value==='HV'
@@ -283,7 +230,7 @@ export function StudentTable({
           />
 
           <SortHeader
-            label="•"
+            label="PRESENT"
             sortKey="present"
             filters={filters}
             path={path}

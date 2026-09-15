@@ -5,14 +5,14 @@ import {db} from './db';
 import {principalSelect,hasRole,isManager,type Principal} from './auth';
 import {requireAdmin} from './access';
 import {HttpError} from './errors';
-import {positions} from './profile';
+import {positions,teacherIdentity} from './teacher-identity';
 const reason=z.string().trim().min(5).max(500);
 const input=z.discriminatedUnion('action',[
- z.object({action:z.literal('CREATE_TEACHER'),name:z.string().trim().min(2).max(200),position:z.enum(Object.keys(positions) as [keyof typeof positions,...(keyof typeof positions)[]]),email:z.email().max(200).transform(s=>s.toLowerCase()),facultyId:z.string().max(100),subjects:z.array(z.string().max(100)).max(100),groups:z.array(z.string().max(100)).max(100),roles:z.array(z.enum(['TEACHER','CURATOR','DEAN_OFFICE'])).min(1).max(3),reason}).strict(),
+ z.object({action:z.literal('CREATE_TEACHER'),name:z.string().trim().min(2).max(200),position:z.enum(Object.keys(positions) as [keyof typeof positions,...(keyof typeof positions)[]]),email:z.email().max(200).transform(s=>s.toLowerCase()),facultyId:z.string().max(100),subjects:z.array(z.string().max(100)).max(100),groups:z.array(z.string().max(100)).max(100),roles:z.array(z.enum(['TEACHER','CURATOR','DEAN_OFFICE'])).min(1).max(3),reason:reason.optional()}).strict(),
  z.object({action:z.literal('RETIRE_TEACHER'),teacherId:z.string().max(100),confirm:z.literal(true),expectedFuture:z.number().int().min(0),reason}).strict(),
  z.object({action:z.literal('SELF_ROLES'),roles:z.array(z.enum(['TEACHER','CURATOR','DEAN_OFFICE','STAROSTA','ADMIN','DEVELOPER'])).min(1).max(6),confirm:z.literal(true),reason}).strict(),
  z.object({action:z.literal('RESET_COOLDOWN'),key:z.string().max(150),reason}).strict(),
- z.object({action:z.literal('FEEDBACK_STATE'),id:z.string().max(100),state:z.enum(['NEW','IN_PROGRESS','RESOLVED']),reason}).strict(),
+ z.object({action:z.literal('FEEDBACK_STATE'),id:z.string().max(100),state:z.enum(['NEW','IN_PROGRESS','RESOLVED']),reason:reason.optional()}).strict(),
  z.object({action:z.enum(['ASSIGN_SUBJECT','REMOVE_SUBJECT','ASSIGN_TEACHING_GROUP','REMOVE_TEACHING_GROUP']),teacherId:z.string().max(100),target:z.string().max(100),reason}).strict(),
 ]);
 export async function adminRelease(user:Principal,raw:unknown){requireAdmin(user);const parsed=input.safeParse(raw);if(!parsed.success)throw new HttpError(400,'Перевірте параметри дії та причину.');const p=parsed.data;
@@ -27,8 +27,8 @@ export async function adminRelease(user:Principal,raw:unknown){requireAdmin(user
    if(!p.roles.includes('TEACHER')||!await tx.faculty.findUnique({where:{id:p.facultyId}}))throw new HttpError(400,'Оберіть роль викладача та факультет.');
    if(await tx.user.findUnique({where:{email:p.email}}))throw new HttpError(409,'Email вже використовується. Призначте наявний обліковий запис.');
    if(await tx.group.count({where:{id:{in:p.groups},specialty:{facultyId:p.facultyId}}})!==new Set(p.groups).size||await tx.subject.count({where:{id:{in:p.subjects}}})!==new Set(p.subjects).size)throw new HttpError(400,'Перевірте групи та дисципліни.');
-   objectId=randomUUID();const teacherId=randomUUID();
-   await tx.user.create({data:{id:objectId,email:p.email,name:p.name,position:p.position,passwordHash:passwordHash!,mustChangePassword:true,roles:{create:[...new Set(p.roles)].map(roleId=>({roleId}))},teacher:{create:{id:teacherId,displayName:p.name,position:p.position,source:{type:'ADMIN_CREATED',originalName:p.name,facultyId:p.facultyId},subjects:{create:[...new Set(p.subjects)].map(subjectId=>({subjectId}))},groups:{create:[...new Set(p.groups)].map(groupId=>({groupId}))}}},...(p.roles.includes('CURATOR')?{curatorAssignments:{create:[...new Set(p.groups)].map(groupId=>({groupId}))}}:{}),...(p.roles.includes('DEAN_OFFICE')?{deanAssignments:{create:{facultyId:p.facultyId}}}:{})}});
+   objectId=randomUUID();const teacherId=randomUUID();const identity=teacherIdentity(p.name,p.position);
+   await tx.user.create({data:{id:objectId,email:p.email,name:identity.name,position:identity.position,passwordHash:passwordHash!,mustChangePassword:true,roles:{create:[...new Set(p.roles)].map(roleId=>({roleId}))},teacher:{create:{id:teacherId,displayName:identity.name,position:identity.position,source:{type:'ADMIN_CREATED',originalName:p.name,facultyId:p.facultyId},subjects:{create:[...new Set(p.subjects)].map(subjectId=>({subjectId}))},groups:{create:[...new Set(p.groups)].map(groupId=>({groupId}))}}},...(p.roles.includes('CURATOR')?{curatorAssignments:{create:[...new Set(p.groups)].map(groupId=>({groupId}))}}:{}),...(p.roles.includes('DEAN_OFFICE')?{deanAssignments:{create:{facultyId:p.facultyId}}}:{})}});
    details={...p,teacherId};
   }else if(p.action==='RETIRE_TEACHER'){
    const teacher=await tx.teacher.findUnique({where:{id:p.teacherId}});if(!teacher||teacher.retiredAt)throw new HttpError(404,'Активного викладача не знайдено.');

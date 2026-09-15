@@ -52,13 +52,41 @@ test('shared journal persists across API reads and denies cross-group writes wit
 });
 test('profile edits preserve Teacher IDs, password changes revoke other sessions and reset uses unique temporary credentials',async()=>{
  const first=await session(teacher.id),second=await session(teacher.id),oldTeacher=teacher.teacher!.id;
+ const originalSource=(await db.teacher.findUniqueOrThrow({where:{id:oldTeacher}})).source;
  await changeProfile(teacher,{action:'PROFILE',name:'Оновлений викладач',position:'PROFESSOR'},first.hash);
+ const refreshed=await fetch(base+'/profile',{headers:{cookie:first.cookie}});const html=await refreshed.text();assert.ok(html.includes('Професор'));assert.ok(html.includes('Оновлений викладач'));
+ assert.equal((await principalFromToken(first.token))?.position,'PROFESSOR');
+ assert.deepEqual((await db.teacher.findUniqueOrThrow({where:{id:oldTeacher}})).source,originalSource);
  assert.equal((await principal(teacher.id)).teacher?.id,oldTeacher);assert.equal((await db.lesson.findUniqueOrThrow({where:{id:lesson}})).teacherId,oldTeacher);
  await changeProfile(teacher,{action:'PASSWORD',currentPassword:'Unique release password 123!',newPassword:'Changed release password 456!'},first.hash);
  assert.equal(await principalFromToken(second.token),null);assert.ok(await principalFromToken(first.token));
  const reset=await adminChange(admin,{action:'RESET_PASSWORD',userId:teacher.id,target:teacher.id,reason});assert.ok(reset.password);assert.equal(await principalFromToken(first.token),null);
  const stored=await db.user.findUniqueOrThrow({where:{id:teacher.id}});assert.ok(stored.mustChangePassword);assert.notEqual(stored.passwordHash,reset.password);assert.ok(await bcrypt.compare(reset.password!,stored.passwordHash));
  const token=await login(teacher.email,reset.password!,'release-password-source');await changeProfile(await principal(teacher.id),{action:'PASSWORD',currentPassword:reset.password!,newPassword:'Final release password 789!'},hashToken(token));teacher=await principal(teacher.id);
+});
+
+test('term creation needs no reason or confirmation, saves an unconfirmed draft and leaves lesson data untouched',async()=>{
+ const before={lessons:await db.lesson.count(),roster:await db.lessonStudent.count(),attendance:await db.attendance.count()};
+ const next=await changeTerm(admin,{action:'CREATE',name:'Next fixture term',facultyId:faculty,fromDate:'2027-02-01',toDate:'2027-06-30',rosterMode:'CURRENT_DRAFT'});
+ const stored=await db.academicTerm.findUniqueOrThrow({where:{id:next.id}});assert.equal(stored.rosterConfirmedAt,null);assert.equal(stored.archivedAt,null);
+ const audit=await db.auditLog.findFirstOrThrow({where:{objectId:next.id,source:'TERM_CREATE'}});assert.ok((audit.details as {rosterDraft:unknown[]}).rosterDraft.length>0);
+ assert.deepEqual({lessons:await db.lesson.count(),roster:await db.lessonStudent.count(),attendance:await db.attendance.count()},before);
+ await rejects(()=>changeTerm(admin,{action:'ARCHIVE',termId:next.id}),400);
+ await rejects(()=>changeTerm(admin,{action:'CREATE',name:'Overlap',facultyId:faculty,fromDate:'2027-03-01',toDate:'2027-07-01'}),409);
+});
+
+test('student and lesson report modes preserve identical totals and archived snapshots remain downloadable',async()=>{
+ const f={from:today(),to:today(),term:termId};
+ const a=await createReport(admin,faculty,{...f,view:'STUDENTS'},'CUSTOM'),b=await createReport(admin,faculty,{...f,view:'LESSONS'},'CUSTOM');assert.notEqual(a.id,b.id);
+ const first=await db.report.findUniqueOrThrow({where:{id:a.id}}),second=await db.report.findUniqueOrThrow({where:{id:b.id}});
+ assert.deepEqual((first.summary as unknown as ReportSummary).stats,(second.summary as unknown as ReportSummary).stats);
+ assert.ok(Buffer.from(first.csv!).toString().includes('ПІБ'));assert.ok(Buffer.from(second.csv!).toString().includes('Дисципліна'));
+ const auth=await session(admin.id);for(const format of ['pdf','csv','xlsx']){const r=await fetch(base+'/api/reports/'+a.id+'/'+format,{headers:{cookie:auth.cookie}});assert.equal(r.status,200);assert.deepEqual(Buffer.from(await r.arrayBuffer()),Buffer.from(first[format as 'pdf'|'csv'|'xlsx']!));}
+ const legacySummary=JSON.parse(JSON.stringify(first.summary));delete legacySummary.rows;
+ const legacy=await db.report.create({data:{key:randomUUID(),createdById:admin.id,facultyId:faculty,kind:'WEEKLY',fromDate:f.from,toDate:f.to,filters:f,summary:legacySummary,state:'READY',pdf:first.pdf,csv:first.csv}});
+ const fallback=await fetch(base+'/api/reports/'+legacy.id+'/xlsx',{headers:{cookie:auth.cookie}});assert.equal(fallback.status,200);assert.ok(Buffer.from(await fallback.arrayBuffer()).includes(Buffer.from('Підсумок')));
+ for(const format of ['pdf','csv']){const r=await fetch(base+'/api/reports/'+legacy.id+'/'+format,{headers:{cookie:auth.cookie}});assert.deepEqual(Buffer.from(await r.arrayBuffer()),Buffer.from(first[format as 'pdf'|'csv']!));}
+ await rejects(()=>createReport(admin,faculty,{...f,view:'STUDENTS'},'SEMESTER'),400);
 });
 test('persistent progressive cooldown does not extend when retried and a different source can log in',async()=>{
  const name='absent-'+randomUUID()+'@example.invalid',source='fixture-ip-a';for(let i=0;i<4;i++)await rejects(()=>login(name,'wrong',source),401);await rejects(()=>login(name,'wrong',source),429);

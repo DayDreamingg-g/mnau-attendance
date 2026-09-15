@@ -1,0 +1,6 @@
+'use client';
+import {useId,useState} from 'react';
+export function MultiSelect({label,name,options,value,onChange,disabled=false}:{label:string;name:string;options:{id:string;name:string}[];value:string[];onChange:(value:string[])=>void;disabled?:boolean}){
+  const [query,setQuery]=useState(''),id=useId();
+  return <fieldset className="multi-select" disabled={disabled}><legend>{label} · {value.length}</legend><input aria-label={`Пошук: ${label}`} placeholder="Пошук…" value={query} onChange={e=>setQuery(e.target.value)}/><div className="selection-chips">{value.map(v=><button className="tag" type="button" aria-label={`Зняти: ${options.find(o=>o.id===v)?.name??v}`} key={v} onClick={()=>onChange(value.filter(x=>x!==v))}>{options.find(o=>o.id===v)?.name??v} ×</button>)}</div><div className="multi-options">{options.filter(o=>o.name.toLocaleLowerCase('uk').includes(query.toLocaleLowerCase('uk'))).map(o=><label className="check-label" key={o.id} htmlFor={id+o.id}><input id={id+o.id} type="checkbox" checked={value.includes(o.id)} onChange={e=>onChange(e.target.checked?[...value,o.id]:value.filter(v=>v!==o.id))}/>{o.name}</label>)}</div>{value.map(v=><input type="hidden" name={name} value={v} key={v}/>)}</fieldset>;
+}

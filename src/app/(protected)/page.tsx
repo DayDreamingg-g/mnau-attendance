@@ -8,7 +8,7 @@ import {redirect} from 'next/navigation';
 import {requireUser,hasRole} from '@/lib/auth';
 import {analytics,filterOptions} from '@/lib/analytics';
 import {betaFilters} from '@/lib/beta-ui';
-import {BetaScopeSwitch} from '@/components/beta-scope-switch';
+
 import {parseFilters,filterLink,type Search} from '@/lib/filters';
 import {Filters} from '@/components/filters';
 import {
@@ -69,7 +69,7 @@ export default async function Dashboard({
     );
 
   return <>
-    <BetaScopeSwitch all={filters.scope==='faculty'} path="/"/>
+
     <PageTitle
       eyebrow="ОГЛЯД ВІДВІДУВАНОСТІ"
       title={beta&&cs&&filters.specialty===cs.id?'Комп’ютерні науки':selected?.name??'Ваш робочий простір'}

@@ -1,3 +1,5 @@
+import {teacherIdentity} from './teacher-identity';
+import {scopedTeacherLabel} from './report-presentation';
 import {termScope} from './terms';
 import {reportFiles} from './report-files';
 import {range} from './filters';
@@ -20,7 +22,8 @@ async function reportSnapshot(user:Principal,facultyId:string,f:ReportFilters,ki
   requireReportFaculty(user,facultyId);
   const faculty=await client.faculty.findUnique({where:{id:facultyId}});
   if(!faculty)throw new HttpError(404,'Факультет не знайдено.');
-  const filters:ReportFilters={from:f.from,to:f.to,course:f.course,faculty:facultyId,specialty:f.specialty,group:f.group,student:f.student,threshold:f.threshold,subject:f.subject,term:f.term,scope:f.scope};
+  const filters:ReportFilters={from:f.from,to:f.to,course:f.course,faculty:facultyId,specialty:f.specialty,group:f.group,student:f.student,threshold:f.threshold,subject:f.subject,term:f.term,scope:f.scope,...(f.view?{view:f.view}:{})};
+  if(kind==='SEMESTER'){const term=await client.academicTerm.findFirst({where:{id:filters.term,facultyId,confirmedAt:{not:null}}});if(!term||term.fromDate!==filters.from||term.toDate!==filters.to)throw new HttpError(400,'Період має відповідати обраному семестру.');}
   if(filters.specialty&&!await client.specialty.findFirst({where:{id:filters.specialty,facultyId}}))throw new HttpError(404,'Спеціальність поза межами факультету.');
   if(filters.group&&!await client.group.findFirst({where:{id:filters.group,specialtyId:filters.specialty,specialty:{facultyId}}}))throw new HttpError(404,'Група не належить обраній спеціальності або факультету.');
   if(filters.group&&!await client.group.findFirst({where:{AND:[{id:filters.group},groupScope(user)]}}))throw new HttpError(403,'Група поза вашою областю доступу.');
@@ -41,9 +44,10 @@ async function reportSnapshot(user:Principal,facultyId:string,f:ReportFilters,ki
   const scope=[faculty.name,filters.specialty?all.specialties.find(s=>s.id===filters.specialty)?.name:undefined,filters.group?all.groups.find(g=>g.id===filters.group)?.name:undefined,filters.student?all.students.find(s=>s.id===filters.student)?.fullName:undefined,filters.threshold?`Нижче ${filters.threshold}%`:undefined].filter(Boolean).join(' · ');
   // Include document labels and every exported cell, so renamed profiles cannot reuse stale files.
   const sourceLessons=await client.lesson.findMany({where:{AND:[await betaCalendarScope(client),await termScope(user,filters.term,client),lessonScope(user),{startAt:range(filters),endAt:{lte:effectiveNow().toJSDate()},cancelled:false,subjectId:filters.subject,groups:{some:{groupId:{in:groups.map(g=>g.id)}}}}]},include:{teacher:true,subject:true,roster:{where:{AND:[rosterScope(user),{studentId:{in:[...studentIds]},groupId:{in:groups.map(g=>g.id)}}]}},attendance:true},orderBy:{startAt:'asc'}});
-  const details=sourceLessons.flatMap(l=>groups.filter(g=>l.roster.some(r=>r.groupId===g.id)).map(g=>{const c=emptyCounts();for(const r of l.roster.filter(r=>r.groupId===g.id)){const a=l.attendance.find(a=>a.studentId===r.studentId);if(a)c[a.statusCode]++;else c.unmarked++;}return {lessonId:l.id,groupId:g.id,group:g.name,teacher:l.teacher?.displayName??'Не призначено',subject:l.subject.name,date:dayOf(l.startAt),time:timeLabel(l.startAt)+'–'+timeLabel(l.endAt),pair:l.pairNumber,onlineUrl:l.onlineUrl,stats:metrics(c)};}));
-  const fingerprint=digest(JSON.stringify({kind,filters,faculty:faculty.name,rows,curators,details,synthetic:realStudents===0}));
-  const summary:ReportSummary={fingerprint,scope,curators,lessons:details,lessonCount:new Set(details.map(l=>l.lessonId)).size,incompleteLessons:new Set(details.filter(l=>l.stats.unmarked>0).map(l=>l.lessonId)).size,students:new Set(students.map(s=>s.id)).size,groups:groups.length,stats:data.stats,below70:studentTotals(students).filter(s=>s.stats.below70).map(s=>({id:s.id,name:s.fullName,group:s.groupName,percentage:s.stats.percentage!,critical:s.stats.below50})),below50:data.below50,synthetic:realStudents===0,rows};
+  const details=sourceLessons.flatMap(l=>groups.filter(g=>l.roster.some(r=>r.groupId===g.id)).map(g=>{const c=emptyCounts();for(const r of l.roster.filter(r=>r.groupId===g.id)){const a=l.attendance.find(a=>a.studentId===r.studentId);if(a)c[a.statusCode]++;else c.unmarked++;}return {lessonId:l.id,groupId:g.id,group:g.name,teacher:l.teacher?teacherIdentity(l.teacher.displayName,l.teacher.position).name:'Не призначено',subject:l.subject.name,date:dayOf(l.startAt),time:timeLabel(l.startAt)+'–'+timeLabel(l.endAt),pair:l.pairNumber,onlineUrl:l.onlineUrl,stats:metrics(c)};}));
+  const teacher=scopedTeacherLabel(sourceLessons.map(l=>l.teacher));
+  const fingerprint=digest(JSON.stringify({kind,filters,faculty:faculty.name,rows,curators,details,teacher,synthetic:realStudents===0}));
+  const summary:ReportSummary={fingerprint,scope,curators,teacher,lessons:details,lessonCount:new Set(details.map(l=>l.lessonId)).size,incompleteLessons:new Set(details.filter(l=>l.stats.unmarked>0).map(l=>l.lessonId)).size,students:new Set(students.map(s=>s.id)).size,groups:groups.length,stats:data.stats,below70:studentTotals(students).filter(s=>s.stats.below70).map(s=>({id:s.id,name:s.fullName,group:s.groupName,percentage:s.stats.percentage!,critical:s.stats.below50})),below50:data.below50,synthetic:realStudents===0,rows};
   return {data,filters,faculty,summary};
 }
 

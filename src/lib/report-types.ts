@@ -1,12 +1,13 @@
 import type {Filters} from './filters';
 import type {metrics} from './metrics';
-export const reportKindLabels={DAILY:'Щоденне зведення',WEEKLY:'Тижневе зведення',MONTHLY:'Місячна атестація'} as const;
+export const reportKindLabels={DAILY:'Щоденне зведення',WEEKLY:'Тижневе зведення',MONTHLY:'Місячна атестація',SEMESTER:'Семестр',CUSTOM:'Довільний період'} as const;
 export type ReportKind=keyof typeof reportKindLabels;
-export type ReportFilters=Filters & {student?:string};
+export type ReportFilters=Filters & {student?:string;view?:'STUDENTS'|'LESSONS'};
 export type ReportSummary={
   lessons?:{lessonId:string;groupId:string;group:string;teacher:string;subject:string;date:string;time:string;pair:number;onlineUrl:string|null;stats:ReturnType<typeof metrics>}[];
   lessonCount?:number;
   incompleteLessons?:number;
+  teacher?:{name:string;position:string};
   fingerprint:string;
   curators?:{id:string;name:string;groupId:string;groupName:string}[];
   scope:string;

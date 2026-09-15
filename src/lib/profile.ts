@@ -3,7 +3,8 @@ import {z} from 'zod';
 import {db} from './db';
 import {hasRole,homeFor,principalSelect,type Principal} from './auth';
 import {HttpError} from './errors';
-export const positions={UNSPECIFIED:'Не вказано',ASSISTANT:'Асистент',SENIOR_LECTURER:'Старший викладач',DOCENT:'Доцент',PROFESSOR:'Професор'} as const;
+import {positions,teacherIdentity} from './teacher-identity';
+export {positions} from './teacher-identity';
 const schema=z.discriminatedUnion('action',[
   z.object({action:z.literal('PROFILE'),name:z.string().trim().min(2).max(200),position:z.enum(Object.keys(positions) as [keyof typeof positions,...(keyof typeof positions)[]])}).strict(),
   z.object({action:z.literal('PASSWORD'),currentPassword:z.string().min(1).max(128),newPassword:z.string().min(10).max(128)}).strict(),
@@ -29,9 +30,10 @@ export async function changeProfile(user:Principal,raw:unknown,tokenHash:string)
       destination=homeFor({...actor,mustChangePassword:false});
     }else if(p.action==='PROFILE'){
       if(!actor.roles.some(r=>['TEACHER','CURATOR','DEAN_OFFICE','ADMIN','DEVELOPER'].includes(r.roleId)))throw new HttpError(403,'Розширений профіль для цієї ролі недоступний.');
-      await tx.user.update({where:{id:user.id},data:{name:p.name,position:p.position}});
-      if(actor.teacher)await tx.teacher.update({where:{id:actor.teacher.id},data:{displayName:p.name,position:p.position}});
-      details={...details,before:{name:actor.name,position:actor.position},after:{name:p.name,position:p.position}};
+      const identity=teacherIdentity(p.name,p.position);
+      await tx.user.update({where:{id:user.id},data:{name:identity.name,position:p.position}});
+      if(actor.teacher)await tx.teacher.update({where:{id:actor.teacher.id},data:{displayName:identity.name,position:p.position}});
+      details={...details,before:{name:actor.name,position:actor.position},after:{name:identity.name,position:p.position}};
     }else if(p.action==='WORKSPACE'){
       if(!hasRole(actor,p.workspace)||p.workspace==='TEACHER'&&(!actor.teacher||actor.teacher.retiredAt))throw new HttpError(403,'Це робоче місце недоступне.');
       await tx.user.update({where:{id:user.id},data:{workspace:p.workspace}});destination=homeFor({...actor,workspace:p.workspace});

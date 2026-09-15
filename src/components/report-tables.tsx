@@ -1,0 +1,13 @@
+'use client';
+import {useState} from 'react';
+import Link from 'next/link';
+import {filterLink} from '@/lib/filters';
+import {teacherIdentity} from '@/lib/teacher-identity';
+import type {ReportFilters,ReportSummary} from '@/lib/report-types';
+import {Percentage,Empty} from './ui';
+export function ReportTables({summary,filters}:{summary:ReportSummary;filters:ReportFilters}){
+ const [view,setView]=useState(filters.view??'STUDENTS');
+ const rows=[...(summary.rows??[])].sort((a,b)=>(a.stats.percentage??Infinity)-(b.stats.percentage??Infinity)||a.fullName.localeCompare(b.fullName,'uk'));
+ const oneTeacher=new Set(summary.lessons?.map(l=>l.teacher)).size===1;
+ return <><div className="filter-section tabs" role="group" aria-label="Таблиця звіту">{(['STUDENTS','LESSONS'] as const).map(v=><button type="button" key={v} aria-pressed={view===v} onClick={()=>setView(v)}>{v==='STUDENTS'?'Студенти':'Пари'}</button>)}</div>{view==='STUDENTS'?(rows.length?<div className="table-scroll"><table><thead><tr>{['Студент / студентка','Група','Усього пар','PRESENT','N','HV','Не відмічено','Відвідуваність'].map(h=><th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{rows.map(s=><tr key={s.groupId+':'+s.id}><td><Link className="row-link" href={filterLink('/students/'+s.id,filters)}>{s.fullName}</Link></td><td>{s.groupName}</td><td>{s.stats.expected}</td><td>{s.stats.PRESENT}</td><td>{s.stats.N}</td><td>{s.stats.HV}</td><td>{s.stats.unmarked}</td><td><Percentage value={s.stats.percentage}/></td></tr>)}</tbody></table></div>:<Empty>{summary.students?'Звіт попередньої версії. Дані доступні у збережених файлах.':'За обраний період даних немає.'}</Empty>):(summary.lessons?.length?<div className="table-scroll"><table><thead><tr>{['Дата / пара','Дисципліна','Група','Склад','PRESENT','N','HV','Не відмічено','Відвідуваність','Онлайн'].map(h=><th scope="col" key={h}>{h}</th>)}</tr></thead><tbody>{summary.lessons.map(l=><tr key={l.lessonId+':'+l.groupId}><td><Link href={filterLink('/teacher/lessons/'+l.lessonId,filters)}>{l.date.split('-').reverse().join('.')} · {l.pair}<span className="table-secondary">{l.time}</span></Link></td><td>{l.subject}{!oneTeacher&&<span className="table-secondary">{teacherIdentity(l.teacher).name}</span>}</td><td>{l.group}</td><td>{l.stats.expected}</td><td>{l.stats.PRESENT}</td><td>{l.stats.N}</td><td>{l.stats.HV}</td><td>{l.stats.unmarked}</td><td><Percentage value={l.stats.percentage}/></td><td>{l.onlineUrl?<a href={l.onlineUrl} target="_blank" rel="noopener noreferrer">Відкрити ↗</a>:'—'}</td></tr>)}</tbody></table></div>:<Empty>Цей знімок не містить окремої таблиці пар.</Empty>)}</>;
+}

@@ -17,7 +17,7 @@ export function effectiveNow() {
 export function clockDescription(){
   const now=effectiveNow();
   const fixed=demoEnabled()&&Boolean(process.env.DEMO_DATE);
-  return `${fixed?'Фіксований демо-час':'Реальний час'}: ${now.toFormat('yyyy-MM-dd · HH:mm')} · ${ZONE}`;
+  return `${fixed?'Фіксований час TEST':'Реальний час'}: ${now.toFormat('yyyy-MM-dd · HH:mm')} · ${ZONE}`;
 }
 export function today() { return effectiveNow().toISODate()!; }
 export function atKyiv(date:string, time:string) { const result=DateTime.fromISO(`${date}T${time}`,{zone:ZONE});if(!result.isValid)throw new Error('Invalid Kyiv date');return result.toJSDate(); }

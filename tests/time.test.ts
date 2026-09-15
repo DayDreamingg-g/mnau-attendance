@@ -30,7 +30,7 @@ test('freezing clock requires both explicit demo flags and a valid date',()=>{
   withClock({APP_ENV:'demo',DEMO_MODE:'true',DEMO_DATE:'2026-09-07'},()=>{
     assert.equal(today(),'2026-09-07');
     assert.equal(effectiveNow().toFormat('HH:mm'),'21:00');
-    assert.equal(clockDescription(),'Фіксований демо-час: 2026-09-07 · 21:00 · Europe/Kyiv');
+    assert.equal(clockDescription(),'Фіксований час TEST: 2026-09-07 · 21:00 · Europe/Kyiv');
   });
   for(const env of [{APP_ENV:'demo',DEMO_MODE:'false',DEMO_DATE:'2026-09-07'},{DEMO_MODE:'true',DEMO_DATE:'2026-09-07'},{APP_ENV:'demo',DEMO_MODE:'true'}]){
     withClock(env,()=>{

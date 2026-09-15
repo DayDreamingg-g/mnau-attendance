@@ -5,7 +5,7 @@ import {parseFilters} from './filters';
 import {today,ZONE} from './time';
 import type {ReportKind,ReportFilters} from './report-types';
 export function parseReportKind(value:unknown):ReportKind {
-  if(value!=='DAILY'&&value!=='WEEKLY'&&value!=='MONTHLY')throw new HttpError(400,'Оберіть тип звіту.');
+  if(value!=='DAILY'&&value!=='WEEKLY'&&value!=='MONTHLY'&&value!=='SEMESTER'&&value!=='CUSTOM')throw new HttpError(400,'Оберіть тип звіту.');
   return value;
 }
 
@@ -15,13 +15,16 @@ export function reportBody(value:unknown):Record<string,unknown> {
 }
 
 export function reportPeriod(kind:ReportKind,body:Record<string,unknown>):ReportFilters{
+  if((kind==='SEMESTER'||kind==='CUSTOM')&&(!body.from||!body.to))throw new HttpError(400,'Оберіть період.');
+  if(kind==='SEMESTER'&&!body.term)throw new HttpError(400,'Оберіть семестр.');
+  if(body.view!==undefined&&body.view!=='STUDENTS'&&body.view!=='LESSONS')throw new HttpError(400,'Оберіть вид звіту.');
   const now=DateTime.fromISO(today(),{zone:ZONE});
   const period=kind==='MONTHLY'?now.minus({months:1}):kind==='WEEKLY'?now.minus({weeks:1}):now;
   const defaults=kind==='DAILY'?{from:today(),to:today()}:{from:period.startOf(kind==='WEEKLY'?'week':'month').toISODate()!,to:period.endOf(kind==='WEEKLY'?'week':'month').toISODate()!};
   const search:Record<string,string>={...defaults};
   for(const k of ['from','to','course','specialty','group','threshold','subject','term','scope'])if(body[k]!==undefined){if(typeof body[k]!=='string'&&typeof body[k]!=='number')throw new HttpError(400,'Некоректні фільтри звіту.');search[k]=String(body[k]);}
   if(body.student!==undefined&&(typeof body.student!=='string'||body.student.length>100))throw new HttpError(400,'Некоректний студент.');
-  return {...parseFilters(search),student:typeof body.student==='string'&&body.student?body.student:undefined};
+  return {...parseFilters(search),...(body.view?{view:body.view as 'STUDENTS'|'LESSONS'}:{}),student:typeof body.student==='string'&&body.student?body.student:undefined};
 }
 
 export async function readReportBody(request:Request):Promise<Record<string,unknown>> {

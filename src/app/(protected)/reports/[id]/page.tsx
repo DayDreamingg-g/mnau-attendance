@@ -1,13 +1,17 @@
+import Link from 'next/link';
+import {notFound} from 'next/navigation';
 import {assertSavedReportAccess} from '@/lib/report-access';
 import {parseFilters,filterLink,type Search} from '@/lib/filters';
-import {SortHeader} from '@/components/sort-header';
-import {sortRows} from '@/lib/sorting';
-import Link from 'next/link';
-import {reportKindLabels,type ReportKind,type ReportSummary,type ReportFilters} from '@/lib/report-types';
+import {reportTitle,readableRange} from '@/lib/report-presentation';
+import type {ReportSummary,ReportFilters} from '@/lib/report-types';
 import {ReportPreview} from '@/components/report-preview';
-import {notFound} from 'next/navigation';
 import {requireUser} from '@/lib/auth';
 import {reportScope} from '@/lib/access';
 import {db} from '@/lib/db';
-import {PageTitle,Panel,Empty,Percentage,Breadcrumbs,FormulaNote} from '@/components/ui';
-export default async function ReportPage({params,searchParams}:{params:Promise<{id:string}>;searchParams:Promise<Search>}){const u=await requireUser(),{id}=await params,f=parseFilters(await searchParams);const report=await db.report.findFirst({where:{AND:[{id},reportScope(u)]},select:{id:true,facultyId:true,kind:true,state:true,fromDate:true,toDate:true,error:true,summary:true,filters:true,faculty:{select:{name:true}}}});if(!report)notFound();await assertSavedReportAccess(u,report);const summary=report.summary as unknown as ReportSummary|null;const reportFilters={...(report.filters as ReportFilters),from:report.fromDate,to:report.toDate,sort:f.sort,order:f.order};return <><Breadcrumbs items={[{label:'Звіти',href:filterLink('/reports',f)},{label:'Деталі звіту'}]}/><PageTitle title={reportKindLabels[report.kind as ReportKind]??report.kind} description={`${report.faculty.name} · ${report.fromDate} → ${report.toDate}`}/>{summary&&<ReportPreview summary={summary} filters={reportFilters} path={`/reports/${id}`}/>}<div className="section-space"/>{report.state==='READY'?<div className="tabs"><a className="button primary" href={`/api/reports/${id}/pdf`}>Завантажити PDF</a><a className="button" href={`/api/reports/${id}/csv`}>Завантажити CSV</a><a className="button" href={`/api/reports/${id}/xlsx`}>Завантажити XLSX</a></div>:<p className="form-error">{report.state==='FAILED'?report.error:'Звіт формується. Оновіть сторінку пізніше.'}</p>}<Panel title={`Нижче 70% · ${summary?.below70.length??0}`}><p className="panel-description">З них нижче 50%: {summary?.below50??0}. Студентів у звіті: {summary?.students??0}.</p>{summary?.below70.length?<div className="table-scroll"><table><thead><tr><SortHeader label="ПІБ" sortKey="report_student" filters={f} path={`/reports/${id}`}/><SortHeader label="Група" sortKey="report_group" filters={f} path={`/reports/${id}`}/><SortHeader label="Показник" sortKey="report_percentage" filters={f} path={`/reports/${id}`}/></tr></thead><tbody>{sortRows(summary.below70,f,{report_student:s=>s.name,report_group:s=>s.group,report_percentage:s=>s.percentage}).map(s=><tr key={s.id}><td><Link className="row-link" href={filterLink(`/students/${s.id}`,reportFilters)}>{s.name}</Link></td><td>{s.group}</td><td><Percentage value={s.percentage}/></td></tr>)}</tbody></table></div>:<Empty/>}</Panel><FormulaNote/></>;}
+import {PageTitle,Breadcrumbs,FormulaNote} from '@/components/ui';
+export default async function ReportPage({params,searchParams}:{params:Promise<{id:string}>;searchParams:Promise<Search>}){
+ const u=await requireUser(),{id}=await params,f=parseFilters(await searchParams);
+ const report=await db.report.findFirst({where:{AND:[{id},reportScope(u)]},select:{id:true,facultyId:true,kind:true,state:true,fromDate:true,toDate:true,error:true,summary:true,filters:true,faculty:{select:{name:true}}}});if(!report)notFound();await assertSavedReportAccess(u,report);
+ const summary=report.summary as unknown as ReportSummary|null,reportFilters={...(report.filters as ReportFilters),from:report.fromDate,to:report.toDate};
+ return <><Breadcrumbs items={[{label:'Звіти',href:filterLink('/reports',f)},{label:'Деталі звіту'}]}/><PageTitle eyebrow="ЗБЕРЕЖЕНИЙ ЗВІТ" title={reportTitle(report.kind,reportFilters)} description={report.faculty.name+' · '+readableRange(report.fromDate,report.toDate)} action={report.state==='READY'&&<div className="report-actions"><a className="button primary" href={'/api/reports/'+id+'/pdf'}>PDF</a><a className="button" href={'/api/reports/'+id+'/csv'}>CSV</a><a className="button" href={'/api/reports/'+id+'/xlsx'}>XLSX</a></div>}/>{summary&&<ReportPreview summary={summary} filters={reportFilters}/>} {report.state!=='READY'&&<p className="form-error">{report.state==='FAILED'?report.error:'Звіт формується. Оновіть сторінку пізніше.'}</p>}<Link className="text-link" href="/reports">← До списку звітів</Link><FormulaNote/></>;
+}
