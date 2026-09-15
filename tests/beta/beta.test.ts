@@ -1,7 +1,8 @@
 import {betaCalendarScope} from '../../src/lib/beta-calendar';
 import test,{before,after} from 'node:test';
 import assert from 'node:assert/strict';
-import {randomUUID} from 'node:crypto';
+import {randomUUID,createHash} from 'node:crypto';
+import {readFile} from 'node:fs/promises';
 import {spawnSync} from 'node:child_process';
 import {db} from '../../src/lib/db';
 import {prepareCSBeta} from '../../scripts/prepare-cs-beta';
@@ -24,6 +25,19 @@ let admin:Principal,curator:Principal,starosta:Principal,developer:Principal,dea
 let summary:Awaited<ReturnType<typeof prepareCSBeta>>,ongoing:string,past:string,future:string,studentId:string;
 let otherCounts:{students:number;lessons:number};
 const marks=(version:number,id:string,mode='CONFIRM',why?:string)=>({version,requestId:randomUUID(),mode,reason:why,rows:[{studentId:id,status:'PRESENT'}]});
+test('source PDF and DOCX bytes require authentication and stay outside public routes',async()=>{
+  const content=await readFile('source-data/cs-beta/Списки груп (2).docx');
+  const sha256=createHash('sha256').update(content).digest('hex');
+  const docx=await db.sourceAsset.upsert({where:{sha256},update:{},create:{id:randomUUID(),fileName:'fixture.docx',mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',sha256,content,groupIds:['g-1-4']}});
+  const pdf=await db.sourceRecord.findFirstOrThrow({where:{file:'1-kurs (1).pdf',lessons:{some:{}}}});
+  const token=await login(developer.email,'Test1234!');
+  for(const [id,mime] of [[docx.id,'application/vnd.openxmlformats-officedocument.wordprocessingml.document'],[pdf.id,'application/pdf']]){
+    const anonymous=await fetch(base+'/api/sources/'+id);assert.equal(anonymous.status,401);
+    const allowed=await fetch(base+'/api/sources/'+id,{headers:{cookie:'mnau_session='+token}});assert.equal(allowed.status,200);assert.equal(allowed.headers.get('content-type'),mime);assert.match(allowed.headers.get('cache-control')??'',/private.*no-store/);
+    const bytes=Buffer.from(await allowed.arrayBuffer());if(id===docx.id)assert.deepEqual(bytes,content);else assert.equal(bytes.subarray(0,5).toString(),'%PDF-');
+  }
+  for(const path of ['/source-data/cs-beta/1-kurs%20(1).pdf','/source-data/cs-beta/'+encodeURIComponent('Списки груп (2).docx')])assert.equal((await fetch(base+path)).status,404);
+});
 before(async()=>{
   otherCounts={students:await db.student.count({where:{groupId:{notIn:[...CS_GROUP_IDS]}}}),lessons:await db.lesson.count()};
   summary=await prepareCSBeta();
