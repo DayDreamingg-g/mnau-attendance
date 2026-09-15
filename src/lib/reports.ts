@@ -12,7 +12,7 @@ import {analytics,type Analytics} from './analytics';
 import {requireReportFaculty,groupScope,lessonScope,rosterScope} from './access';
 import type {Principal} from './auth';
 import {HttpError} from './errors';
-import {metrics,sumCounts,emptyCounts,studentTotals} from './metrics';
+import {countAttendance,metrics,sumCounts,emptyCounts,studentTotals} from './metrics';
 import {type ReportFilters,type ReportKind,type ReportSummary} from './report-types';
 import type {Prisma} from '../generated/prisma/client';
 export {csvEscape} from './report-files';
@@ -44,9 +44,9 @@ async function reportSnapshot(user:Principal,facultyId:string,f:ReportFilters,ki
   const scope=[faculty.name,filters.specialty?all.specialties.find(s=>s.id===filters.specialty)?.name:undefined,filters.group?all.groups.find(g=>g.id===filters.group)?.name:undefined,filters.student?all.students.find(s=>s.id===filters.student)?.fullName:undefined,filters.threshold?`Нижче ${filters.threshold}%`:undefined].filter(Boolean).join(' · ');
   // Include document labels and every exported cell, so renamed profiles cannot reuse stale files.
   const sourceLessons=await client.lesson.findMany({where:{AND:[await betaCalendarScope(client),await termScope(user,filters.term,client),lessonScope(user),{startAt:range(filters),endAt:{lte:effectiveNow().toJSDate()},cancelled:false,subjectId:filters.subject,groups:{some:{groupId:{in:groups.map(g=>g.id)}}}}]},include:{teacher:true,subject:true,roster:{where:{AND:[rosterScope(user),{studentId:{in:[...studentIds]},groupId:{in:groups.map(g=>g.id)}}]}},attendance:true},orderBy:{startAt:'asc'}});
-  const details=sourceLessons.flatMap(l=>groups.filter(g=>l.roster.some(r=>r.groupId===g.id)).map(g=>{const c=emptyCounts();for(const r of l.roster.filter(r=>r.groupId===g.id)){const a=l.attendance.find(a=>a.studentId===r.studentId);if(a)c[a.statusCode]++;else c.unmarked++;}return {lessonId:l.id,groupId:g.id,group:g.name,teacher:l.teacher?teacherIdentity(l.teacher.displayName,l.teacher.position).name:'Не призначено',subject:l.subject.name,date:dayOf(l.startAt),time:timeLabel(l.startAt)+'–'+timeLabel(l.endAt),pair:l.pairNumber,onlineUrl:l.onlineUrl,stats:metrics(c)};}));
+  const details=sourceLessons.flatMap(l=>groups.filter(g=>l.roster.some(r=>r.groupId===g.id)).map(g=>{const c=emptyCounts();for(const r of l.roster.filter(r=>r.groupId===g.id)){const a=l.attendance.find(a=>a.studentId===r.studentId);countAttendance(c,a??null);}return {lessonId:l.id,groupId:g.id,group:g.name,teacher:l.teacher?teacherIdentity(l.teacher.displayName,l.teacher.position).name:'Не призначено',subject:l.subject.name,date:dayOf(l.startAt),time:timeLabel(l.startAt)+'–'+timeLabel(l.endAt),pair:l.pairNumber,onlineUrl:l.onlineUrl,stats:metrics(c)};}));
   const teacher=scopedTeacherLabel(sourceLessons.map(l=>l.teacher));
-  const fingerprint=digest(JSON.stringify({kind,filters,faculty:faculty.name,rows,curators,details,teacher,synthetic:realStudents===0}));
+  const fingerprint=digest(JSON.stringify({formatVersion:2,kind,filters,faculty:faculty.name,rows,curators,details,teacher,synthetic:realStudents===0}));
   const summary:ReportSummary={fingerprint,scope,curators,teacher,lessons:details,lessonCount:new Set(details.map(l=>l.lessonId)).size,incompleteLessons:new Set(details.filter(l=>l.stats.unmarked>0).map(l=>l.lessonId)).size,students:new Set(students.map(s=>s.id)).size,groups:groups.length,stats:data.stats,below70:studentTotals(students).filter(s=>s.stats.below70).map(s=>({id:s.id,name:s.fullName,group:s.groupName,percentage:s.stats.percentage!,critical:s.stats.below50})),below50:data.below50,synthetic:realStudents===0,rows};
   return {data,filters,faculty,summary};
 }

@@ -6,3 +6,20 @@
 .stack>.status{justify-self:start}.beta-scope{margin-bottom:0}.button.danger{color:var(--red);border-color:color-mix(in srgb,var(--red) 40%,var(--border))}.wizard-footer{position:sticky;bottom:-24px;background:var(--surface);padding:16px 0 0}.app-dialog .admin-form{grid-template-columns:1fr}
 
 .topbar{position:sticky;top:0;z-index:30}
+.mode-control{position:relative;display:inline-flex}
+.mode-tooltip{display:none;position:absolute;z-index:10;top:100%;right:0;padding:6px 9px;border-radius:5px;background:var(--text);color:var(--bg);font-size:12px;white-space:nowrap;pointer-events:none}
+.mode-control:hover .mode-tooltip,.mode-control:focus-within .mode-tooltip{display:block}
+.attendance-mode button.selected{color:var(--accent);background:var(--accent-soft);border-color:var(--accent)}
+.attendance-mode button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.attendance-mode button:disabled{opacity:.5;cursor:not-allowed}
+.report-data-table{white-space:normal;font-variant-numeric:tabular-nums}
+.report-data-table th,.report-data-table td{padding:12px 10px}
+.report-data-table th{font-size:11px}
+.report-data-table td:first-child{min-width:160px}
+.report-data-table .report-subject{min-width:150px}
+.report-summary{gap:8px;padding-bottom:12px}
+.report-summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;margin:4px 0}
+.report-view-tabs{padding:12px 24px}
+.report-summary-grid>div{padding:12px;border:1px solid var(--border);border-radius:8px;background:var(--surface-alt)}
+.report-summary-grid dt{font-size:12px;color:var(--muted);margin-bottom:6px}
+.report-summary-grid dd{margin:0;font-size:20px;font-weight:600;font-variant-numeric:tabular-nums}

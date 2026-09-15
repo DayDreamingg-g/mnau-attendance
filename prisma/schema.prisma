@@ -19,6 +19,10 @@ enum StatusCode {
   N
   HV
 }
+enum AttendanceMode {
+  ONLINE
+  OFFLINE
+}
 enum JournalState {
   EMPTY
   DRAFT
@@ -284,6 +288,7 @@ model Attendance {
   studentId String
   lessonId String
   statusCode StatusCode
+  attendanceMode AttendanceMode?
   confirmed Boolean @default(false)
   isDemo Boolean @default(false)
   source String @default("MANUAL")

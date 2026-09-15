@@ -3,7 +3,7 @@ import {betaCalendarScope} from './beta-calendar';
 import {db} from './db';
 import type {Principal} from './auth';
 import {groupScope,lessonScope,rosterScope,lessonGroupScope} from './access';
-import {emptyCounts,metrics,sumCounts,studentTotals} from './metrics';
+import {countAttendance,emptyCounts,metrics,sumCounts,studentTotals} from './metrics';
 import {range,type Filters} from './filters';
 import {effectiveNow} from './time';
 import type {Prisma} from '../generated/prisma/client';
@@ -13,7 +13,10 @@ export async function analytics(user:Principal,f:Filters,client:Prisma.Transacti
   const currentGroups=await client.group.findMany({where:groupWhere,include:{specialty:{include:{faculty:true}},students:{where:{active:true},select:{id:true,fullName:true,groupId:true},orderBy:{fullName:'asc'}}},orderBy:[{course:'asc'},{name:'asc'}]});
   const ids=currentGroups.map(g=>g.id);
   const lessonWhere:Prisma.LessonWhereInput={AND:[await betaCalendarScope(client),await termScope(user,f.term,client),lessonScope(user),{groups:{some:{AND:[{groupId:{in:ids}},lessonGroupScope(user)]}},startAt:range(f),endAt:{lte:effectiveNow().toJSDate()},cancelled:false,subjectId:f.subject}]};
-  const lessons=await client.lesson.findMany({where:lessonWhere,select:{id:true,groups:{where:lessonGroupScope(user),select:{groupId:true}},roster:{where:{AND:[{groupId:{in:ids}},rosterScope(user)]},select:{studentId:true,groupId:true,student:{select:{fullName:true}},attendance:{select:{statusCode:true,confirmed:true}}}}}});
+  const scopedRoster:Prisma.LessonStudentWhereInput={AND:[{groupId:{in:ids}},rosterScope(user)]};
+  // Load marks by lesson, avoiding a large composite-key lookup for every roster row.
+  // Apply the same roster scope to both reads before matching student IDs in memory.
+  const lessons=await client.lesson.findMany({where:lessonWhere,select:{id:true,groups:{where:lessonGroupScope(user),select:{groupId:true}},roster:{where:scopedRoster,select:{studentId:true,groupId:true,student:{select:{fullName:true}}}},attendance:{where:{roster:scopedRoster},select:{studentId:true,statusCode:true,attendanceMode:true}}}});
   // A transfer or archive changes current membership, never the group attributed to old marks.
   const groups=currentGroups.map(g=>{
     const members=new Map(g.students.map(s=>[s.id,s]));
@@ -22,9 +25,12 @@ export async function analytics(user:Principal,f:Filters,client:Prisma.Transacti
   });
   const key=(groupId:string,id:string)=>groupId+':'+id;
   const countMap=new Map(groups.flatMap(g=>g.students.map(s=>[key(g.id,s.id),emptyCounts()] as const)));
-  for(const lesson of lessons)for(const r of lesson.roster){
-    const c=countMap.get(key(r.groupId??'',r.studentId));if(!c)continue;
-    if(!r.attendance)c.unmarked++;else c[r.attendance.statusCode]++;
+  for(const lesson of lessons){
+    const marks=new Map(lesson.attendance.map(a=>[a.studentId,a]));
+    for(const r of lesson.roster){
+      const c=countMap.get(key(r.groupId??'',r.studentId));if(!c)continue;
+      countAttendance(c,marks.get(r.studentId)??null);
+    }
   }
   const students=groups.flatMap(g=>g.students.map(s=>({...s,groupName:g.name,course:g.course,specialtyId:g.specialtyId,specialtyName:g.specialty.name,facultyId:g.specialty.facultyId,stats:metrics(countMap.get(key(g.id,s.id))!)})));
   const enrichedGroups=groups.map(g=>({...g,lessonCount:lessons.filter(l=>l.groups.some(lg=>lg.groupId===g.id)).length,stats:metrics(sumCounts(g.students.map(s=>countMap.get(key(g.id,s.id))!)))}));
