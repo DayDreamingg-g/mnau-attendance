@@ -59,7 +59,8 @@ model User {
   auditLogs    AuditLog[]
   submissions  JournalSubmission[]
   reports      Report[]
-  feedback Feedback[]
+  feedback Feedback[] @relation("FeedbackAuthor")
+  deletedFeedback Feedback[] @relation("FeedbackDeletedBy")
 }
 model UserRole {
   userId String
@@ -437,7 +438,11 @@ model Feedback {
   state String @default("NEW")
   createdAt DateTime @default(now()) @db.Timestamptz(3)
   updatedAt DateTime @updatedAt @db.Timestamptz(3)
-  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  deletedAt DateTime? @db.Timestamptz(3)
+  deletedById String?
+  deleteReason String?
+  user User @relation("FeedbackAuthor", fields: [userId], references: [id], onDelete: Restrict)
+  deletedBy User? @relation("FeedbackDeletedBy", fields: [deletedById], references: [id], onDelete: Restrict)
   @@index([state, createdAt])
   @@index([createdAt])
 }

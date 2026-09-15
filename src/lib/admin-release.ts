@@ -12,6 +12,7 @@ const input=z.discriminatedUnion('action',[
  z.object({action:z.literal('RETIRE_TEACHER'),teacherId:z.string().max(100),confirm:z.literal(true),expectedFuture:z.number().int().min(0),reason}).strict(),
  z.object({action:z.literal('SELF_ROLES'),roles:z.array(z.enum(['TEACHER','CURATOR','DEAN_OFFICE','STAROSTA','ADMIN','DEVELOPER'])).min(1).max(6),confirm:z.literal(true),reason}).strict(),
  z.object({action:z.literal('RESET_COOLDOWN'),key:z.string().max(150),reason}).strict(),
+ z.object({action:z.literal('FEEDBACK_DELETE'),id:z.string().min(1).max(100),confirm:z.literal(true),reason}).strict(),
  z.object({action:z.literal('FEEDBACK_STATE'),id:z.string().max(100),state:z.enum(['NEW','IN_PROGRESS','RESOLVED']),reason:reason.optional()}).strict(),
  z.object({action:z.enum(['ASSIGN_SUBJECT','REMOVE_SUBJECT','ASSIGN_TEACHING_GROUP','REMOVE_TEACHING_GROUP']),teacherId:z.string().max(100),target:z.string().max(100),reason}).strict(),
 ]);
@@ -45,8 +46,18 @@ export async function adminRelease(user:Principal,raw:unknown){requireAdmin(user
   }else if(p.action==='RESET_COOLDOWN'){
    const before=await tx.loginBucket.findUnique({where:{key:p.key}});if(!before)throw new HttpError(404,'Обмеження не знайдено.');
    await tx.loginBucket.update({where:{key:p.key},data:{attempts:0,strikes:0,blockedUntil:null,resetAt:new Date()}});objectId=p.key;details={...p,before:{attempts:before.attempts,strikes:before.strikes,blockedUntil:before.blockedUntil?.toISOString()}};
-  }else if(p.action==='FEEDBACK_STATE'){
-   const before=await tx.feedback.findUniqueOrThrow({where:{id:p.id}});await tx.feedback.update({where:{id:p.id},data:{state:p.state}});objectId=p.id;details={...p,before:before.state};
+  }else if(p.action==='FEEDBACK_STATE'||p.action==='FEEDBACK_DELETE'){
+   const before=await tx.feedback.findUnique({where:{id:p.id}});
+   if(!before)throw new HttpError(404,'Відгук не знайдено.');
+   if(before.deletedAt)throw new HttpError(409,'Відгук уже видалено.');
+   objectId=p.id;
+   if(p.action==='FEEDBACK_DELETE'){
+    const deletedAt=new Date();
+    await tx.feedback.update({where:{id:p.id},data:{deletedAt,deletedById:actor.id,deleteReason:p.reason}});
+    details={...p,before:before.state,deletedAt:deletedAt.toISOString(),deletedById:actor.id};
+   }else{
+    await tx.feedback.update({where:{id:p.id},data:{state:p.state}});details={...p,before:before.state};
+   }
   }else{
    const teacher=await tx.teacher.findUnique({where:{id:p.teacherId}});if(!teacher||teacher.retiredAt)throw new HttpError(404,'Викладача не знайдено.');objectId=teacher.id;
    if(p.action==='ASSIGN_SUBJECT')await tx.teacherSubject.upsert({where:{teacherId_subjectId:{teacherId:teacher.id,subjectId:p.target}},create:{teacherId:teacher.id,subjectId:p.target},update:{}});
@@ -54,7 +65,7 @@ export async function adminRelease(user:Principal,raw:unknown){requireAdmin(user
    if(p.action==='ASSIGN_TEACHING_GROUP')await tx.teacherGroup.upsert({where:{teacherId_groupId:{teacherId:teacher.id,groupId:p.target}},create:{teacherId:teacher.id,groupId:p.target},update:{}});
    if(p.action==='REMOVE_TEACHING_GROUP')await tx.teacherGroup.deleteMany({where:{teacherId:teacher.id,groupId:p.target}});
   }
-  await tx.auditLog.create({data:{actorId:actor.id,objectType:p.action==='FEEDBACK_STATE'?'Feedback':p.action==='RESET_COOLDOWN'?'LoginBucket':'Administration',objectId,source:'ADMIN_'+p.action,reason:p.reason,details:JSON.parse(JSON.stringify(details))}});
+  await tx.auditLog.create({data:{actorId:actor.id,objectType:p.action.startsWith('FEEDBACK_')?'Feedback':p.action==='RESET_COOLDOWN'?'LoginBucket':'Administration',objectId,source:'ADMIN_'+p.action,reason:p.reason,details:JSON.parse(JSON.stringify(details))}});
   return {ok:true,...(password?{password}:{})};
  },{timeout:15000});
 }
