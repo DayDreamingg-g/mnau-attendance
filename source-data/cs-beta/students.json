@@ -3,754 +3,2338 @@
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Авраменко Олег Станіславович",
+    "legacy": {
+      "index": 0,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Авраменко Олег Станіславович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Авраменко Олег Станіславович",
+      "paragraph": 3,
+      "groupRow": 1,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Гайдаш Олександр Миколайович",
+    "legacy": {
+      "index": 1,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Гайдаш Олександр Миколайович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Гайдаш Олександр Миколайович ",
+      "paragraph": 4,
+      "groupRow": 2,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Жанкова Віра Сергіївна",
+    "legacy": {
+      "index": 2,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Жанкова Віра Сергіївна"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Жанкова Віра Сергіївна",
+      "paragraph": 5,
+      "groupRow": 3,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Калініченко Владислав Олександрович",
+    "legacy": {
+      "index": 3,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Калініченко Владислав Олександрович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Калініченко Владислав Олександрович",
+      "paragraph": 6,
+      "groupRow": 4,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Колпак Єгор Олександрович",
+    "legacy": {
+      "index": 4,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Колпак Єгор Олександрович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Колпак Єгор Олександрович",
+      "paragraph": 7,
+      "groupRow": 5,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Курбан Михайло Юрійович",
+    "legacy": {
+      "index": 5,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Курбан Михайло Юрійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Курбан Михайло Юрійович",
+      "paragraph": 8,
+      "groupRow": 6,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Кучер Андрій Іванович",
+    "legacy": {
+      "index": 6,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Кучер Андрій Іванович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Кучер Андрій Іванович",
+      "paragraph": 9,
+      "groupRow": 7,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Мацола Антон Петрович",
+    "legacy": {
+      "index": 7,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Мацола Антон Петрович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Мацола Антон Петрович",
+      "paragraph": 10,
+      "groupRow": 8,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Мурза Іван Вадимович",
+    "legacy": {
+      "index": 8,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Мурза Іван Вадимович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Мурза Іван Вадимович",
+      "paragraph": 11,
+      "groupRow": 9,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Павлюк Євген Валерійович",
+    "legacy": {
+      "index": 9,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Павлюк Євген Валерійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Павлюк Євген Валерійович",
+      "paragraph": 12,
+      "groupRow": 10,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Пермінов Артем Ігорович",
+    "legacy": {
+      "index": 10,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Пермінов Артем Ігорович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Пермінов Артем Ігорович",
+      "paragraph": 13,
+      "groupRow": 11,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Петренко Олександр Олександрович",
+    "legacy": {
+      "index": 11,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Петренко Олександр Олександрович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Петренко Олександр Олександрович",
+      "paragraph": 14,
+      "groupRow": 12,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Петренко Софія Геннадіївна",
+    "legacy": {
+      "index": 12,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Петренко Софія Геннадіївна"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Петренко Софія Геннадіївна",
+      "paragraph": 15,
+      "groupRow": 13,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Проскуряков Нікіта Ігорович",
+    "legacy": {
+      "index": 13,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Проскуряков Нікіта Ігорович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Проскуряков Нікіта Ігорович",
+      "paragraph": 16,
+      "groupRow": 14,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Себро Святослав Сергійович",
+    "legacy": {
+      "index": 14,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Себро Святослав Сергійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Себро Святослав Сергійович",
+      "paragraph": 17,
+      "groupRow": 15,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Ткач Діана Романівна",
+    "legacy": {
+      "index": 15,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Ткач Діана Романівна"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Ткач Діана Романівна",
+      "paragraph": 18,
+      "groupRow": 16,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 1/1",
     "groupId": "g-1-4",
     "fullName": "Чернявський Олег Валерійович",
+    "legacy": {
+      "index": 16,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-1-4",
+      "fullName": "Чернявський Олег Валерійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
       "page": 1,
       "rawName": "Чернявський Олег Валерійович",
+      "paragraph": 19,
+      "groupRow": 17,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Бавицький Андрій Олегович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Бавицький Андрій Олегович",
+      "paragraph": 24,
+      "groupRow": 1,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Безруков Владислав Андрійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Безруков Владислав Андрійович",
+      "paragraph": 25,
+      "groupRow": 2,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Бодюл Едуард Сергійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Бодюл Едуард Сергійович ",
+      "paragraph": 26,
+      "groupRow": 3,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Брижак Арсен Олександрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Брижак Арсен Олександрович",
+      "paragraph": 27,
+      "groupRow": 4,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Вишневський Данило Дмитрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Вишневський Данило Дмитрович ",
+      "paragraph": 28,
+      "groupRow": 5,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Вівтюк Георгій Ігорович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Вівтюк Георгій Ігорович ",
+      "paragraph": 29,
+      "groupRow": 6,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Герук Вікторія Сергіївна",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Герук Вікторія Сергіївна ",
+      "paragraph": 30,
+      "groupRow": 7,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Горобець Владислав Вячеславович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Горобець Владислав Вячеславович",
+      "paragraph": 31,
+      "groupRow": 8,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Жирнов Костянтин Артемович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Жирнов Костянтин Артемович ",
+      "paragraph": 32,
+      "groupRow": 9,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Ключко Владислав Олександрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Ключко Владислав Олександрович ",
+      "paragraph": 33,
+      "groupRow": 10,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Корольов Андрій Віталійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Корольов Андрій Віталійович ",
+      "paragraph": 34,
+      "groupRow": 11,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Крохін Дмитро Павлович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Крохін Дмитро Павлович ",
+      "paragraph": 35,
+      "groupRow": 12,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Курашвілі Андрій Бесаріонович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Курашвілі Андрій Бесаріонович ",
+      "paragraph": 36,
+      "groupRow": 13,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Литвинюк Катерина Євгеніївна",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Литвинюк Катерина Євгеніївна ",
+      "paragraph": 37,
+      "groupRow": 14,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Мак Андрій Андрійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Мак Андрій Андрійович",
+      "paragraph": 38,
+      "groupRow": 15,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Пасічник Антон Юрійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Пасічник Антон Юрійович",
+      "paragraph": 39,
+      "groupRow": 16,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Пушкар Михайло Олександрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Пушкар Михайло Олександрович ",
+      "paragraph": 40,
+      "groupRow": 17,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Романюк Єгор Олександрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Романюк Єгор Олександрович ",
+      "paragraph": 41,
+      "groupRow": 18,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Рудоман Архип Дмитрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Рудоман Архип Дмитрович ",
+      "paragraph": 42,
+      "groupRow": 19,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Сидоренко Роман Олександрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Сидоренко Роман Олександрович ",
+      "paragraph": 43,
+      "groupRow": 20,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Слободенюк Артем Юрійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Слободенюк Артем Юрійович ",
+      "paragraph": 44,
+      "groupRow": 21,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Сорочан Артем Ігорович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Сорочан Артем Ігорович ",
+      "paragraph": 45,
+      "groupRow": 22,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Сухінін Богдан Васильович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Сухінін Богдан Васильович ",
+      "paragraph": 46,
+      "groupRow": 23,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Ткаченко Віктор Геннадійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Ткаченко Віктор Геннадійович ",
+      "paragraph": 47,
+      "groupRow": 24,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Урсу Денис Олександрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Урсу Денис Олександрович ",
+      "paragraph": 48,
+      "groupRow": 25,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Хмельницький Нікіта Сергійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Хмельницький Нікіта Сергійович ",
+      "paragraph": 49,
+      "groupRow": 26,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Чернишова Маргарита Євгенівна",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Чернишова Маргарита Євгенівна",
+      "paragraph": 50,
+      "groupRow": 27,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Чумак Анна Дмитрівна",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Чумак Анна Дмитрівна",
+      "paragraph": 51,
+      "groupRow": 28,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Шпилюк Анна Василівна",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Шпилюк Анна Василівна ",
+      "paragraph": 52,
+      "groupRow": 29,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 2/1",
+    "groupId": "g-2-4",
+    "fullName": "Яник Олександр Олександрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 2,
+      "rawName": "Яник Олександр Олександрович",
+      "paragraph": 53,
+      "groupRow": 30,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Абдулін Андрій Вікторович",
+    "legacy": {
+      "index": 17,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Абдулін Андрій Вікторович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Абдулін Андрій Вікторович",
+      "paragraph": 57,
+      "groupRow": 1,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Бережний Михайло Валерійович",
+    "legacy": {
+      "index": 18,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Бережний Михайло Валерійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Бережний Михайло Валерійович",
+      "paragraph": 58,
+      "groupRow": 2,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Гришин Артем Олександрович",
+    "legacy": {
+      "index": 19,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Гришин Артем Олександрович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Гришин Артем Олександрович",
+      "paragraph": 59,
+      "groupRow": 3,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Данильченко Денис В`ячеславович",
+    "legacy": {
+      "index": 20,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Данильченко Денис В`ячеславович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Данильченко Денис В`ячеславович",
+      "paragraph": 60,
+      "groupRow": 4,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Заїкин Євгеній Олексійович",
+    "legacy": {
+      "index": 21,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Заїкин Євгеній Олексійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Заїкин Євгеній Олексійович",
+      "paragraph": 61,
+      "groupRow": 5,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Зайцев Дмитро Анатолійович",
+    "legacy": {
+      "index": 22,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Зайцев Дмитро Анатолійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Зайцев Дмитро Анатолійович",
+      "paragraph": 62,
+      "groupRow": 6,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Казаковцев Євген Вадимович",
+    "legacy": {
+      "index": 23,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Казаковцев Євген Вадимович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Казаковцев Євген Вадимович",
+      "paragraph": 63,
+      "groupRow": 7,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Кислякова Юлія Сергіївна",
+    "legacy": {
+      "index": 24,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Кислякова Юлія Сергіївна"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Кислякова Юлія Сергіївна",
+      "paragraph": 64,
+      "groupRow": 8,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Корева Діана Сергіївна",
+    "legacy": {
+      "index": 25,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Корева Діана Сергіївна"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Корева Діана Сергіївна",
+      "paragraph": 65,
+      "groupRow": 9,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Короленко Антон Андрійович",
+    "legacy": {
+      "index": 26,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Короленко Антон Андрійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Короленко Антон Андрійович",
+      "paragraph": 66,
+      "groupRow": 10,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Кривель Олег Володимирович",
+    "legacy": {
+      "index": 27,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Кривель Олег Володимирович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Кривель Олег Володимирович ",
+      "paragraph": 67,
+      "groupRow": 11,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Куліковська Альона Юріївна",
+    "legacy": {
+      "index": 28,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Куліковська Альона Юріївна"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Куліковська Альона Юріївна",
+      "paragraph": 68,
+      "groupRow": 12,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Лебідь Максим Олександрович",
+    "legacy": {
+      "index": 29,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Лебідь Максим Олександрович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Лебідь Максим Олександрович",
+      "paragraph": 69,
+      "groupRow": 13,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Лобас Богдан Віталійович",
+    "legacy": {
+      "index": 30,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Лобас Богдан Віталійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Лобас Богдан Віталійович",
+      "paragraph": 70,
+      "groupRow": 14,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Ломпас Олександр Ігоревич",
+    "legacy": {
+      "index": 31,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Ломпас Олександр Ігоревич"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Ломпас Олександр Ігоревич",
+      "paragraph": 71,
+      "groupRow": 15,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Піскун Анастасія Юріївна",
+    "legacy": {
+      "index": 32,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Піскун Анастасія Юріївна"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Піскун Анастасія Юріївна",
+      "paragraph": 72,
+      "groupRow": 16,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Рагулін Роман Дмитрович",
+    "legacy": {
+      "index": 33,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Рагулін Роман Дмитрович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Рагулін Роман Дмитрович",
+      "paragraph": 73,
+      "groupRow": 17,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Селютіна Анна Андріївна",
+    "legacy": {
+      "index": 34,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Селютіна Анна Андріївна"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Селютіна Анна Андріївна",
+      "paragraph": 74,
+      "groupRow": 18,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Татарчук Іван Сергійович",
+    "legacy": {
+      "index": 35,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Татарчук Іван Сергійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Татарчук Іван Сергійович",
+      "paragraph": 75,
+      "groupRow": 19,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/1",
     "groupId": "g-3-4",
     "fullName": "Штикер Міхаіл Андрійович",
+    "legacy": {
+      "index": 36,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-4",
+      "fullName": "Штикер Міхаіл Андрійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 2,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 3,
       "rawName": "Штикер Міхаіл Андрійович",
+      "paragraph": 76,
+      "groupRow": 20,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Бондар Ренат Романович",
+    "legacy": {
+      "index": 37,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Бондар Ренат Романович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Бондар Ренат Романович",
+      "paragraph": 81,
+      "groupRow": 1,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Боричевський Максим Олексійович",
+    "legacy": {
+      "index": 38,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Боричевський Максим Олексійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Боричевський Максим Олексійович",
+      "paragraph": 82,
+      "groupRow": 2,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Волохова Злата Романівна",
+    "legacy": {
+      "index": 39,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Волохова Злата Романівна"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Волохова Злата Романівна",
+      "paragraph": 83,
+      "groupRow": 3,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Гончарик Владислав Сергійович",
+    "legacy": {
+      "index": 40,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Гончарик Владислав Сергійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Гончарик Владислав Сергійович",
+      "paragraph": 84,
+      "groupRow": 4,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Гребенюк Іван Васильович",
+    "legacy": {
+      "index": 41,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Гребенюк Іван Васильович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Гребенюк Іван Васильович",
+      "paragraph": 85,
+      "groupRow": 5,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Заграничний Владислав Олексійович",
+    "legacy": {
+      "index": 42,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Заграничний Владислав Олексійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Заграничний Владислав Олексійович",
+      "paragraph": 86,
+      "groupRow": 6,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Капріян Богдан Ярославович",
+    "legacy": {
+      "index": 43,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Капріян Богдан Ярославович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Капріян Богдан Ярославович",
+      "paragraph": 87,
+      "groupRow": 7,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Кім Віолетта Володимирівна",
+    "legacy": {
+      "index": 44,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Кім Віолетта Володимирівна"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Кім Віолетта Володимирівна",
+      "paragraph": 88,
+      "groupRow": 8,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Кравчук Максим Денисович",
+    "legacy": {
+      "index": 45,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Кравчук Максим Денисович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Кравчук Максим Денисович",
+      "paragraph": 89,
+      "groupRow": 9,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Крупа Владислав Вадимович",
+    "legacy": {
+      "index": 46,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Крупа Владислав Вадимович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Крупа Владислав Вадимович",
+      "paragraph": 90,
+      "groupRow": 10,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Курилов Артем Денисович",
+    "legacy": {
+      "index": 47,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Курилов Артем Денисович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Курилов Артем Денисович",
+      "paragraph": 91,
+      "groupRow": 11,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Лівий Назар Русланович",
+    "legacy": {
+      "index": 48,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Лівий Назар Русланович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Лівий Назар Русланович",
+      "paragraph": 92,
+      "groupRow": 12,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Мельник Данило Максимович",
+    "legacy": {
+      "index": 49,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Мельник Данило Максимович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Мельник Данило Максимович",
+      "paragraph": 93,
+      "groupRow": 13,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Перепьолкін Олег Олегович",
+    "legacy": {
+      "index": 50,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Перепьолкін Олег Олегович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Перепьолкін Олег Олегович",
+      "paragraph": 94,
+      "groupRow": 14,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Попач Олександра Максимівна",
+    "legacy": {
+      "index": 51,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Попач Олександра Максимівна"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Попач Олександра Максимівна",
+      "paragraph": 95,
+      "groupRow": 15,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Пушкаревський Іван Анатолійович",
+    "legacy": {
+      "index": 52,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Пушкаревський Іван Анатолійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Пушкаревський Іван Анатолійович",
+      "paragraph": 96,
+      "groupRow": 16,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Савицький Олександр Сергійович",
+    "legacy": {
+      "index": 53,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Савицький Олександр Сергійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Савицький Олександр Сергійович",
+      "paragraph": 97,
+      "groupRow": 17,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Степанов Олександр Віталійович",
+    "legacy": {
+      "index": 54,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Степанов Олександр Віталійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Степанов Олександр Віталійович",
+      "paragraph": 98,
+      "groupRow": 18,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Фокіна Ксенія Олексіївна",
+    "legacy": {
+      "index": 55,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Фокіна Ксенія Олексіївна"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Фокіна Ксенія Олексіївна ",
+      "paragraph": 99,
+      "groupRow": 19,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Хлівний Олександр Сергійович",
+    "legacy": {
+      "index": 56,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Хлівний Олександр Сергійович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Хлівний Олександр Сергійович",
+      "paragraph": 100,
+      "groupRow": 20,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   },
   {
     "groupName": "КН 3/2",
     "groupId": "g-3-5",
     "fullName": "Чмельов Юрій Дмитрович",
+    "legacy": {
+      "index": 57,
+      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3",
+      "groupId": "g-3-5",
+      "fullName": "Чмельов Юрій Дмитрович"
+    },
     "source": {
-      "file": "Списки груп(1).docx",
-      "actualFile": "Списки груп.docx",
-      "page": 3,
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 4,
       "rawName": "Чмельов Юрій Дмитрович",
+      "paragraph": 101,
+      "groupRow": 21,
       "pagination": "Word saved lastRenderedPageBreak",
-      "sha256": "c9af638cdb10b77240010942f266751e64657082a01b4c737e0e7d09aac410f3"
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Батечко Денис Олександрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Батечко Денис Олександрович ",
+      "paragraph": 106,
+      "groupRow": 1,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Богданов Денис Олегович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Богданов Денис Олегович ",
+      "paragraph": 107,
+      "groupRow": 2,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Венгура Людмила Олександрівна",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Венгура Людмила Олександрівна ",
+      "paragraph": 108,
+      "groupRow": 3,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Висоцький Данило Олегович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Висоцький Данило Олегович",
+      "paragraph": 109,
+      "groupRow": 4,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Вишневський Олег Олександрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Вишневський Олег Олександрович ",
+      "paragraph": 110,
+      "groupRow": 5,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Волик Артем Юрійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Волик Артем Юрійович",
+      "paragraph": 111,
+      "groupRow": 6,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Гармаш Станіслав Миколайович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Гармаш Станіслав Миколайович ",
+      "paragraph": 112,
+      "groupRow": 7,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Гурко Максим Олегович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Гурко Максим Олегович",
+      "paragraph": 113,
+      "groupRow": 8,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Дідріхс Антон Геннадійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Дідріхс Антон Геннадійович ",
+      "paragraph": 114,
+      "groupRow": 9,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Іваненко Павло Павлович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Іваненко Павло Павлович ",
+      "paragraph": 115,
+      "groupRow": 10,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Ізотов Ярослав Сергійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Ізотов Ярослав Сергійович",
+      "paragraph": 116,
+      "groupRow": 11,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Коваленко Кирило Максимович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Коваленко Кирило Максимович ",
+      "paragraph": 117,
+      "groupRow": 12,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Козак Іван Миколайович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Козак Іван Миколайович ",
+      "paragraph": 118,
+      "groupRow": 13,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Кравченко Даніель Євгенович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Кравченко Даніель Євгенович ",
+      "paragraph": 119,
+      "groupRow": 14,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Кравченко Руслан Сергійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Кравченко Руслан Сергійович ",
+      "paragraph": 120,
+      "groupRow": 15,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Лисяк Микола Олександрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Лисяк Микола Олександрович ",
+      "paragraph": 121,
+      "groupRow": 16,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Лівий Денис Русланович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Лівий Денис Русланович",
+      "paragraph": 122,
+      "groupRow": 17,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Лощиць Денис Сергійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Лощиць Денис Сергійович ",
+      "paragraph": 123,
+      "groupRow": 18,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Макеєв Владислав Вікторович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Макеєв Владислав Вікторович",
+      "paragraph": 124,
+      "groupRow": 19,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Максименко Максим Євгенійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Максименко Максим Євгенійович",
+      "paragraph": 125,
+      "groupRow": 20,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Мельник Віктор Віталійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Мельник Віктор Віталійович ",
+      "paragraph": 126,
+      "groupRow": 21,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Мокан Дмитро Володимирович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Мокан Дмитро Володимирович ",
+      "paragraph": 127,
+      "groupRow": 22,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Морозова Марія Олександрівна",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Морозова Марія Олександрівна ",
+      "paragraph": 128,
+      "groupRow": 23,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Москаленко Дмитро Миколайович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Москаленко Дмитро Миколайович",
+      "paragraph": 129,
+      "groupRow": 24,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Нам Владислав Максимович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Нам Владислав Максимович ",
+      "paragraph": 130,
+      "groupRow": 25,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Ничипорук Назар Миколайович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Ничипорук Назар Миколайович",
+      "paragraph": 131,
+      "groupRow": 26,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Остапчук Олександр Михайлович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Остапчук Олександр Михайлович ",
+      "paragraph": 132,
+      "groupRow": 27,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Пазюк Олександр Романович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Пазюк Олександр Романович",
+      "paragraph": 133,
+      "groupRow": 28,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Русанов Юрій Олександрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Русанов Юрій Олександрович ",
+      "paragraph": 134,
+      "groupRow": 29,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Сиров Іван Ігорович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Сиров Іван Ігорович ",
+      "paragraph": 135,
+      "groupRow": 30,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Сиротенко Віктор Дмитрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Сиротенко Віктор Дмитрович ",
+      "paragraph": 136,
+      "groupRow": 31,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Сліж Владислав Віталійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Сліж Владислав Віталійович ",
+      "paragraph": 137,
+      "groupRow": 32,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Ступка Антон Олександрович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Ступка Антон Олександрович ",
+      "paragraph": 138,
+      "groupRow": 33,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Тимошенко Єлизавета Сергіївна",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Тимошенко Єлизавета Сергіївна ",
+      "paragraph": 139,
+      "groupRow": 34,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Ткач Артем Юрійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Ткач Артем Юрійович ",
+      "paragraph": 140,
+      "groupRow": 35,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Толмачов Іван Сергійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Толмачов Іван Сергійович ",
+      "paragraph": 141,
+      "groupRow": 36,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Холодний Андрій Максимович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Холодний Андрій Максимович ",
+      "paragraph": 142,
+      "groupRow": 37,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Чернега Катерина Петрівна",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Чернега Катерина Петрівна ",
+      "paragraph": 143,
+      "groupRow": 38,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Чулов Данііл Андрійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Чулов Данііл Андрійович ",
+      "paragraph": 144,
+      "groupRow": 39,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
+    }
+  },
+  {
+    "groupName": "КН 4/1",
+    "groupId": "g-4-4",
+    "fullName": "Старостін Андрій Андрійович",
+    "legacy": null,
+    "source": {
+      "file": "Списки груп (2).docx",
+      "actualFile": "Списки груп (2).docx",
+      "page": 5,
+      "rawName": "Старостін Андрій Андрійович",
+      "paragraph": 145,
+      "groupRow": 40,
+      "pagination": "Word saved lastRenderedPageBreak",
+      "sha256": "1d1bb732983c0193d99940e80dd741007758925fb5e46315b39f05f15b201d6b"
     }
   }
 ]

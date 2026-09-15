@@ -1,8 +1,10 @@
 import 'dotenv/config';
+import {assertLegacyFixture} from '../src/lib/beta-operations';
 import { createInterface } from 'node:readline/promises';
 import { stdin,stdout } from 'node:process';
 import {db} from '../src/lib/db';
 import {demoEnabled} from '../src/lib/time';
+assertLegacyFixture();
 if(!demoEnabled()||process.env.APP_ENV==='production')throw new Error('Reset forbidden');
 if(!stdin.isTTY)throw new Error('Reset requires an interactive terminal');
 const rl=createInterface({input:stdin,output:stdout});

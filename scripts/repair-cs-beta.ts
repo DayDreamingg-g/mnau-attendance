@@ -1,3 +1,4 @@
+import {assertLegacyFixture} from '../src/lib/beta-operations';
 import 'dotenv/config';
 import {pathToFileURL} from 'node:url';
 import {mkdir,writeFile} from 'node:fs/promises';
@@ -13,6 +14,7 @@ import type {Prisma,RoleCode} from '../src/generated/prisma/client';
 const json=(v:unknown)=>JSON.parse(JSON.stringify(v)) as Prisma.InputJsonValue;
 
 export async function repairCSBeta(options:{from?:string;to?:string}={}){
+  assertLegacyFixture();
   if(!demoEnabled()||process.env.APP_ENV==='production')throw new Error('CS repair requires APP_ENV=demo and DEMO_MODE=true; production is locked.');
 
   const database=await db.$queryRaw<{name:string}[]>`SELECT current_database() AS name`;
@@ -177,7 +179,7 @@ export async function repairCSBeta(options:{from?:string;to?:string}={}){
 
       if(!user){
         user=await tx.user.create({
-          data:{
+          data:{mustChangePassword:false,
             email,
             name,
             passwordHash,

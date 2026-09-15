@@ -1,3 +1,4 @@
+import {assertLegacyFixture} from '../src/lib/beta-operations';
 import 'dotenv/config';
 import { readFile,writeFile,mkdir } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
@@ -15,6 +16,7 @@ const id=(prefix:string,value:string)=>prefix+'-'+createHash('sha256').update(va
 const json=(value:unknown)=>JSON.parse(JSON.stringify(value)) as Prisma.InputJsonValue;
 const bellTimes=[['08:30','09:50'],['10:05','11:25'],['11:55','13:15'],['13:30','14:50'],['15:05','16:25'],['16:40','18:00'],['18:10','19:10'],['19:20','20:20']];
 async function main(){
+  assertLegacyFixture();
   if(!demoEnabled())throw new Error('Seed requires APP_ENV=demo and DEMO_MODE=true. Production demo seeding is forbidden.');
   await db.$queryRaw`SELECT current_database(), current_schema()`;
   const groups=JSON.parse(await readFile('source-data/groups.json','utf8')) as SourceGroup[];
@@ -51,7 +53,7 @@ async function main(){
   const passwordHash=await bcrypt.hash('Test1234!',12);
   async function createUser(email:string,name:string,roles:RoleCode[]){
     const existing=await db.user.findUnique({where:{email}});if(existing)return {user:existing,created:false};
-    return {user:await db.user.create({data:{email,name,passwordHash,roles:{create:roles.map(roleId=>({roleId}))}}}),created:true};
+    return {user:await db.user.create({data:{mustChangePassword:false,email,name,passwordHash,roles:{create:roles.map(roleId=>({roleId}))}}}),created:true};
   }
   await createUser('admin@test.com','Адміністратор демо',['ADMIN']);
   const dean=await createUser('dean@test.com','Деканат · демо',['DEAN_OFFICE']);

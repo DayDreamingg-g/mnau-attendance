@@ -40,6 +40,10 @@ model User {
   name         String
   passwordHash String
   active       Boolean @default(true)
+  mustChangePassword Boolean @default(true)
+  position String @default("UNSPECIFIED")
+  workspace RoleCode?
+  passwordChangedAt DateTime? @db.Timestamptz(3)
   createdAt    DateTime @default(now()) @db.Timestamptz(3)
   roles        UserRole[]
   sessions     Session[]
@@ -51,6 +55,7 @@ model User {
   auditLogs    AuditLog[]
   submissions  JournalSubmission[]
   reports      Report[]
+  feedback Feedback[]
 }
 model UserRole {
   userId String
@@ -66,12 +71,16 @@ model Session {
   expiresAt DateTime @db.Timestamptz(3)
   createdAt DateTime @default(now()) @db.Timestamptz(3)
   user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  lastSeenAt DateTime @default(now()) @db.Timestamptz(3)
+  device String @default("Невідомий пристрій")
   @@index([userId, expiresAt])
 }
 model LoginBucket {
   key String @id
   attempts Int @default(0)
   resetAt DateTime @db.Timestamptz(3)
+  strikes Int @default(0)
+  blockedUntil DateTime? @db.Timestamptz(3)
 }
 model Faculty {
   id String @id @default(cuid())
@@ -81,6 +90,7 @@ model Faculty {
   specialties Specialty[]
   deanAssignments DeanAssignment[]
   reports Report[]
+  terms AcademicTerm[]
 }
 model Specialty {
   id String @id
@@ -107,6 +117,7 @@ model Group {
   curatorAssignments CuratorAssignment[]
   starostaAssignments StarostaAssignment[]
   roster LessonStudent[]
+  teachingAssignments TeacherGroup[]
   @@index([specialtyId, course])
 }
 model Student {
@@ -126,6 +137,7 @@ model Student {
   user User? @relation(fields: [userId], references: [id], onDelete: Restrict)
   attendance Attendance[]
   roster LessonStudent[]
+  sourceRows RosterSourceRow[]
   @@index([groupId, fullName])
 }
 model Teacher {
@@ -133,8 +145,12 @@ model Teacher {
   displayName String
   userId String? @unique
   source Json
+  retiredAt DateTime? @db.Timestamptz(3)
+  position String @default("UNSPECIFIED")
   user User? @relation(fields: [userId], references: [id], onDelete: Restrict)
   lessons Lesson[]
+  subjects TeacherSubject[]
+  groups TeacherGroup[]
 }
 model CuratorAssignment {
   userId String
@@ -167,6 +183,7 @@ model Subject {
   name String
   source Json
   lessons Lesson[]
+  teachers TeacherSubject[]
 }
 model Building {
   id String @id
@@ -208,6 +225,9 @@ model Lesson {
   teacherId String?
   buildingId String
   room String
+  onlineUrl String?
+  termId String?
+  term AcademicTerm? @relation(fields: [termId], references: [id], onDelete: Restrict)
   bellId String
   sourceId String?
   synthetic Boolean @default(true)
@@ -230,6 +250,7 @@ model Lesson {
   auditLogs AuditLog[]
   submissions JournalSubmission[]
   @@index([teacherId, startAt])
+  @@index([termId, startAt])
   @@index([startAt, cancelled])
   @@index([buildingId, room, startAt])
 }
@@ -265,6 +286,10 @@ model Attendance {
   statusCode StatusCode
   confirmed Boolean @default(false)
   isDemo Boolean @default(false)
+  source String @default("MANUAL")
+  batchId String?
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  batch BackfillBatch? @relation(fields: [batchId], references: [id], onDelete: Restrict)
   updatedAt DateTime @updatedAt @db.Timestamptz(3)
   student Student @relation(fields: [studentId], references: [id], onDelete: Restrict)
   lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Restrict)
@@ -302,6 +327,8 @@ model AuditLog {
   lesson Lesson? @relation(fields: [lessonId], references: [id], onDelete: Restrict)
   @@index([lessonId, createdAt])
   @@index([objectType, objectId, createdAt])
+  @@index([createdAt])
+  @@index([actorId, createdAt])
 }
 model Report {
   id String @id @default(cuid())
@@ -316,6 +343,7 @@ model Report {
   summary Json?
   csv Bytes?
   pdf Bytes?
+  xlsx Bytes?
   error String?
   alertKey String? @unique
   createdAt DateTime @default(now()) @db.Timestamptz(3)
@@ -323,4 +351,88 @@ model Report {
   faculty Faculty @relation(fields: [facultyId], references: [id], onDelete: Restrict)
   createdBy User? @relation(fields: [createdById], references: [id], onDelete: Restrict)
   @@index([facultyId, fromDate, toDate])
+}
+
+model AcademicTerm {
+  id String @id
+  name String
+  facultyId String
+  fromDate String
+  toDate String
+  confirmedAt DateTime? @db.Timestamptz(3)
+  archivedAt DateTime? @db.Timestamptz(3)
+  rosterConfirmedAt DateTime? @db.Timestamptz(3)
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  faculty Faculty @relation(fields: [facultyId], references: [id], onDelete: Restrict)
+  lessons Lesson[]
+  @@index([facultyId, fromDate, toDate])
+}
+
+model TeacherSubject {
+  teacherId String
+  subjectId String
+  teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Restrict)
+  subject Subject @relation(fields: [subjectId], references: [id], onDelete: Restrict)
+  @@id([teacherId, subjectId])
+}
+
+model TeacherGroup {
+  teacherId String
+  groupId String
+  teacher Teacher @relation(fields: [teacherId], references: [id], onDelete: Restrict)
+  group Group @relation(fields: [groupId], references: [id], onDelete: Restrict)
+  @@id([teacherId, groupId])
+}
+
+model SourceAsset {
+  id String @id
+  fileName String
+  mimeType String
+  sha256 String @unique
+  content Bytes
+  groupIds Json
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  rows RosterSourceRow[]
+}
+
+model RosterSourceRow {
+  sourceId String
+  row Int
+  groupId String
+  fullName String
+  studentId String
+  provenance Json
+  source SourceAsset @relation(fields: [sourceId], references: [id], onDelete: Restrict)
+  student Student @relation(fields: [studentId], references: [id], onDelete: Restrict)
+  @@id([sourceId, row])
+  @@unique([sourceId, studentId])
+  @@index([studentId])
+}
+
+model BackfillBatch {
+  id String @id
+  algorithm String
+  seed String
+  fromDate String
+  toDate String
+  sourceId String
+  parameters Json
+  result Json
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  attendance Attendance[]
+}
+
+model Feedback {
+  id String @id @default(cuid())
+  userId String
+  roles Json
+  workspace String?
+  page String
+  text String
+  state String @default("NEW")
+  createdAt DateTime @default(now()) @db.Timestamptz(3)
+  updatedAt DateTime @updatedAt @db.Timestamptz(3)
+  user User @relation(fields: [userId], references: [id], onDelete: Restrict)
+  @@index([state, createdAt])
+  @@index([createdAt])
 }

@@ -48,7 +48,7 @@ export async function syncCSSchedule(tx:Prisma.TransactionClient,options:{from?:
   const sourceToDB=new Map(CS_SOURCE_GROUPS.map(s=>[s.id,groups.find(g=>csName(g.name)===csName(s.name))!.id]));
   const resolved=cells.map(c=>({...c,groups:c.groups.map(id=>sourceToDB.get(id)!)}));
   const calendar=expandCSCalendar(resolved,options.from,options.to),now=effectiveNow().toJSDate();
-  const teacherIds=new Map((await tx.teacher.findMany()).map(t=>[teacherKey(t.displayName),t.id]));
+  const teacherIds=new Map((await tx.teacher.findMany()).map(t=>[teacherKey((t.source as {originalDisplayName?:string}|null)?.originalDisplayName??t.displayName),t.id]));
   const students=await tx.student.findMany({where:{groupId:{in:ids},active:true}});
   const old=await tx.lesson.findMany({where:{groups:{some:{groupId:{in:ids}}}},include:{groups:true,subject:true,teacher:true,attendance:true,submissions:true,auditLogs:true,roster:true}});
   const signature=(date:string,pair:number,groupIds:string[],subject:string)=>JSON.stringify([date,pair,[...groupIds].sort(),subjectKey(subject)]);
@@ -62,7 +62,7 @@ export async function syncCSSchedule(tx:Prisma.TransactionClient,options:{from?:
   const reused=new Map<string,typeof old[number]>();
   for(const lesson of old.filter(l=>!l.cancelled&&history(l))){
     const match=wanted.get(identity(lesson));
-    if(!match||lesson.groups.some(g=>!ids.includes(g.groupId))||reused.has(match.id)||teacherKey(lesson.teacher?.displayName??'')!==teacherKey(match.cell.teacher??''))throw new Error('Ambiguous manual history; schedule repair blocked for '+lesson.id);
+    if(!match||lesson.groups.some(g=>!ids.includes(g.groupId))||reused.has(match.id)||teacherKey((lesson.teacher?.source as {originalDisplayName?:string}|null)?.originalDisplayName??lesson.teacher?.displayName??'')!==teacherKey(match.cell.teacher??''))throw new Error('Ambiguous manual history; schedule repair blocked for '+lesson.id);
     reused.set(match.id,lesson);
   }
   let created=0,updated=0,retired=0;

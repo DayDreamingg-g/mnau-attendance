@@ -5,12 +5,12 @@ import {CS_COUNTS,readCSData,teacherEmail,teacherKey} from '../src/lib/cs-beta-d
 import {weekHalf} from '../scripts/generate-semester-schedule';
 import {scheduleWeek} from '../src/lib/schedule-week';
 import {verifyCSSource,expandCSCalendar} from '../src/lib/cs-schedule';
-test('the supplied roster preserves 58 source names, exact counts, pages and raw spelling',async()=>{
+test('the supplied roster preserves 128 source names, exact counts, pages and raw spelling',async()=>{
   const {students}=await readCSData();
   for(const [id,count] of Object.entries(CS_COUNTS))assert.equal(students.filter(s=>s.groupId===id).length,count);
   assert.equal(students.find(s=>s.fullName.startsWith('Штикер'))?.fullName,'Штикер Міхаіл Андрійович');
   assert.equal(students.find(s=>s.fullName.startsWith('Ломпас'))?.fullName,'Ломпас Олександр Ігоревич');
-  assert.ok(students.every(s=>s.source.page>=1&&s.source.page<=3&&s.source.rawName.trim()===s.fullName));
+  assert.ok(students.every(s=>s.source.page>=1&&s.source.paragraph!==undefined&&s.source.rawName.trim()===s.fullName));
 });
 test('teacher identity normalizes titles/case/spacing and user-confirmed aliases',async()=>{
   assert.equal(teacherKey('  доц. ПАРХОМЕНКО О. Ю.'),teacherKey('Пархоменко А.Ю.'));

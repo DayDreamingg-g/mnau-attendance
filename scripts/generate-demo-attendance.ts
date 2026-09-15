@@ -1,4 +1,5 @@
 import "dotenv/config";
+import {assertLegacyFixture} from '../src/lib/beta-operations';
 import { createHash } from "node:crypto";
 import { pathToFileURL } from "node:url";
 import { journalStateForRoster } from "../src/lib/journal-state";
@@ -69,6 +70,7 @@ function generateStatus(
 }
 
 export async function generateDemoAttendance() {
+  assertLegacyFixture();
   if (!demoEnabled() || process.env.APP_ENV === "production") {
     throw new Error(
       "Demo attendance generation is allowed only in demo mode.",

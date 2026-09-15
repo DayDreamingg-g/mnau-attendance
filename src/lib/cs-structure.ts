@@ -2,7 +2,7 @@ import sourceGroups from '../../source-data/groups.json';
 import type {Prisma} from '../generated/prisma/client';
 
 export const CS_SPECIALTY_NAME="Комп'ютерні науки";
-export const CS_GROUP_COUNTS:Record<string,number>={'КН 1/1':17,'КН 2/1':0,'КН 3/1':20,'КН 3/2':21,'КН 4/1':0};
+export const CS_GROUP_COUNTS:Record<string,number>={'КН 1/1':17,'КН 2/1':30,'КН 3/1':20,'КН 3/2':21,'КН 4/1':40};
 export const csName=(name:string)=>name.normalize('NFKC').replace(/[’ʼ`]/g,"'").replace(/\s+/g,' ').trim().toLocaleUpperCase('uk');
 export const isCSSpecialty=(name:string)=>csName(name)===csName(CS_SPECIALTY_NAME);
 // Source identifiers are read from the supplied group inventory, never embedded in scopes.

@@ -5,7 +5,7 @@ export const CS_GROUP_IDS=CS_SOURCE_GROUPS.map(g=>g.id);
 export const CS_COUNTS=Object.fromEntries(CS_SOURCE_GROUPS.map(g=>[g.id,CS_GROUP_COUNTS[csName(g.name)]]));
 export const stableId=(prefix:string,value:string)=>prefix+'-'+createHash('sha256').update(value).digest('hex').slice(0,16);
 export type CSCell={id:string;file:string;sha256?:string;page:number;bbox:number[];sourceCell:string;raw:string;groups:string[];groupNames?:string[];weekday:string;pairNumber:number;splitCell:boolean;splitPart:'upper'|'lower'|null;subject:string|null;teacher:string|null;teacherDisplayName:string|null;building:string|null;room:string|null;issues:string[]};
-export type CSStudent={groupId:string;groupName:string;fullName:string;source:{file:string;actualFile:string;page:number;rawName:string;sha256:string}};
+export type CSStudent={groupId:string;groupName:string;fullName:string;legacy?:{index:number;sha256:string;groupId:string;fullName:string}|null;source:{file:string;actualFile:string;page:number;paragraph?:number;groupRow?:number;rawName:string;sha256:string}};
 export function teacherKey(name:string){return name.normalize('NFKC').trim().toLocaleLowerCase('uk').replace(/^(?:доц\.|проф\.|ст\.?\s?в\.?|ас\.?|в\.)\s*/,'').replace(/[\s.ʼ’'`-]/g,'').replace('пархоменкоаю','пархоменкоою').replace('богатенковаоє','богатєнковаоє');}
 const letters:Record<string,string>={а:'a',б:'b',в:'v',г:'h',ґ:'g',д:'d',е:'e',є:'ye',ж:'zh',з:'z',и:'y',і:'i',ї:'yi',й:'y',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'kh',ц:'ts',ч:'ch',ш:'sh',щ:'shch',ь:'',ю:'yu',я:'ya'};
 export function teacherEmail(name:string){
@@ -18,7 +18,9 @@ export async function readCSData(){
   const cells=JSON.parse(await readFile('source-data/cs-beta/schedule-cells.json','utf8')) as CSCell[];
   const students=JSON.parse(await readFile('source-data/cs-beta/students.json','utf8')) as CSStudent[];
   for(const [id,count] of Object.entries(CS_COUNTS))if(students.filter(s=>s.groupId===id).length!==count)throw new Error('Invalid source roster count: '+id);
-  if(students.length!==58)throw new Error('Expected exactly 58 source students.');
+  if(students.length!==128)throw new Error('Expected exactly 128 official source rows.');
+  const hash=createHash('sha256').update(await readFile('source-data/cs-beta/Списки груп (2).docx')).digest('hex');
+  if(students.some(s=>s.source.sha256!==hash))throw new Error('Complete roster DOCX checksum differs.');
   for(const groupId of CS_GROUP_IDS)if(!cells.some(c=>c.groups.includes(groupId)))throw new Error('No PDF schedule cells for '+groupId);
   for(const cell of cells)if(!cell.subject||!cell.building||!cell.room||!['MON','TUE','WED','THU','FRI'].includes(cell.weekday)||cell.splitCell&&!cell.splitPart)throw new Error('Unresolved PDF cell '+cell.id);
   return {cells,students};

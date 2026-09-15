@@ -1,3 +1,4 @@
+import {assertLegacyFixture} from '../src/lib/beta-operations';
 import 'dotenv/config';
 import {pathToFileURL} from 'node:url';
 import {mkdir,writeFile,readFile} from 'node:fs/promises';
@@ -11,6 +12,7 @@ import type {Prisma,RoleCode} from '../src/generated/prisma/client';
 const json=(value:unknown)=>JSON.parse(JSON.stringify(value)) as Prisma.InputJsonValue;
 
 export async function prepareCSBeta(){
+  assertLegacyFixture();
   if(!demoEnabled()||process.env.APP_ENV==='production')throw new Error('DESTRUCTIVE beta preparation requires APP_ENV=demo and DEMO_MODE=true; production is locked.');
 
   const database=await db.$queryRaw<{name:string}[]>`SELECT current_database() AS name`;
@@ -173,7 +175,7 @@ export async function prepareCSBeta(){
       let user=await tx.user.findUnique({where:{email}});
 
       if(!user)user=await tx.user.create({
-        data:{
+        data:{mustChangePassword:false,
           email,
           name,
           passwordHash,
